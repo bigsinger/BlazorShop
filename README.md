@@ -1,2 +1,6 @@
 # BlazorShop
-ASP.NET Core | Blazor WebAssembly | Simple Shop application
+Fork from https://github.com/kalintsenkov/BlazorShop
+
+
+
+支持.net 6
