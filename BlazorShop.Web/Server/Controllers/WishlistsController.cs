@@ -8,8 +8,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [Route("api/wishlists")]
-    [ApiController]
     [Authorize]
     public class WishlistsController : ApiController {
         private readonly IWishlistsService wishlists;

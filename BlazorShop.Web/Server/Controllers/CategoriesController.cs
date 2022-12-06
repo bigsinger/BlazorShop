@@ -8,8 +8,6 @@
     using System.Threading.Tasks;
     using static Common.Constants;
 
-    [Route("api/categories")]
-    [ApiController]
     [Authorize(Roles = AdministratorRole)]
     public class CategoriesController : ApiController {
         private readonly ICategoriesService categories;

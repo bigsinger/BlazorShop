@@ -7,8 +7,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [Route("api/orders")]
-    [ApiController]
     [Authorize]
     public class OrdersController : ApiController {
         private readonly IOrdersService orders;

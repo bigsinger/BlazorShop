@@ -7,8 +7,6 @@
     using Services.Identity;
     using System.Threading.Tasks;
 
-    [Route("api/identity")]
-    [ApiController]
     public class IdentityController : ApiController {
         private readonly IIdentityService identity;
         private readonly ICurrentUserService currentUser;

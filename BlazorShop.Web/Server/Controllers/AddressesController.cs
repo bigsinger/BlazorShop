@@ -9,8 +9,6 @@ using Services.Addresses;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-[Route("api/addresses")]
-[ApiController]
 [Authorize]
 public class AddressesController : ApiController {
     private readonly IAddressesService addresses;

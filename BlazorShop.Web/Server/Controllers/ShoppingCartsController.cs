@@ -8,8 +8,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [Route("api/shoppingcarts")]
-    [ApiController]
     [Authorize]
     public class ShoppingCartsController : ApiController {
         private readonly IShoppingCartsService shoppingCarts;

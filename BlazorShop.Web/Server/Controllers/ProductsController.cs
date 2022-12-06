@@ -7,8 +7,6 @@
     using System.Threading.Tasks;
     using static Common.Constants;
 
-    [Route("api/products")]
-    [ApiController]
     [Authorize(Roles = AdministratorRole)]
     public class ProductsController : ApiController {
         private readonly IProductsService products;
