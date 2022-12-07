@@ -1,6 +1,4 @@
-﻿namespace BlazorShop.Services.Common
-{
-    public interface ISingletonService
-    {
+﻿namespace BlazorShop.Services.Common {
+    public interface ISingletonService {
     }
 }

@@ -1,6 +1,4 @@
-﻿namespace BlazorShop.Services.Common
-{
-    public interface IService
-    {
+﻿namespace BlazorShop.Services.Common {
+    public interface IService {
     }
 }

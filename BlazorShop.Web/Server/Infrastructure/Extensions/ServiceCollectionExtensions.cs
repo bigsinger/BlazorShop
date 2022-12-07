@@ -14,20 +14,17 @@
     using Services;
     using System.Linq;
     using System.Text;
-    using static Data.ModelConstants.Identity;
 
     public static class ServiceCollectionExtensions {
         public static ApplicationSettings GetApplicationSettings(
             this IServiceCollection services,
             IConfiguration configuration) {
             var applicationSettingsConfiguration = configuration.GetSection(nameof(ApplicationSettings));
-            services.Configure<ApplicationSettings>(applicationSettingsConfiguration);
+            //services.Configure<ApplicationSettings>(applicationSettingsConfiguration);
             return applicationSettingsConfiguration.Get<ApplicationSettings>();
         }
 
-        public static IServiceCollection AddDatabase(
-            this IServiceCollection services,
-            IConfiguration configuration)
+        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
             => services
                 //.AddDbContext<BlazorShopDbContext>(options => options
                 //    .UseSqlServer(configuration.GetDefaultConnectionString()))
@@ -37,22 +34,19 @@
                 .AddTransient<IInitializer, BlazorShopDbInitializer>();
 
         public static IServiceCollection AddIdentity(this IServiceCollection services) {
-            services
-                .AddIdentity<BlazorShopUser, BlazorShopRole>(options => {
-                    options.Password.RequiredLength = MinPasswordLength;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.User.RequireUniqueEmail = true;
-                })
-                .AddEntityFrameworkStores<BlazorShopDbContext>();
+            services.AddIdentity<BlazorShopUser, BlazorShopRole>(opt => {
+                opt.Password.RequiredLength = ModelConstants.Identity.MinPasswordLength;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+                opt.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<BlazorShopDbContext>();
 
             return services;
         }
 
-        public static IServiceCollection AddJwtAuthentication(
-            this IServiceCollection services,
+        public static IServiceCollection AddJwtAuthentication(this IServiceCollection services,
             ApplicationSettings applicationSettings) {
             var key = Encoding.ASCII.GetBytes(applicationSettings.Secret);
 
@@ -80,28 +74,28 @@
         }
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) {
-            var serviceInterfaceType = typeof(IService);
+            var transientServiceInterfaceType = typeof(IService);
             var singletonServiceInterfaceType = typeof(ISingletonService);
             var scopedServiceInterfaceType = typeof(IScopedService);
 
-            var types = serviceInterfaceType
+            var types = transientServiceInterfaceType
                 .Assembly
                 .GetExportedTypes()
                 .Where(t => t.IsClass && !t.IsAbstract)
                 .Select(t => new
                 {
-                    Service = t.GetInterface($"I{t.Name}"),
-                    Implementation = t
+                    ServiceInterface = t.GetInterface($"I{t.Name}"),
+                    ServiceImplementation = t
                 })
-                .Where(t => t.Service != null);
+                .Where(t => t.ServiceInterface != null);
 
             foreach (var type in types) {
-                if (serviceInterfaceType.IsAssignableFrom(type.Service)) {
-                    services.AddTransient(type.Service, type.Implementation);
-                } else if (singletonServiceInterfaceType.IsAssignableFrom(type.Service)) {
-                    services.AddSingleton(type.Service, type.Implementation);
-                } else if (scopedServiceInterfaceType.IsAssignableFrom(type.Service)) {
-                    services.AddScoped(type.Service, type.Implementation);
+                if (type.ServiceInterface!.IsAssignableTo(transientServiceInterfaceType)) {
+                    services.AddTransient(type.ServiceInterface, type.ServiceImplementation);
+                } else if (type.ServiceInterface!.IsAssignableTo(singletonServiceInterfaceType)) {
+                    services.AddSingleton(type.ServiceInterface, type.ServiceImplementation);
+                } else if (type.ServiceInterface!.IsAssignableTo(scopedServiceInterfaceType)) {
+                    services.AddScoped(type.ServiceInterface, type.ServiceImplementation);
                 }
             }
 
@@ -109,13 +103,8 @@
         }
 
         public static IServiceCollection AddApiControllers(this IServiceCollection services) {
-            services
-                .AddControllers(options => options
-                      .Filters
-                      .Add<ModelOrNotFoundActionFilter>());
-
+            services.AddControllers(options => options.Filters.Add<ModelOrNotFoundActionFilter>());
             services.AddRazorPages();
-
             return services;
         }
     }

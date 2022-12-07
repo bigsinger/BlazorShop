@@ -1,7 +1,5 @@
-﻿namespace BlazorShop.Models
-{
-    public class ApplicationSettings
-    {
+﻿namespace BlazorShop.Models {
+    public class ApplicationSettings {
         public string Secret { get; set; }
     }
 }

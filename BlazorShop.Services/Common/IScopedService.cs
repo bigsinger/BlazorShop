@@ -1,6 +1,4 @@
-﻿namespace BlazorShop.Services.Common
-{
-    public interface IScopedService
-    {
+﻿namespace BlazorShop.Services.Common {
+    public interface IScopedService {
     }
 }
