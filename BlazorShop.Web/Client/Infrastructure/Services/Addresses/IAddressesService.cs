@@ -1,16 +1,13 @@
-﻿namespace BlazorShop.Web.Client.Infrastructure.Services.Addresses
-{
+﻿namespace BlazorShop.Web.Client.Infrastructure.Services.Addresses {
+    using Models;
+    using Models.Addresses;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Models;
-    using Models.Addresses;
+    public interface IAddressesService {
+        Task<long> CreateAsync(AddressesRequestModel model);
 
-    public interface IAddressesService
-    {
-        Task<int> CreateAsync(AddressesRequestModel model);
-
-        Task<Result> DeleteAsync(int id);
+        Task<Result> DeleteAsync(long id);
 
         Task<IEnumerable<AddressesListingResponseModel>> Mine();
     }

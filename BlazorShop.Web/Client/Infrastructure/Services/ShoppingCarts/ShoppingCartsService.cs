@@ -1,16 +1,13 @@
-﻿namespace BlazorShop.Web.Client.Infrastructure.Services.ShoppingCarts
-{
+﻿namespace BlazorShop.Web.Client.Infrastructure.Services.ShoppingCarts {
+    using Extensions;
+    using Models;
+    using Models.ShoppingCarts;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Json;
     using System.Threading.Tasks;
 
-    using Extensions;
-    using Models;
-    using Models.ShoppingCarts;
-
-    public class ShoppingCartsService : IShoppingCartsService
-    {
+    public class ShoppingCartsService : IShoppingCartsService {
         private readonly HttpClient http;
 
         private const string ShoppingCartsPath = "api/shoppingcarts";
@@ -27,7 +24,7 @@
                 .PutAsJsonAsync($"{ShoppingCartsPath}/{nameof(this.UpdateProduct)}", model)
                 .ToResult();
 
-        public async Task<Result> RemoveProduct(int id)
+        public async Task<Result> RemoveProduct(long id)
             => await this.http.DeleteAsync($"{ShoppingCartsPath}/{nameof(this.RemoveProduct)}/{id}").ToResult();
 
         public async Task<int> TotalProducts()

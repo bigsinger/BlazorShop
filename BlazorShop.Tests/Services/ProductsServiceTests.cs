@@ -1,18 +1,14 @@
-﻿namespace BlazorShop.Tests.Services
-{
-    using System.Threading.Tasks;
-
-    using Microsoft.EntityFrameworkCore;
-    using Shouldly;
-    using Xunit;
-
+﻿namespace BlazorShop.Tests.Services {
     using BlazorShop.Services.Products;
     using Common;
     using Data;
+    using Microsoft.EntityFrameworkCore;
     using Models.Products;
+    using Shouldly;
+    using System.Threading.Tasks;
+    using Xunit;
 
-    public class ProductsServiceTests : SetupFixture
-    {
+    public class ProductsServiceTests : SetupFixture {
         private readonly IProductsService products;
 
         public ProductsServiceTests()
@@ -28,8 +24,7 @@
             string imageSource,
             int quantity,
             decimal price,
-            int categoryId)
-        {
+            long categoryId) {
             var request = new ProductsRequestModel
             {
                 Name = name,
@@ -64,9 +59,8 @@
             string imageSource,
             int quantity,
             decimal price,
-            int categoryId)
-        {
-            const int id = 1;
+            long categoryId) {
+            const long id = 1;
 
             await this.AddFakeProducts(count);
 
@@ -96,8 +90,7 @@
         }
 
         [Fact]
-        public async Task DeleteShouldReturnSucceededResultWhenProductIsDeleted()
-        {
+        public async Task DeleteShouldReturnSucceededResultWhenProductIsDeleted() {
             await this.AddFakeProducts(1);
 
             var result = await this.products.DeleteAsync(1);
@@ -106,8 +99,7 @@
         }
 
         [Fact]
-        public async Task DeleteShouldSetIsDeletedToTrue()
-        {
+        public async Task DeleteShouldSetIsDeletedToTrue() {
             await this.AddFakeProducts(1);
 
             var result = await this.products.DeleteAsync(1);
@@ -124,15 +116,13 @@
         }
 
         [Fact]
-        public async Task DeleteShouldReturnNotSucceededResultWhenProductIsNotFound()
-        {
+        public async Task DeleteShouldReturnNotSucceededResultWhenProductIsNotFound() {
             var result = await this.products.DeleteAsync(1);
 
             result.Succeeded.ShouldBeFalse();
         }
 
-        private async Task AddFakeProducts(int count)
-        {
+        private async Task AddFakeProducts(int count) {
             var fakes = ProductsTestData.GetProducts(count);
 
             await this.Data.AddRangeAsync(fakes);

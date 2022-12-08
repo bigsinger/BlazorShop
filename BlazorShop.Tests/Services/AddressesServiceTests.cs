@@ -1,21 +1,17 @@
-﻿namespace BlazorShop.Tests.Services
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using Microsoft.EntityFrameworkCore;
-    using MyTested.AspNetCore.Mvc;
-    using Shouldly;
-    using Xunit;
-
+﻿namespace BlazorShop.Tests.Services {
     using BlazorShop.Services.Addresses;
     using Common;
     using Data;
+    using Microsoft.EntityFrameworkCore;
     using Models.Addresses;
+    using MyTested.AspNetCore.Mvc;
+    using Shouldly;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Xunit;
 
-    public class AddressesServiceTests : SetupFixture
-    {
+    public class AddressesServiceTests : SetupFixture {
         private readonly IAddressesService addresses;
 
         public AddressesServiceTests()
@@ -31,8 +27,7 @@
             string city,
             string description,
             string postalCode,
-            string phoneNumber)
-        {
+            string phoneNumber) {
             const string userId = TestUser.Identifier;
 
             var request = new AddressesRequestModel
@@ -49,7 +44,7 @@
 
             var address = await this.Data.Addresses.FindAsync(id);
 
-            address.Id.ShouldBe(id);
+            address.Id.ShouldBe((long)id);
             address.Country.ShouldBe(request.Country);
             address.State.ShouldBe(request.State);
             address.Description.ShouldBe(request.Description);
@@ -59,8 +54,7 @@
         }
 
         [Fact]
-        public async Task DeleteShouldReturnSucceededResultWhenAddressIsDeleted()
-        {
+        public async Task DeleteShouldReturnSucceededResultWhenAddressIsDeleted() {
             await this.AddFakeAddresses(1);
 
             var result = await this.addresses.DeleteAsync(1, TestUser.Identifier);
@@ -69,8 +63,7 @@
         }
 
         [Fact]
-        public async Task DeleteShouldSetIsDeletedToTrue()
-        {
+        public async Task DeleteShouldSetIsDeletedToTrue() {
             await this.AddFakeAddresses(1);
 
             var result = await this.addresses.DeleteAsync(1, TestUser.Identifier);
@@ -87,8 +80,7 @@
         }
 
         [Fact]
-        public async Task DeleteShouldReturnNotSucceededResultWhenAddressIsNotFound()
-        {
+        public async Task DeleteShouldReturnNotSucceededResultWhenAddressIsNotFound() {
             var result = await this.addresses.DeleteAsync(1, TestUser.Identifier);
 
             result.Succeeded.ShouldBeFalse();
@@ -98,8 +90,7 @@
         [InlineData(3)]
         [InlineData(6)]
         [InlineData(9)]
-        public async Task ByUserShouldReturnCurrentUserAddresses(int count)
-        {
+        public async Task ByUserShouldReturnCurrentUserAddresses(int count) {
             await this.AddFakeAddresses(count);
 
             var actual = await this.addresses.ByUserAsync(TestUser.Identifier);
@@ -108,8 +99,7 @@
             actual.ShouldBeAssignableTo<IEnumerable<AddressesListingResponseModel>>();
         }
 
-        private async Task AddFakeAddresses(int count)
-        {
+        private async Task AddFakeAddresses(int count) {
             var fakes = AddressesTestData.GetAddresses(count);
 
             await this.Data.AddRangeAsync(fakes);

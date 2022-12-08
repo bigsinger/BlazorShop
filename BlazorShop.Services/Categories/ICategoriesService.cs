@@ -1,19 +1,16 @@
-﻿namespace BlazorShop.Services.Categories
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-
+﻿namespace BlazorShop.Services.Categories {
     using Common;
     using Models;
     using Models.Categories;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-    public interface ICategoriesService : IService
-    {
-        Task<int> CreateAsync(CategoriesRequestModel model);
+    public interface ICategoriesService : IService {
+        Task<long> CreateAsync(CategoriesRequestModel model);
 
-        Task<Result> UpdateAsync(int id, CategoriesRequestModel model);
+        Task<Result> UpdateAsync(long id, CategoriesRequestModel model);
 
-        Task<Result> DeleteAsync(int id);
+        Task<Result> DeleteAsync(long id);
 
         Task<IEnumerable<CategoriesListingResponseModel>> AllAsync();
     }

@@ -1,16 +1,11 @@
-﻿namespace BlazorShop.Tests.Data
-{
+﻿namespace BlazorShop.Tests.Data {
+    using BlazorShop.Data.Models;
+    using MyTested.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Linq;
 
-    using MyTested.AspNetCore.Mvc;
-
-    using BlazorShop.Data.Models;
-
-    public static class AddressesTestData
-    {
-        public static List<Address> GetAddresses(int count, bool sameUser = true)
-        {
+    public static class AddressesTestData {
+        public static List<Address> GetAddresses(int count, bool sameUser = true) {
             var user = new BlazorShopUser
             {
                 Id = TestUser.Identifier,
@@ -21,7 +16,7 @@
                 .Range(1, count)
                 .Select(i => new Address
                 {
-                    Id = i,
+                    Id = (long)i,
                     Country = $"Country {i}",
                     State = $"State {i}",
                     City = $"City {i}",

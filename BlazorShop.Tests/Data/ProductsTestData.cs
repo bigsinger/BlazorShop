@@ -1,12 +1,9 @@
-﻿namespace BlazorShop.Tests.Data
-{
+﻿namespace BlazorShop.Tests.Data {
+    using BlazorShop.Data.Models;
     using System.Collections.Generic;
     using System.Linq;
 
-    using BlazorShop.Data.Models;
-
-    public static class ProductsTestData
-    {
+    public static class ProductsTestData {
         public static List<Product> GetProducts(int count)
             => Enumerable
                 .Range(1, count)
@@ -17,7 +14,7 @@
                     ImageSource = $"Image {i}",
                     Quantity = i,
                     Price = i + 0.5m,
-                    CategoryId = i
+                    CategoryId = (long)i
                 })
                 .ToList();
     }

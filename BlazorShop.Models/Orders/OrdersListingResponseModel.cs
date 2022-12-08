@@ -1,11 +1,9 @@
-﻿namespace BlazorShop.Models.Orders
-{
+﻿namespace BlazorShop.Models.Orders {
     using AutoMapper;
 
     using Data.Models;
 
-    public class OrdersListingResponseModel : OrdersBaseResponseModel
-    {
+    public class OrdersListingResponseModel : OrdersBaseResponseModel {
         public string ProductName { get; set; }
 
         public string ProductImageSource { get; set; }

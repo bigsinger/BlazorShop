@@ -1,26 +1,20 @@
-﻿namespace BlazorShop.Services.Categories
-{
+﻿namespace BlazorShop.Services.Categories {
+    using AutoMapper;
+    using Data;
+    using Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
+    using Models.Categories;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
-
-    using Data;
-    using Data.Models;
-    using Models;
-    using Models.Categories;
-
-    public class CategoriesService : BaseService<Category>, ICategoriesService
-    {
+    public class CategoriesService : BaseService<Category>, ICategoriesService {
         public CategoriesService(BlazorShopDbContext db, IMapper mapper)
-            : base(db, mapper)
-        {
+            : base(db, mapper) {
         }
 
-        public async Task<int> CreateAsync(CategoriesRequestModel model)
-        {
+        public async Task<long> CreateAsync(CategoriesRequestModel model) {
             var category = new Category
             {
                 Name = model.Name
@@ -33,12 +27,10 @@
         }
 
         public async Task<Result> UpdateAsync(
-            int id, CategoriesRequestModel model)
-        {
+            long id, CategoriesRequestModel model) {
             var category = await this.FindByIdAsync(id);
 
-            if (category == null)
-            {
+            if (category == null) {
                 return false;
             }
 
@@ -49,12 +41,10 @@
             return true;
         }
 
-        public async Task<Result> DeleteAsync(int id)
-        {
+        public async Task<Result> DeleteAsync(long id) {
             var category = await this.FindByIdAsync(id);
 
-            if (category == null)
-            {
+            if (category == null) {
                 return false;
             }
 
@@ -72,7 +62,7 @@
                 .ToListAsync();
 
         private async Task<Category> FindByIdAsync(
-            int id)
+            long id)
             => await this
                 .All()
                 .Where(c => c.Id == id)

@@ -1,9 +1,7 @@
-﻿namespace BlazorShop.Models.Orders
-{
+﻿namespace BlazorShop.Models.Orders {
     using System.Collections.Generic;
 
-    public class OrdersDetailsResponseModel : OrdersBaseResponseModel
-    {
+    public class OrdersDetailsResponseModel : OrdersBaseResponseModel {
         public IEnumerable<OrdersProductsResponseModel> Products { get; set; }
     }
 }

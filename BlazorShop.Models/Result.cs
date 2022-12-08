@@ -1,15 +1,12 @@
-﻿namespace BlazorShop.Models
-{
+﻿namespace BlazorShop.Models {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Result
-    {
+    public class Result {
         private readonly List<string> errors;
 
-        internal Result(bool succeeded, List<string> errors)
-        {
+        internal Result(bool succeeded, List<string> errors) {
             this.Succeeded = succeeded;
             this.errors = errors;
         }
@@ -40,8 +37,7 @@
             => result.Succeeded;
     }
 
-    public class Result<TData> : Result
-    {
+    public class Result<TData> : Result {
         private readonly TData data;
 
         private Result(bool succeeded, TData data, List<string> errors)

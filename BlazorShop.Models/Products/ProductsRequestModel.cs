@@ -1,17 +1,14 @@
-﻿namespace BlazorShop.Models.Products
-{
+﻿namespace BlazorShop.Models.Products {
     using System.ComponentModel.DataAnnotations;
-
-    using static ErrorMessages;
     using static Data.ModelConstants.Common;
     using static Data.ModelConstants.Product;
+    using static ErrorMessages;
 
-    public class ProductsRequestModel
-    {
+    public class ProductsRequestModel {
         [Required]
         [StringLength(
-            MaxNameLength, 
-            ErrorMessage = StringLengthErrorMessage, 
+            MaxNameLength,
+            ErrorMessage = StringLengthErrorMessage,
             MinimumLength = MinNameLength)]
         public string Name { get; set; }
 
@@ -21,7 +18,7 @@
         [Required]
         [MaxLength(MaxUrlLength)]
         public string ImageSource { get; set; }
-        
+
         [Required]
         [Range(MinQuantity, MaxQuantity)]
         public int Quantity { get; set; }
@@ -31,6 +28,6 @@
         public decimal Price { get; set; }
 
         [Required]
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
     }
 }

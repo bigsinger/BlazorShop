@@ -1,17 +1,11 @@
-﻿namespace BlazorShop.Services
-{
+﻿namespace BlazorShop.Services {
+    using AutoMapper;
+    using Data;
+    using Microsoft.EntityFrameworkCore;
     using System.Linq;
 
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
-
-    using Data;
-
-    public abstract class BaseService<TEntity>
-        where TEntity : class
-    {
-        protected BaseService(BlazorShopDbContext data, IMapper mapper)
-        {
+    public abstract class BaseService<TEntity> where TEntity : class {
+        protected BaseService(BlazorShopDbContext data, IMapper mapper) {
             this.Data = data;
             this.Mapper = mapper;
         }

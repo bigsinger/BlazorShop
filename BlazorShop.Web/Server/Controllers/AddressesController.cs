@@ -26,8 +26,7 @@ public class AddressesController : ApiController {
         => await this.addresses.ByUserAsync(this.currentUser.UserId);
 
     [HttpPost]
-    public async Task<ActionResult> Create(
-        AddressesRequestModel model) {
+    public async Task<ActionResult> Create(AddressesRequestModel model) {
         var userId = this.currentUser.UserId;
 
         var id = await this.addresses.CreateAsync(model, userId);
@@ -36,7 +35,7 @@ public class AddressesController : ApiController {
     }
 
     [HttpDelete(Id)]
-    public async Task<ActionResult> Delete(int id)
+    public async Task<ActionResult> Delete(long id)
         => await this.addresses
             .DeleteAsync(id, this.currentUser.UserId)
             .ToActionResult();

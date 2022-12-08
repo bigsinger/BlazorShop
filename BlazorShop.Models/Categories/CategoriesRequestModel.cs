@@ -1,16 +1,13 @@
-﻿namespace BlazorShop.Models.Categories
-{
+﻿namespace BlazorShop.Models.Categories {
     using System.ComponentModel.DataAnnotations;
-
-    using static ErrorMessages;
     using static Data.ModelConstants.Common;
+    using static ErrorMessages;
 
-    public class CategoriesRequestModel
-    {
+    public class CategoriesRequestModel {
         [Required]
         [StringLength(
-            MaxNameLength, 
-            ErrorMessage = StringLengthErrorMessage, 
+            MaxNameLength,
+            ErrorMessage = StringLengthErrorMessage,
             MinimumLength = MinNameLength)]
         public string Name { get; set; }
     }

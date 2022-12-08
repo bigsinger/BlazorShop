@@ -1,10 +1,8 @@
-﻿namespace BlazorShop.Models.Orders
-{
+﻿namespace BlazorShop.Models.Orders {
     using System.ComponentModel.DataAnnotations;
 
-    public class OrdersRequestModel
-    {
+    public class OrdersRequestModel {
         [Required]
-        public int AddressId { get; set; }
+        public long AddressId { get; set; }
     }
 }

@@ -32,13 +32,13 @@
 
             this.AddAdministrator();
 
-            foreach (var initialDataProvider in this.initialDataProviders) {
-                if (this.DataSetIsEmpty(initialDataProvider.EntityType)) {
-                    var data = initialDataProvider.GetData();
-
-                    foreach (var entity in data) {
-                        this.db.Add(entity);
-                    }
+            foreach (var provider in this.initialDataProviders) {
+                if (this.DataSetIsEmpty(provider.EntityType)) {
+                    var data = provider.GetData();
+                    this.db.AddRange(data);
+                    //foreach (var entity in data) {
+                    //    this.db.Add(entity);
+                    //}
                 }
             }
 
@@ -90,8 +90,6 @@
             return result == 0;
         }
 
-        private DbSet<TEntity> GetSet<TEntity>()
-            where TEntity : class
-            => this.db.Set<TEntity>();
+        private DbSet<TEntity> GetSet<TEntity>() where TEntity : class => this.db.Set<TEntity>();
     }
 }

@@ -1,20 +1,17 @@
-﻿namespace BlazorShop.Services.Products
-{
-    using System.Threading.Tasks;
-
+﻿namespace BlazorShop.Services.Products {
     using Common;
     using Models;
     using Models.Products;
+    using System.Threading.Tasks;
 
-    public interface IProductsService : IService
-    {
-        Task<int> CreateAsync(ProductsRequestModel model);
+    public interface IProductsService : IService {
+        Task<long> CreateAsync(ProductsRequestModel model);
 
-        Task<Result> UpdateAsync(int id, ProductsRequestModel model);
+        Task<Result> UpdateAsync(long id, ProductsRequestModel model);
 
-        Task<Result> DeleteAsync(int id);
+        Task<Result> DeleteAsync(long id);
 
-        Task<ProductsDetailsResponseModel> DetailsAsync(int id);
+        Task<ProductsDetailsResponseModel> DetailsAsync(long id);
 
         Task<ProductsSearchResponseModel> SearchAsync(ProductsSearchRequestModel model);
     }

@@ -1,14 +1,10 @@
-﻿namespace BlazorShop.Models.Orders
-{
-    using System.Globalization;
-
+﻿namespace BlazorShop.Models.Orders {
     using AutoMapper;
-
     using Common.Mapping;
     using Data.Models;
+    using System.Globalization;
 
-    public class OrdersBaseResponseModel : IMapFrom<Order>
-    {
+    public class OrdersBaseResponseModel : IMapFrom<Order> {
         public string Id { get; set; }
 
         public string CreatedOn { get; set; }

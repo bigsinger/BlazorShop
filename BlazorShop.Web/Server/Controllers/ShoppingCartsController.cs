@@ -29,22 +29,19 @@
             => await this.shoppingCarts.TotalAsync(this.currentUser.UserId);
 
         [HttpPost(nameof(AddProduct))]
-        public async Task<ActionResult> AddProduct(
-            ShoppingCartRequestModel model)
+        public async Task<ActionResult> AddProduct(ShoppingCartRequestModel model)
             => await this.shoppingCarts
                 .AddProductAsync(model, this.currentUser.UserId)
                 .ToActionResult();
 
         [HttpPut(nameof(UpdateProduct))]
-        public async Task<ActionResult> UpdateProduct(
-            ShoppingCartRequestModel model)
+        public async Task<ActionResult> UpdateProduct(ShoppingCartRequestModel model)
             => await this.shoppingCarts
                 .UpdateProductAsync(model, this.currentUser.UserId)
                 .ToActionResult();
 
         [HttpDelete(nameof(RemoveProduct) + PathSeparator + Id)]
-        public async Task<ActionResult> RemoveProduct(
-            int id)
+        public async Task<ActionResult> RemoveProduct(long id)
             => await this.shoppingCarts
                 .RemoveProductAsync(id, this.currentUser.UserId)
                 .ToActionResult();

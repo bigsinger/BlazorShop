@@ -1,13 +1,11 @@
-﻿namespace BlazorShop.Models.ShoppingCarts
-{
+﻿namespace BlazorShop.Models.ShoppingCarts {
     using AutoMapper;
 
     using Common.Mapping;
     using Data.Models;
 
-    public class ShoppingCartProductsResponseModel : IMapFrom<ShoppingCartProduct>
-    {
-        public int Id { get; set; }
+    public class ShoppingCartProductsResponseModel : IMapFrom<ShoppingCartProduct> {
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

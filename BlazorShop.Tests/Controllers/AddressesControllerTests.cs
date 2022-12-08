@@ -1,18 +1,14 @@
-﻿namespace BlazorShop.Tests.Controllers
-{
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MyTested.AspNetCore.Mvc;
-    using Shouldly;
-    using Xunit;
-
+﻿namespace BlazorShop.Tests.Controllers {
     using Data;
     using Models.Addresses;
+    using MyTested.AspNetCore.Mvc;
+    using Shouldly;
+    using System.Collections.Generic;
+    using System.Linq;
     using Web.Server.Controllers;
+    using Xunit;
 
-    public class AddressesControllerTests
-    {
+    public class AddressesControllerTests {
         [Fact]
         public void ShouldHaveRestrictionsForAuthorizedUsers()
             => MyController<AddressesController>
@@ -81,7 +77,7 @@
         [Fact]
         public void DeleteShouldHaveRestrictionsForHttpDeleteOnly()
             => MyController<AddressesController>
-                .Calling(c => c.Delete(With.Any<int>()))
+                .Calling(c => c.Delete(With.Any<long>()))
                 .ShouldHave()
                 .ActionAttributes(attrs => attrs
                     .RestrictingForHttpMethod(HttpMethod.Delete));
@@ -89,7 +85,7 @@
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
-        public void DeleteShouldReturnOkResultWhenAddressDeleted(int id)
+        public void DeleteShouldReturnOkResultWhenAddressDeleted(long id)
             => MyController<AddressesController>
                 .Instance(instance => instance
                     .WithUser()
@@ -103,7 +99,7 @@
             => MyController<AddressesController>
                 .Instance(instance => instance
                     .WithUser())
-                .Calling(c => c.Delete(With.Any<int>()))
+                .Calling(c => c.Delete(With.Any<long>()))
                 .ShouldReturn()
                 .BadRequest();
     }

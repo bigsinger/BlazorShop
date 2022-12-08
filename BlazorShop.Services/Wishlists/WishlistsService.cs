@@ -1,27 +1,20 @@
-﻿namespace BlazorShop.Services.Wishlists
-{
+﻿namespace BlazorShop.Services.Wishlists {
+    using AutoMapper;
+    using Data;
+    using Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
+    using Models.Wishlists;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
-
-    using Data;
-    using Data.Models;
-    using Models;
-    using Models.Wishlists;
-
-    public class WishlistsService : BaseService<Wishlist>, IWishlistsService
-    {
+    public class WishlistsService : BaseService<Wishlist>, IWishlistsService {
         public WishlistsService(BlazorShopDbContext db, IMapper mapper)
-            : base(db, mapper)
-        {
+            : base(db, mapper) {
         }
 
-        public async Task<Result> AddProductAsync(
-            int productId, string userId)
-        {
+        public async Task<Result> AddProductAsync(long productId, string userId) {
             var wishlist = await this
                 .All()
                 .FirstOrDefaultAsync(w => w.UserId == userId);
@@ -37,21 +30,23 @@
                 ProductId = productId
             };
 
-            await this.Data.AddAsync(wishlistProduct);
-            await this.Data.SaveChangesAsync();
+            try {
+                await this.Data.AddAsync(wishlistProduct);
+                await this.Data.SaveChangesAsync();
+            } catch (System.Exception e) {
+                string s = e.Message;
+                throw;
+            }
 
             return Result.Success;
         }
 
-        public async Task<Result> RemoveProductAsync(
-            int productId, string userId)
-        {
+        public async Task<Result> RemoveProductAsync(long productId, string userId) {
             var wishlistProduct = await this
                 .AllByUserId(userId)
                 .FirstOrDefaultAsync(w => w.ProductId == productId);
 
-            if (wishlistProduct == null)
-            {
+            if (wishlistProduct == null) {
                 return "This user cannot delete products from this wishlist.";
             }
 
@@ -62,16 +57,14 @@
             return Result.Success;
         }
 
-        public async Task<IEnumerable<WishlistsProductsResponseModel>> ByUserAsync(
-            string userId)
+        public async Task<IEnumerable<WishlistsProductsResponseModel>> ByUserAsync(string userId)
             => await this.Mapper
                 .ProjectTo<WishlistsProductsResponseModel>(this
                     .AllByUserId(userId)
                     .AsNoTracking())
                 .ToListAsync();
 
-        private IQueryable<WishlistProduct> AllByUserId(
-            string userId)
+        private IQueryable<WishlistProduct> AllByUserId(string userId)
             => this
                 .All()
                 .Where(w => w.UserId == userId)

@@ -1,15 +1,12 @@
-﻿namespace BlazorShop.Web.Client.Infrastructure.Services.Products
-{
+﻿namespace BlazorShop.Web.Client.Infrastructure.Services.Products {
+    using Extensions;
+    using Models;
+    using Models.Products;
     using System.Net.Http;
     using System.Net.Http.Json;
     using System.Threading.Tasks;
 
-    using Extensions;
-    using Models;
-    using Models.Products;
-
-    public class ProductsService : IProductsService
-    {
+    public class ProductsService : IProductsService {
         private readonly HttpClient http;
 
         private const string ProductsPath = "api/products";
@@ -18,34 +15,28 @@
 
         public ProductsService(HttpClient http) => this.http = http;
 
-        public async Task<int> CreateAsync(
-            ProductsRequestModel model)
-        {
+        public async Task<long> CreateAsync(
+            ProductsRequestModel model) {
             var response = await this.http.PostAsJsonAsync(ProductsPath, model);
-            var id = await response.Content.ReadFromJsonAsync<int>();
+            var id = await response.Content.ReadFromJsonAsync<long>();
 
             return id;
         }
 
-        public async Task<Result> UpdateAsync(
-            int id, ProductsRequestModel model)
+        public async Task<Result> UpdateAsync(long id, ProductsRequestModel model)
             => await this.http
                 .PutAsJsonAsync(ProductsPathWithSlash + id, model)
                 .ToResult();
 
-        public async Task<Result> DeleteAsync(
-            int id)
+        public async Task<Result> DeleteAsync(long id)
             => await this.http
                 .DeleteAsync(ProductsPathWithSlash + id)
                 .ToResult();
 
-        public async Task<TModel> DetailsAsync<TModel>(
-            int id)
-            where TModel : class
+        public async Task<TModel> DetailsAsync<TModel>(long id) where TModel : class
             => await this.http.GetFromJsonAsync<TModel>(ProductsPathWithSlash + id);
 
-        public async Task<ProductsSearchResponseModel> SearchAsync(
-            ProductsSearchRequestModel model)
+        public async Task<ProductsSearchResponseModel> SearchAsync(ProductsSearchRequestModel model)
             => await this.http.GetFromJsonAsync<ProductsSearchResponseModel>(
                 string.Format(
                     ProductsSearchPath,

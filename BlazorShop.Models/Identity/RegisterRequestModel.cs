@@ -1,13 +1,10 @@
-﻿namespace BlazorShop.Models.Identity
-{
+﻿namespace BlazorShop.Models.Identity {
     using System.ComponentModel.DataAnnotations;
-
-    using static ErrorMessages;
     using static Data.ModelConstants.Common;
     using static Data.ModelConstants.Identity;
+    using static ErrorMessages;
 
-    public class RegisterRequestModel : LoginRequestModel
-    {
+    public class RegisterRequestModel : LoginRequestModel {
         [Required]
         [StringLength(
             MaxNameLength,

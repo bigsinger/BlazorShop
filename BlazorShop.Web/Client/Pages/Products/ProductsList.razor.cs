@@ -15,7 +15,7 @@
         private IEnumerable<CategoriesListingResponseModel> categories;
 
         [Parameter]
-        public int? CategoryId { get; set; }
+        public long? CategoryId { get; set; }
 
         [Parameter]
         public string CategoryName { get; set; }
@@ -61,12 +61,12 @@
             this.Filter();
         }
 
-        private async Task AddToWishlist(int id) {
+        private async Task AddToWishlist(long id) {
             await this.WishlistsService.AddProduct(id);
             this.NavigationManager.NavigateTo("/wishlist");
         }
 
-        private async Task AddToCart(int id) {
+        private async Task AddToCart(long id) {
             var cartRequest = new ShoppingCartRequestModel
             {
                 ProductId = id,

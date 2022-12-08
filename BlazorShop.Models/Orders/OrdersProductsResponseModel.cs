@@ -1,13 +1,11 @@
-﻿namespace BlazorShop.Models.Orders
-{
+﻿namespace BlazorShop.Models.Orders {
     using AutoMapper;
 
     using Common.Mapping;
     using Data.Models;
 
-    public class OrdersProductsResponseModel : IMapFrom<OrderProduct>
-    {
-        public int Id { get; set; }
+    public class OrdersProductsResponseModel : IMapFrom<OrderProduct> {
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

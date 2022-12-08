@@ -14,7 +14,7 @@
         private IEnumerable<CategoriesListingResponseModel> categories;
 
         [Parameter]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

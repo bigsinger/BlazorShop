@@ -20,7 +20,7 @@
             this IServiceCollection services,
             IConfiguration configuration) {
             var applicationSettingsConfiguration = configuration.GetSection(nameof(ApplicationSettings));
-            //services.Configure<ApplicationSettings>(applicationSettingsConfiguration);
+            services.Configure<ApplicationSettings>(applicationSettingsConfiguration);
             return applicationSettingsConfiguration.Get<ApplicationSettings>();
         }
 
@@ -73,6 +73,7 @@
             return services;
         }
 
+        // 获取BlazorShop.Services程序集下面的所有Service接口及派生类，并根据类型进行全局注入
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) {
             var transientServiceInterfaceType = typeof(IService);
             var singletonServiceInterfaceType = typeof(ISingletonService);

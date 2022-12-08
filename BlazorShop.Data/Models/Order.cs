@@ -1,19 +1,16 @@
-﻿namespace BlazorShop.Data.Models
-{
+﻿namespace BlazorShop.Data.Models {
+    using Contracts;
     using System;
     using System.Collections.Generic;
 
-    using Contracts;
-
-    public class Order : BaseModel
-    {
+    public class Order : BaseModel {
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         public string UserId { get; set; }
 
         public BlazorShopUser User { get; set; }
 
-        public int DeliveryAddressId { get; set; }
+        public long DeliveryAddressId { get; set; }
 
         public Address DeliveryAddress { get; set; }
 

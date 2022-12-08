@@ -1,16 +1,13 @@
-﻿namespace BlazorShop.Web.Client.Infrastructure.Services.Wishlists
-{
+﻿namespace BlazorShop.Web.Client.Infrastructure.Services.Wishlists {
+    using Models;
+    using Models.Wishlists;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Models;
-    using Models.Wishlists;
+    public interface IWishlistsService {
+        Task<Result> AddProduct(long id);
 
-    public interface IWishlistsService
-    {
-        Task<Result> AddProduct(int id);
-
-        Task<Result> RemoveProduct(int id);
+        Task<Result> RemoveProduct(long id);
 
         Task<IEnumerable<WishlistsProductsResponseModel>> Mine();
     }

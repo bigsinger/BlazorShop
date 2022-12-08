@@ -48,6 +48,14 @@
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
 
+            builder.Entity<Address>().Property(f => f.Id).ValueGeneratedOnAdd();
+            builder.Entity<Category>().Property(f => f.Id).ValueGeneratedOnAdd();
+            builder.Entity<Product>().Property(f => f.Id).ValueGeneratedOnAdd();
+            builder.Entity<ShoppingCart>().Property(f => f.Id).ValueGeneratedOnAdd();
+            builder.Entity<ShoppingCartProduct>().Property(f => f.ShoppingCartId).ValueGeneratedOnAdd();
+            builder.Entity<Wishlist>().Property(f => f.Id).ValueGeneratedOnAdd();
+            builder.Entity<WishlistProduct>().Property(f => f.WishlistId).ValueGeneratedOnAdd();
+
             builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
 

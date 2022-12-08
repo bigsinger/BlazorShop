@@ -5,7 +5,7 @@
 
     public class Address : BaseDeletableModel {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public long Id { get; set; } = 0;
 
         public string Country { get; set; }
 

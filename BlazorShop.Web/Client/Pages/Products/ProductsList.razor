@@ -1,8 +1,8 @@
 ﻿@page "/products/page/{Page:int}"
 @page "/products/search/{SearchQuery}/page/{Page:int}"
-@page "/products/category/{CategoryName}/{CategoryId:int}"
-@page "/products/category/{CategoryName}/{CategoryId:int}/page/{Page:int}"
-@page "/products/category/{CategoryName}/{CategoryId:int}/search/{SearchQuery}/page/{Page:int}"
+@page "/products/category/{CategoryName}/{CategoryId:long}"
+@page "/products/category/{CategoryName}/{CategoryId:long}/page/{Page:int}"
+@page "/products/category/{CategoryName}/{CategoryId:long}/search/{SearchQuery}/page/{Page:int}"
 
 @if (products == null || categories == null)
 {

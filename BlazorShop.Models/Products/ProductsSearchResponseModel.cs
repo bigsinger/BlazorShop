@@ -1,9 +1,7 @@
-﻿namespace BlazorShop.Models.Products
-{
+﻿namespace BlazorShop.Models.Products {
     using System.Collections.Generic;
 
-    public class ProductsSearchResponseModel
-    {
+    public class ProductsSearchResponseModel {
         public IEnumerable<ProductsListingResponseModel> Products { get; set; }
 
         public int Page { get; set; }

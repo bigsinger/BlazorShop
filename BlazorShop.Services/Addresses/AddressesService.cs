@@ -1,27 +1,20 @@
-﻿namespace BlazorShop.Services.Addresses
-{
+﻿namespace BlazorShop.Services.Addresses {
+    using AutoMapper;
+    using Data;
+    using Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
+    using Models.Addresses;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
-
-    using Data;
-    using Data.Models;
-    using Models;
-    using Models.Addresses;
-
-    public class AddressesService : BaseService<Address>, IAddressesService
-    {
+    public class AddressesService : BaseService<Address>, IAddressesService {
         public AddressesService(BlazorShopDbContext data, IMapper mapper)
-            : base(data, mapper)
-        {
+            : base(data, mapper) {
         }
 
-        public async Task<int> CreateAsync(
-            AddressesRequestModel model, string userId)
-        {
+        public async Task<long> CreateAsync(AddressesRequestModel model, string userId) {
             var address = new Address
             {
                 Country = model.Country,
@@ -39,16 +32,13 @@
             return address.Id;
         }
 
-        public async Task<Result> DeleteAsync(
-            int id, string userId)
-        {
+        public async Task<Result> DeleteAsync(long id, string userId) {
             var address = await this
                 .All()
                 .Where(a => a.Id == id && a.UserId == userId)
                 .FirstOrDefaultAsync();
 
-            if (address == null)
-            {
+            if (address == null) {
                 return "This user cannot delete this address.";
             }
 
@@ -59,8 +49,7 @@
             return Result.Success;
         }
 
-        public async Task<IEnumerable<AddressesListingResponseModel>> ByUserAsync(
-            string userId)
+        public async Task<IEnumerable<AddressesListingResponseModel>> ByUserAsync(string userId)
             => await this.Mapper
                 .ProjectTo<AddressesListingResponseModel>(this
                     .AllAsNoTracking()

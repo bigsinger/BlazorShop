@@ -1,29 +1,23 @@
-﻿namespace BlazorShop.Services.Products
-{
+﻿namespace BlazorShop.Services.Products {
+    using AutoMapper;
+    using Data;
+    using Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
+    using Models.Products;
+    using Specifications;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
-
-    using Data;
-    using Data.Models;
-    using Models;
-    using Models.Products;
-    using Specifications;
-
-    public class ProductsService : BaseService<Product>, IProductsService
-    {
+    public class ProductsService : BaseService<Product>, IProductsService {
         private const int ProductsPerPage = 6;
 
         public ProductsService(BlazorShopDbContext db, IMapper mapper)
-            : base(db, mapper)
-        {
+            : base(db, mapper) {
         }
 
-        public async Task<int> CreateAsync(ProductsRequestModel model)
-        {
+        public async Task<long> CreateAsync(ProductsRequestModel model) {
             var product = new Product
             {
                 Name = model.Name,
@@ -40,13 +34,10 @@
             return product.Id;
         }
 
-        public async Task<Result> UpdateAsync(
-            int id, ProductsRequestModel model)
-        {
+        public async Task<Result> UpdateAsync(long id, ProductsRequestModel model) {
             var product = await this.FindByIdAsync(id);
 
-            if (product == null)
-            {
+            if (product == null) {
                 return false;
             }
 
@@ -62,12 +53,10 @@
             return true;
         }
 
-        public async Task<Result> DeleteAsync(int id)
-        {
+        public async Task<Result> DeleteAsync(long id) {
             var product = await this.FindByIdAsync(id);
 
-            if (product == null)
-            {
+            if (product == null) {
                 return false;
             }
 
@@ -78,8 +67,7 @@
             return true;
         }
 
-        public async Task<ProductsDetailsResponseModel> DetailsAsync(
-            int id)
+        public async Task<ProductsDetailsResponseModel> DetailsAsync(long id)
             => await this.Mapper
                 .ProjectTo<ProductsDetailsResponseModel>(this
                     .AllAsNoTracking()
@@ -87,8 +75,7 @@
                 .FirstOrDefaultAsync();
 
         public async Task<ProductsSearchResponseModel> SearchAsync(
-            ProductsSearchRequestModel model)
-        {
+            ProductsSearchRequestModel model) {
             var specification = this.GetProductSpecification(model);
 
             var products = await this.Mapper
@@ -109,9 +96,7 @@
             };
         }
 
-        private async Task<int> GetTotalPages(
-            ProductsSearchRequestModel model)
-        {
+        private async Task<int> GetTotalPages(ProductsSearchRequestModel model) {
             var specification = this.GetProductSpecification(model);
 
             var total = await this
@@ -122,8 +107,7 @@
             return (int)Math.Ceiling((double)total / ProductsPerPage);
         }
 
-        private async Task<Product> FindByIdAsync(
-            int id)
+        private async Task<Product> FindByIdAsync(long id)
             => await this
                 .All()
                 .Where(p => p.Id == id)

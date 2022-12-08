@@ -5,7 +5,7 @@
 
     public class Product : BaseDeletableModel {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public long Id { get; set; } = 0;
 
         public string Name { get; set; }
 
@@ -17,7 +17,7 @@
 
         public decimal Price { get; set; }
 
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
         public Category Category { get; set; }
 

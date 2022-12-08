@@ -13,7 +13,7 @@
         public IEnumerable<string> Errors { get; set; }
 
         [Parameter]
-        public int ProductId { get; set; }
+        public long ProductId { get; set; }
 
         [Parameter]
         public string ProductName { get; set; }

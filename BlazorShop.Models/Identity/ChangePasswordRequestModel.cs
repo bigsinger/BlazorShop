@@ -1,11 +1,9 @@
-﻿namespace BlazorShop.Models.Identity
-{
+﻿namespace BlazorShop.Models.Identity {
     using System.ComponentModel.DataAnnotations;
 
     using static Data.ModelConstants.Identity;
 
-    public class ChangePasswordRequestModel
-    {
+    public class ChangePasswordRequestModel {
         [Required]
         [MinLength(MinPasswordLength)]
         [DataType(DataType.Password)]

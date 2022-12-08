@@ -1,11 +1,9 @@
-﻿namespace BlazorShop.Models.Addresses
-{
+﻿namespace BlazorShop.Models.Addresses {
     using System.ComponentModel.DataAnnotations;
 
     using static Data.ModelConstants.Address;
 
-    public class AddressesRequestModel
-    {
+    public class AddressesRequestModel {
         [Required]
         [MaxLength(MaxCountryLength)]
         public string Country { get; set; }

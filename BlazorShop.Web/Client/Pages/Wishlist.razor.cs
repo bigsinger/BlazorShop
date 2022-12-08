@@ -1,21 +1,17 @@
-﻿namespace BlazorShop.Web.Client.Pages
-{
+﻿namespace BlazorShop.Web.Client.Pages {
+    using Models.ShoppingCarts;
+    using Models.Wishlists;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Models.ShoppingCarts;
-    using Models.Wishlists;
-
-    public partial class Wishlist
-    {
+    public partial class Wishlist {
         private IEnumerable<WishlistsProductsResponseModel> products;
 
         protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
 
         private async Task LoadDataAsync() => this.products = await this.WishlistsService.Mine();
 
-        private async Task OnSubmitAsync(int id)
-        {
+        private async Task OnSubmitAsync(long id) {
             var cartRequest = new ShoppingCartRequestModel
             {
                 ProductId = id,
@@ -27,12 +23,10 @@
             this.NavigationManager.NavigateTo("/cart", forceLoad: true);
         }
 
-        private async Task OnRemoveAsync(int id)
-        {
+        private async Task OnRemoveAsync(long id) {
             var result = await this.WishlistsService.RemoveProduct(id);
 
-            if (result.Succeeded)
-            {
+            if (result.Succeeded) {
                 await this.LoadDataAsync();
             }
         }

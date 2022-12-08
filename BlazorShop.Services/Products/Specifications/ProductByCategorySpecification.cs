@@ -1,15 +1,12 @@
-﻿namespace BlazorShop.Services.Products.Specifications
-{
+﻿namespace BlazorShop.Services.Products.Specifications {
+    using Data.Models;
     using System;
     using System.Linq.Expressions;
 
-    using Data.Models;
+    internal class ProductByCategorySpecification : Specification<Product> {
+        private readonly long? category;
 
-    internal class ProductByCategorySpecification : Specification<Product>
-    {
-        private readonly int? category;
-
-        internal ProductByCategorySpecification(int? category)
+        internal ProductByCategorySpecification(long? category)
             => this.category = category;
 
         protected override bool Include => this.category != null;

@@ -1,17 +1,13 @@
-﻿namespace BlazorShop.Web.Client.Pages.Products
-{
+﻿namespace BlazorShop.Web.Client.Pages.Products {
+    using Microsoft.AspNetCore.Components;
+    using Models.Products;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Components;
-
-    using Models.Products;
-
-    public partial class Details
-    {
+    public partial class Details {
         private ProductsDetailsResponseModel product;
 
         [Parameter]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Parameter]
         public string ProductName { get; set; }

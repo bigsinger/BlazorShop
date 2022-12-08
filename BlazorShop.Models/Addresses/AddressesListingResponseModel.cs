@@ -1,11 +1,9 @@
-﻿namespace BlazorShop.Models.Addresses
-{
+﻿namespace BlazorShop.Models.Addresses {
     using Common.Mapping;
     using Data.Models;
 
-    public class AddressesListingResponseModel : IMapFrom<Address>
-    {
-        public int Id { get; set; }
+    public class AddressesListingResponseModel : IMapFrom<Address> {
+        public long Id { get; set; }
 
         public string Country { get; set; }
 

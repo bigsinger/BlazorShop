@@ -1,11 +1,9 @@
-﻿namespace BlazorShop.Models.Products
-{
+﻿namespace BlazorShop.Models.Products {
     using Common.Mapping;
     using Data.Models;
 
-    public class ProductsListingResponseModel : IMapFrom<Product>
-    {
-        public int Id { get; set; }
+    public class ProductsListingResponseModel : IMapFrom<Product> {
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

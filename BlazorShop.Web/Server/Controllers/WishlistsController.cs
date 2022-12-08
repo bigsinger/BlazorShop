@@ -25,15 +25,13 @@
             => await this.wishlists.ByUserAsync(this.currentUser.UserId);
 
         [HttpPost(nameof(AddProduct) + PathSeparator + Id)]
-        public async Task<ActionResult> AddProduct(
-            int id)
+        public async Task<ActionResult> AddProduct(long id)
             => await this.wishlists
                 .AddProductAsync(id, this.currentUser.UserId)
                 .ToActionResult();
 
         [HttpDelete(nameof(RemoveProduct) + PathSeparator + Id)]
-        public async Task<ActionResult> RemoveProduct(
-            int id)
+        public async Task<ActionResult> RemoveProduct(long id)
             => await this.wishlists
                 .RemoveProductAsync(id, this.currentUser.UserId)
                 .ToActionResult();

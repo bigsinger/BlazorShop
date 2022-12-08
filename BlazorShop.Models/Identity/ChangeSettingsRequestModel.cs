@@ -1,12 +1,9 @@
-﻿namespace BlazorShop.Models.Identity
-{
+﻿namespace BlazorShop.Models.Identity {
     using System.ComponentModel.DataAnnotations;
-
-    using static ErrorMessages;
     using static Data.ModelConstants.Common;
+    using static ErrorMessages;
 
-    public class ChangeSettingsRequestModel
-    {
+    public class ChangeSettingsRequestModel {
         [Required]
         [StringLength(
             MaxNameLength,

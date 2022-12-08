@@ -1,13 +1,11 @@
-﻿namespace BlazorShop.Models.Wishlists
-{
+﻿namespace BlazorShop.Models.Wishlists {
     using AutoMapper;
 
     using Common.Mapping;
     using Data.Models;
 
-    public class WishlistsProductsResponseModel : IMapFrom<WishlistProduct>
-    {
-        public int Id { get; set; }
+    public class WishlistsProductsResponseModel : IMapFrom<WishlistProduct> {
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

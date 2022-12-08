@@ -1,10 +1,8 @@
-﻿namespace BlazorShop.Models.Products
-{
-    public class ProductsSearchRequestModel
-    {
+﻿namespace BlazorShop.Models.Products {
+    public class ProductsSearchRequestModel {
         public string Query { get; set; }
 
-        public int? Category { get; set; }
+        public long? Category { get; set; }
 
         public decimal? MinPrice { get; set; }
 

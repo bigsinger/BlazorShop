@@ -1,16 +1,11 @@
-﻿namespace BlazorShop.Data.Models
-{
+﻿namespace BlazorShop.Data.Models {
+    using Contracts;
+    using Microsoft.AspNetCore.Identity;
     using System;
 
-    using Microsoft.AspNetCore.Identity;
-
-    using Contracts;
-
-    public class BlazorShopRole : IdentityRole, IAuditInfo, IDeletableEntity
-    {
+    public class BlazorShopRole : IdentityRole, IAuditInfo, IDeletableEntity {
         public BlazorShopRole()
-            : this(null)
-        {
+            : this(null) {
         }
 
         public BlazorShopRole(string name)
