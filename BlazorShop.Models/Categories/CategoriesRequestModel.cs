@@ -1,7 +1,7 @@
 ﻿namespace BlazorShop.Models.Categories {
     using System.ComponentModel.DataAnnotations;
+    using static BlazorShop.Common.ErrorMessages;
     using static Data.ModelConstants.Common;
-    using static ErrorMessages;
 
     public class CategoriesRequestModel {
         [Required]

@@ -1,12 +1,12 @@
 ﻿namespace BlazorShop.Web.Server.Controllers {
-    using Infrastructure.Extensions;
+    using BlazorShop.Web.Server.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models.Categories;
     using Services.Categories;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using static Common.Constants;
+    using static BlazorShop.Data.Constants;
 
     [Authorize(Roles = AdministratorRole)]
     public class CategoriesController : ApiController {

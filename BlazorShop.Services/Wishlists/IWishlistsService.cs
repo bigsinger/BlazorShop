@@ -1,6 +1,6 @@
 ﻿namespace BlazorShop.Services.Wishlists {
+    using BlazorShop.Common.Common;
     using Common;
-    using Models;
     using Models.Wishlists;
     using System.Collections.Generic;
     using System.Threading.Tasks;

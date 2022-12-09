@@ -1,9 +1,9 @@
 ﻿namespace BlazorShop.Services.Wishlists {
     using AutoMapper;
+    using BlazorShop.Common;
     using Data;
     using Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using Models;
     using Models.Wishlists;
     using System.Collections.Generic;
     using System.Linq;
@@ -19,13 +19,11 @@
                 .All()
                 .FirstOrDefaultAsync(w => w.UserId == userId);
 
-            wishlist ??= new Wishlist
-            {
+            wishlist ??= new Wishlist {
                 UserId = userId
             };
 
-            var wishlistProduct = new WishlistProduct
-            {
+            var wishlistProduct = new WishlistProduct {
                 Wishlist = wishlist,
                 ProductId = productId
             };
@@ -33,7 +31,7 @@
             try {
                 await this.Data.AddAsync(wishlistProduct);
                 await this.Data.SaveChangesAsync();
-            } catch (System.Exception) {
+            } catch(System.Exception) {
                 return NotLogin;
             }
 
@@ -45,7 +43,7 @@
                 .AllByUserId(userId)
                 .FirstOrDefaultAsync(w => w.ProductId == productId);
 
-            if (wishlistProduct == null) {
+            if(wishlistProduct == null) {
                 return "This user cannot delete products from this wishlist.";
             }
 

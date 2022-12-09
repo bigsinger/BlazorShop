@@ -1,5 +1,4 @@
 ﻿namespace BlazorShop.Web.Server.Controllers {
-    using Infrastructure.Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models.Orders;

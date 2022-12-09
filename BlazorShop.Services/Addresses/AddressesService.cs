@@ -1,9 +1,9 @@
 ﻿namespace BlazorShop.Services.Addresses {
     using AutoMapper;
+    using BlazorShop.Common;
     using Data;
     using Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using Models;
     using Models.Addresses;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,8 +15,7 @@
         }
 
         public async Task<long> CreateAsync(AddressesRequestModel model, string userId) {
-            var address = new Address
-            {
+            var address = new Address {
                 Country = model.Country,
                 State = model.State,
                 City = model.City,
@@ -38,7 +37,7 @@
                 .Where(a => a.Id == id && a.UserId == userId)
                 .FirstOrDefaultAsync();
 
-            if (address == null) {
+            if(address == null) {
                 return "This user cannot delete this address.";
             }
 

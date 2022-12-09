@@ -1,13 +1,10 @@
-﻿namespace BlazorShop.Services.Orders
-{
+﻿namespace BlazorShop.Services.Orders {
+    using BlazorShop.Common.Common;
+    using Models.Orders;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Common;
-    using Models.Orders;
-
-    public interface IOrdersService : IService
-    {
+    public interface IOrdersService : IService {
         Task<string> PurchaseAsync(OrdersRequestModel model, string userId);
 
         Task<OrdersDetailsResponseModel> DetailsAsync(string id);

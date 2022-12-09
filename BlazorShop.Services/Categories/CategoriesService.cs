@@ -1,22 +1,20 @@
 ﻿namespace BlazorShop.Services.Categories {
     using AutoMapper;
+    using BlazorShop.Common;
     using Data;
     using Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using Models;
     using Models.Categories;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     public class CategoriesService : BaseService<Category>, ICategoriesService {
-        public CategoriesService(BlazorShopDbContext db, IMapper mapper)
-            : base(db, mapper) {
+        public CategoriesService(BlazorShopDbContext db, IMapper mapper) : base(db, mapper) {
         }
 
         public async Task<long> CreateAsync(CategoriesRequestModel model) {
-            var category = new Category
-            {
+            var category = new Category {
                 Name = model.Name
             };
 
@@ -30,7 +28,7 @@
             long id, CategoriesRequestModel model) {
             var category = await this.FindByIdAsync(id);
 
-            if (category == null) {
+            if(category == null) {
                 return false;
             }
 
@@ -44,7 +42,7 @@
         public async Task<Result> DeleteAsync(long id) {
             var category = await this.FindByIdAsync(id);
 
-            if (category == null) {
+            if(category == null) {
                 return false;
             }
 
@@ -56,8 +54,7 @@
         }
 
         public async Task<IEnumerable<CategoriesListingResponseModel>> AllAsync()
-            => await this.Mapper
-                .ProjectTo<CategoriesListingResponseModel>(this.AllAsNoTracking())
+            => await this.Mapper.ProjectTo<CategoriesListingResponseModel>(this.AllAsNoTracking())
                 .ToListAsync();
 
         private async Task<Category> FindByIdAsync(

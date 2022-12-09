@@ -1,16 +1,13 @@
-﻿namespace BlazorShop.Web.Client.Pages
-{
+﻿namespace BlazorShop.Web.Client.Pages {
+    using BlazorShop.Web.Client.Extensions;
+    using Models.Addresses;
+    using Models.Orders;
+    using Models.ShoppingCarts;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Infrastructure.Extensions;
-    using Models.Addresses;
-    using Models.Orders;
-    using Models.ShoppingCarts;
-
-    public partial class Checkout
-    {
+    public partial class Checkout {
         private readonly AddressesRequestModel address = new AddressesRequestModel();
         private readonly OrdersRequestModel order = new OrdersRequestModel();
 
@@ -18,8 +15,7 @@
         private decimal totalPrice;
         private IEnumerable<ShoppingCartProductsResponseModel> cartProducts;
 
-        protected override async Task OnInitializedAsync()
-        {
+        protected override async Task OnInitializedAsync() {
             var state = await this.AuthState.GetAuthenticationStateAsync();
             var user = state.User;
 
@@ -29,8 +25,7 @@
             this.totalPrice = this.cartProducts.Sum(p => p.Price * p.Quantity);
         }
 
-        private async Task SubmitAsync()
-        {
+        private async Task SubmitAsync() {
             var addressId = await this.AddressesService.CreateAsync(this.address);
 
             this.order.AddressId = addressId;

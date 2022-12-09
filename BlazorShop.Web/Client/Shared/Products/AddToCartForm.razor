@@ -1,4 +1,5 @@
-﻿<EditForm Model="model" OnValidSubmit="OnSubmitAsync">
+﻿@using BlazorShop.Data;
+<EditForm Model="model" OnValidSubmit="OnSubmitAsync">
 
     <ErrorsList ShowErrors="ShowErrors" Errors="Errors" />
     <DataAnnotationsValidator />

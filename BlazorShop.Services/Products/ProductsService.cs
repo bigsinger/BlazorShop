@@ -1,9 +1,9 @@
 ﻿namespace BlazorShop.Services.Products {
     using AutoMapper;
+    using BlazorShop.Common;
     using Data;
     using Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using Models;
     using Models.Products;
     using Specifications;
     using System;

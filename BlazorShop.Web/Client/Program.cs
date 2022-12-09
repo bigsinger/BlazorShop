@@ -1,4 +1,4 @@
-using BlazorShop.Web.Client.Infrastructure.Extensions;
+using BlazorShop.Web.Client;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

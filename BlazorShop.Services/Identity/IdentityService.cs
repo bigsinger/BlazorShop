@@ -1,16 +1,12 @@
-﻿namespace BlazorShop.Services.Identity
-{
+﻿namespace BlazorShop.Services.Identity {
+    using BlazorShop.Common;
+    using Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Models.Identity;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity;
-
-    using Data.Models;
-    using Models;
-    using Models.Identity;
-
-    public class IdentityService : IIdentityService
-    {
+    public class IdentityService : IIdentityService {
         private const string InvalidErrorMessage = "Invalid email or password.";
 
         private readonly UserManager<BlazorShopUser> userManager;
@@ -18,16 +14,13 @@
 
         public IdentityService(
             UserManager<BlazorShopUser> userManager,
-            IJwtGeneratorService jwtGenerator)
-        {
+            IJwtGeneratorService jwtGenerator) {
             this.userManager = userManager;
             this.jwtGenerator = jwtGenerator;
         }
 
-        public async Task<Result> RegisterAsync(RegisterRequestModel model)
-        {
-            var user = new BlazorShopUser
-            {
+        public async Task<Result> RegisterAsync(RegisterRequestModel model) {
+            var user = new BlazorShopUser {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
@@ -43,17 +36,14 @@
                 : Result.Failure(errors);
         }
 
-        public async Task<Result<LoginResponseModel>> LoginAsync(LoginRequestModel model)
-        {
+        public async Task<Result<LoginResponseModel>> LoginAsync(LoginRequestModel model) {
             var user = await this.userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
+            if(user == null) {
                 return InvalidErrorMessage;
             }
 
             var passwordValid = await this.userManager.CheckPasswordAsync(user, model.Password);
-            if (!passwordValid)
-            {
+            if(!passwordValid) {
                 return InvalidErrorMessage;
             }
 
@@ -63,11 +53,9 @@
         }
 
         public async Task<Result> ChangeSettingsAsync(
-            ChangeSettingsRequestModel model, string userId)
-        {
+            ChangeSettingsRequestModel model, string userId) {
             var user = await this.userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
+            if(user == null) {
                 return InvalidErrorMessage;
             }
 
@@ -84,11 +72,9 @@
         }
 
         public async Task<Result> ChangePasswordAsync(
-            ChangePasswordRequestModel model, string userId)
-        {
+            ChangePasswordRequestModel model, string userId) {
             var user = await this.userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
+            if(user == null) {
                 return InvalidErrorMessage;
             }
 

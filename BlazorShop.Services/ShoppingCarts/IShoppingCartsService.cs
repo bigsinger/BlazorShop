@@ -1,6 +1,6 @@
 ﻿namespace BlazorShop.Services.ShoppingCarts {
+    using BlazorShop.Common.Common;
     using Common;
-    using Models;
     using Models.ShoppingCarts;
     using System.Collections.Generic;
     using System.Threading.Tasks;

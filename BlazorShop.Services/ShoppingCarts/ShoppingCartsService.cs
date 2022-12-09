@@ -1,9 +1,9 @@
 ﻿namespace BlazorShop.Services.ShoppingCarts {
     using AutoMapper;
+    using BlazorShop.Common;
     using Data;
     using Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using Models;
     using Models.ShoppingCarts;
     using System.Collections.Generic;
     using System.Linq;
@@ -23,21 +23,19 @@
 
             var productQuantity = await this.GetProductQuantityById(productId);
 
-            if (productQuantity < requestQuantity) {
+            if(productQuantity < requestQuantity) {
                 return NotEnoughProductsMessage;
             }
 
             var shoppingCartProduct = await this.FindByProductAndUserAsync(productId, userId);
-            if (shoppingCartProduct == null) {
+            if(shoppingCartProduct == null) {
                 var shoppingCart = await this.All().FirstOrDefaultAsync(c => c.UserId == userId);
 
-                shoppingCart ??= new ShoppingCart
-                {
+                shoppingCart ??= new ShoppingCart {
                     UserId = userId
                 };
 
-                shoppingCartProduct = new ShoppingCartProduct
-                {
+                shoppingCartProduct = new ShoppingCartProduct {
                     ShoppingCart = shoppingCart,
                     ProductId = productId,
                     Quantity = requestQuantity
@@ -46,7 +44,7 @@
                 try {
                     await this.Data.AddAsync(shoppingCartProduct);
                     await this.Data.SaveChangesAsync();
-                } catch (System.Exception) {
+                } catch(System.Exception) {
                     return NotLogin;
                 }
             } else {
@@ -63,13 +61,13 @@
 
             var productQuantity = await this.GetProductQuantityById(productId);
 
-            if (productQuantity < requestQuantity) {
+            if(productQuantity < requestQuantity) {
                 return NotEnoughProductsMessage;
             }
 
             var shoppingCartProduct = await this.FindByProductAndUserAsync(productId, userId);
 
-            if (shoppingCartProduct == null) {
+            if(shoppingCartProduct == null) {
                 return InvalidErrorMessage;
             }
 
@@ -77,7 +75,7 @@
 
             try {
                 await this.Data.SaveChangesAsync();
-            } catch (System.Exception) {
+            } catch(System.Exception) {
                 return NotLogin;
             }
 
@@ -87,7 +85,7 @@
         public async Task<Result> RemoveProductAsync(long productId, string userId) {
             var shoppingCartProduct = await this.FindByProductAndUserAsync(productId, userId);
 
-            if (shoppingCartProduct == null) {
+            if(shoppingCartProduct == null) {
                 return InvalidErrorMessage;
             }
 

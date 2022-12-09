@@ -5,7 +5,7 @@
 
     public class Category : BaseDeletableModel {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; } = 0;
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

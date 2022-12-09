@@ -1,5 +1,5 @@
-using BlazorShop.Web.Server.Infrastructure.Extensions;
-using System.Reflection;
+using BlazorShop.Models.Mapping;
+using BlazorShop.Web.Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddDatabase(builder.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(builder.Services.GetApplicationSettings(builder.Configuration))
-                .AddAutoMapper(Assembly.GetExecutingAssembly())
+                //.AddAutoMapper(Assembly.GetExecutingAssembly())
+                .AddAutoMapper(typeof(MappingProfile).Assembly)
                 .AddApplicationServices()
                 .AddApiControllers();
 

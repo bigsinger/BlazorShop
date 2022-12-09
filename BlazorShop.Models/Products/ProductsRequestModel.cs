@@ -1,8 +1,8 @@
 ﻿namespace BlazorShop.Models.Products {
     using System.ComponentModel.DataAnnotations;
+    using static BlazorShop.Common.ErrorMessages;
     using static Data.ModelConstants.Common;
     using static Data.ModelConstants.Product;
-    using static ErrorMessages;
 
     public class ProductsRequestModel {
         [Required]

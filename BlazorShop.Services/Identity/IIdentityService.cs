@@ -1,13 +1,10 @@
-﻿namespace BlazorShop.Services.Identity
-{
+﻿namespace BlazorShop.Services.Identity {
+    using BlazorShop.Common.Common;
+    using Common;
+    using Models.Identity;
     using System.Threading.Tasks;
 
-    using Common;
-    using Models;
-    using Models.Identity;
-
-    public interface IIdentityService : IService
-    {
+    public interface IIdentityService : IService {
         Task<Result> RegisterAsync(RegisterRequestModel model);
 
         Task<Result<LoginResponseModel>> LoginAsync(LoginRequestModel model);

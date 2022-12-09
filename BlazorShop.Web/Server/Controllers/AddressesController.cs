@@ -1,7 +1,6 @@
 ﻿namespace BlazorShop.Web.Server.Controllers;
 
-using Infrastructure.Extensions;
-using Infrastructure.Services;
+using BlazorShop.Web.Server.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Addresses;

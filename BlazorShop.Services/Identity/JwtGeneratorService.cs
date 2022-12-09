@@ -1,36 +1,29 @@
-﻿namespace BlazorShop.Services.Identity
-{
+﻿namespace BlazorShop.Services.Identity {
+    using Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.Options;
+    using Microsoft.IdentityModel.Tokens;
+    using Models;
     using System;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
+    using static BlazorShop.Data.Constants;
 
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Options;
-    using Microsoft.IdentityModel.Tokens;
-
-    using Data.Models;
-    using Models;
-
-    using static BlazorShop.Common.Constants;
-
-    public class JwtGeneratorService : IJwtGeneratorService
-    {
+    public class JwtGeneratorService : IJwtGeneratorService {
         private readonly UserManager<BlazorShopUser> userManager;
         private readonly ApplicationSettings applicationSettings;
 
         public JwtGeneratorService(
             UserManager<BlazorShopUser> userManager,
-            IOptions<ApplicationSettings> applicationSettings)
-        {
+            IOptions<ApplicationSettings> applicationSettings) {
             this.userManager = userManager;
             this.applicationSettings = applicationSettings.Value;
         }
 
-        public async Task<string> GenerateJwtAsync(BlazorShopUser user)
-        {
+        public async Task<string> GenerateJwtAsync(BlazorShopUser user) {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
@@ -41,8 +34,7 @@
 
             var isAdministrator = await this.userManager.IsInRoleAsync(user, AdministratorRole);
 
-            if (isAdministrator)
-            {
+            if(isAdministrator) {
                 claims.Add(new Claim(ClaimTypes.Role, AdministratorRole));
             }
 

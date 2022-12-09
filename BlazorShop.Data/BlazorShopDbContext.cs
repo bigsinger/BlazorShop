@@ -69,7 +69,7 @@
                 .ForEach(entry => {
                     var entity = (IAuditInfo)entry.Entity;
 
-                    if (entry.State == EntityState.Added) {
+                    if(entry.State == EntityState.Added) {
                         entity.CreatedOn = DateTime.UtcNow;
                     } else {
                         entity.ModifiedOn = DateTime.UtcNow;

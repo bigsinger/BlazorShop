@@ -1,8 +1,8 @@
 ﻿namespace BlazorShop.Models.Identity {
     using System.ComponentModel.DataAnnotations;
+    using static BlazorShop.Common.ErrorMessages;
     using static Data.ModelConstants.Common;
     using static Data.ModelConstants.Identity;
-    using static ErrorMessages;
 
     public class RegisterRequestModel : LoginRequestModel {
         [Required]

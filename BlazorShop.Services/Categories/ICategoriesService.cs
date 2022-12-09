@@ -1,6 +1,6 @@
 ﻿namespace BlazorShop.Services.Categories {
+    using BlazorShop.Common.Common;
     using Common;
-    using Models;
     using Models.Categories;
     using System.Collections.Generic;
     using System.Threading.Tasks;

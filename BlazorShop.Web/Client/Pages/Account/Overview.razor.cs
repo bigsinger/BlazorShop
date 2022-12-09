@@ -1,14 +1,11 @@
-﻿namespace BlazorShop.Web.Client.Pages.Account
-{
+﻿namespace BlazorShop.Web.Client.Pages.Account {
+    using BlazorShop.Web.Client.Extensions;
+    using Models.Orders;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Infrastructure.Extensions;
-    using Models.Orders;
-
-    public partial class Overview
-    {
+    public partial class Overview {
         private IEnumerable<OrdersListingResponseModel> orders;
 
         private string email;
@@ -17,8 +14,7 @@
 
         protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
 
-        private async Task LoadDataAsync()
-        {
+        private async Task LoadDataAsync() {
             var state = await this.AuthState.GetAuthenticationStateAsync();
             var user = state.User;
 

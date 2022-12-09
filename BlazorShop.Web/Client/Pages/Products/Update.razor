@@ -1,4 +1,5 @@
 ﻿@page "/products/update/{Id:long}"
+@using BlazorShop.Data;
 @attribute [Authorize(Roles = Constants.AdministratorRole)]
 
 @if (categories == null || model == null)

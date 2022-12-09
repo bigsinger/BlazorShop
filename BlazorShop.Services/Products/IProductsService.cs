@@ -1,6 +1,6 @@
 ﻿namespace BlazorShop.Services.Products {
+    using BlazorShop.Common.Common;
     using Common;
-    using Models;
     using Models.Products;
     using System.Threading.Tasks;
 

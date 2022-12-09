@@ -1,6 +1,6 @@
 ﻿namespace BlazorShop.Services.Addresses {
+    using BlazorShop.Common.Common;
     using Common;
-    using Models;
     using Models.Addresses;
     using System.Collections.Generic;
     using System.Threading.Tasks;

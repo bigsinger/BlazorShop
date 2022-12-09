@@ -1,14 +1,11 @@
-﻿namespace BlazorShop.Web.Client.Pages.Account
-{
+﻿namespace BlazorShop.Web.Client.Pages.Account {
+    using BlazorShop.Web.Client.Extensions;
+    using Models.Identity;
     using System.Collections.Generic;
     using System.Net.Http.Json;
     using System.Threading.Tasks;
 
-    using Infrastructure.Extensions;
-    using Models.Identity;
-
-    public partial class Settings
-    {
+    public partial class Settings {
         private readonly ChangeSettingsRequestModel model = new ChangeSettingsRequestModel();
 
         private string email;
@@ -19,28 +16,23 @@
 
         protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
 
-        private async Task SubmitAsync()
-        {
+        private async Task SubmitAsync() {
             var response = await this.Http.PutAsJsonAsync("api/identity/changesettings", this.model);
 
-            if (response.IsSuccessStatusCode)
-            {
+            if(response.IsSuccessStatusCode) {
                 this.ShowErrors = false;
 
                 await this.AuthService.Logout();
 
                 this.ToastService.ShowSuccess("Your account settings has been changed successfully.\n Please login.");
                 this.NavigationManager.NavigateTo("/account/login");
-            }
-            else
-            {
+            } else {
                 this.Errors = await response.Content.ReadFromJsonAsync<string[]>();
                 this.ShowErrors = true;
             }
         }
 
-        private async Task LoadDataAsync()
-        {
+        private async Task LoadDataAsync() {
             var state = await this.AuthState.GetAuthenticationStateAsync();
             var user = state.User;
 

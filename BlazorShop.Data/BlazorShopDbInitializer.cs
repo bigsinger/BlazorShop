@@ -8,7 +8,6 @@
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
-    using static Common.Constants;
 
     public class BlazorShopDbInitializer : IInitializer {
         private readonly BlazorShopDbContext db;
@@ -32,8 +31,8 @@
 
             this.AddAdministrator();
 
-            foreach (var provider in this.initialDataProviders) {
-                if (this.DataSetIsEmpty(provider.EntityType)) {
+            foreach(var provider in this.initialDataProviders) {
+                if(this.DataSetIsEmpty(provider.EntityType)) {
                     var data = provider.GetData();
                     this.db.AddRange(data);
                     //foreach (var entity in data) {
@@ -48,18 +47,17 @@
         private void AddAdministrator()
             => Task
                 .Run(async () => {
-                    var existingRole = await this.roleManager.FindByNameAsync(AdministratorRole);
+                    var existingRole = await this.roleManager.FindByNameAsync(Constants.AdministratorRole);
 
-                    if (existingRole != null) {
+                    if(existingRole != null) {
                         return;
                     }
 
-                    var adminRole = new BlazorShopRole(AdministratorRole);
+                    var adminRole = new BlazorShopRole(Constants.AdministratorRole);
 
                     await this.roleManager.CreateAsync(adminRole);
 
-                    var adminUser = new BlazorShopUser
-                    {
+                    var adminUser = new BlazorShopUser {
                         FirstName = "Admin",
                         LastName = "Admin",
                         Email = "admin@blazorshop.com",
@@ -68,7 +66,7 @@
                     };
 
                     await this.userManager.CreateAsync(adminUser, "admin123456");
-                    await this.userManager.AddToRoleAsync(adminUser, AdministratorRole);
+                    await this.userManager.AddToRoleAsync(adminUser, Constants.AdministratorRole);
                 })
                 .GetAwaiter()
                 .GetResult();
