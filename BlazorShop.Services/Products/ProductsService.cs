@@ -13,13 +13,11 @@
     public class ProductsService : BaseService<Product>, IProductsService {
         private const int ProductsPerPage = 6;
 
-        public ProductsService(BlazorShopDbContext db, IMapper mapper)
-            : base(db, mapper) {
+        public ProductsService(BlazorShopDbContext db, IMapper mapper) : base(db, mapper) {
         }
 
         public async Task<long> CreateAsync(ProductsRequestModel model) {
-            var product = new Product
-            {
+            var product = new Product {
                 Name = model.Name,
                 Description = model.Description,
                 ImageSource = model.ImageSource,
@@ -37,7 +35,7 @@
         public async Task<Result> UpdateAsync(long id, ProductsRequestModel model) {
             var product = await this.FindByIdAsync(id);
 
-            if (product == null) {
+            if(product == null) {
                 return false;
             }
 
@@ -56,7 +54,7 @@
         public async Task<Result> DeleteAsync(long id) {
             var product = await this.FindByIdAsync(id);
 
-            if (product == null) {
+            if(product == null) {
                 return false;
             }
 
@@ -88,8 +86,7 @@
 
             var totalPages = await this.GetTotalPages(model);
 
-            return new ProductsSearchResponseModel
-            {
+            return new ProductsSearchResponseModel {
                 Products = products,
                 Page = model.Page,
                 TotalPages = totalPages

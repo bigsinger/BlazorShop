@@ -12,13 +12,12 @@
     public class ShoppingCartsService : BaseService<ShoppingCart>, IShoppingCartsService {
         private const string InvalidErrorMessage = "This user cannot edit this shopping cart.";
         private const string NotEnoughProductsMessage = "There are not enough products in stock.";
+        private const string NotLogin = "您尚未登录";
 
-        public ShoppingCartsService(BlazorShopDbContext db, IMapper mapper)
-            : base(db, mapper) {
+        public ShoppingCartsService(BlazorShopDbContext db, IMapper mapper) : base(db, mapper) {
         }
 
-        public async Task<Result> AddProductAsync(
-            ShoppingCartRequestModel model, string userId) {
+        public async Task<Result> AddProductAsync(ShoppingCartRequestModel model, string userId) {
             var productId = model.ProductId;
             var requestQuantity = model.Quantity;
 
@@ -47,9 +46,8 @@
                 try {
                     await this.Data.AddAsync(shoppingCartProduct);
                     await this.Data.SaveChangesAsync();
-                } catch (System.Exception ex) {
-                    string s = ex.ToString();
-                    throw;
+                } catch (System.Exception) {
+                    return NotLogin;
                 }
             } else {
                 model.Quantity = shoppingCartProduct.Quantity + 1;
@@ -59,8 +57,7 @@
             return Result.Success;
         }
 
-        public async Task<Result> UpdateProductAsync(
-            ShoppingCartRequestModel model, string userId) {
+        public async Task<Result> UpdateProductAsync(ShoppingCartRequestModel model, string userId) {
             var productId = model.ProductId;
             var requestQuantity = model.Quantity;
 
@@ -78,15 +75,17 @@
 
             shoppingCartProduct.Quantity = requestQuantity;
 
-            await this.Data.SaveChangesAsync();
+            try {
+                await this.Data.SaveChangesAsync();
+            } catch (System.Exception) {
+                return NotLogin;
+            }
 
             return Result.Success;
         }
 
         public async Task<Result> RemoveProductAsync(long productId, string userId) {
-            var shoppingCartProduct = await this.FindByProductAndUserAsync(
-                productId,
-                userId);
+            var shoppingCartProduct = await this.FindByProductAndUserAsync(productId, userId);
 
             if (shoppingCartProduct == null) {
                 return InvalidErrorMessage;
@@ -114,16 +113,10 @@
                 .ToListAsync();
 
         private async Task<ShoppingCartProduct> FindByProductAndUserAsync(long productId, string userId)
-            => await this
-                .AllByUserId(userId)
-                .FirstOrDefaultAsync(c => c.ProductId == productId);
+            => await this.AllByUserId(userId).FirstOrDefaultAsync(c => c.ProductId == productId);
 
-        private IQueryable<ShoppingCartProduct> AllByUserId(
-            string userId)
-            => this
-                .All()
-                .Where(c => c.UserId == userId)
-                .SelectMany(c => c.Products);
+        private IQueryable<ShoppingCartProduct> AllByUserId(string userId)
+            => this.All().Where(c => c.UserId == userId).SelectMany(c => c.Products);
 
         private async Task<int> GetProductQuantityById(long productId)
             => await this

@@ -9,8 +9,7 @@
     using System.Threading.Tasks;
 
     public class BlazorShopDbContext : IdentityDbContext<BlazorShopUser, BlazorShopRole, string> {
-        public BlazorShopDbContext(DbContextOptions<BlazorShopDbContext> options)
-            : base(options) {
+        public BlazorShopDbContext(DbContextOptions<BlazorShopDbContext> options) : base(options) {
         }
 
         public DbSet<Address> Addresses { get; set; }

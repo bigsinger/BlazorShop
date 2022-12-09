@@ -10,8 +10,8 @@
     using System.Threading.Tasks;
 
     public class WishlistsService : BaseService<Wishlist>, IWishlistsService {
-        public WishlistsService(BlazorShopDbContext db, IMapper mapper)
-            : base(db, mapper) {
+        private const string NotLogin = "您尚未登录";
+        public WishlistsService(BlazorShopDbContext db, IMapper mapper) : base(db, mapper) {
         }
 
         public async Task<Result> AddProductAsync(long productId, string userId) {
@@ -33,9 +33,8 @@
             try {
                 await this.Data.AddAsync(wishlistProduct);
                 await this.Data.SaveChangesAsync();
-            } catch (System.Exception e) {
-                string s = e.Message;
-                throw;
+            } catch (System.Exception) {
+                return NotLogin;
             }
 
             return Result.Success;
