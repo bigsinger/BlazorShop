@@ -10,9 +10,9 @@
         public IEnumerable<object> GetData()
             => new List<Category>
             {
-                new Category { Id = 1, Name = "Fashion" },
-                new Category { Id = 2, Name = "Electronics" },
-                new Category { Id = 3, Name = "Books, Movies & Music" }
+                new Category { Id = 1, Name = "软件" },
+                new Category { Id = 2, Name = "书籍" },
+                new Category { Id = 3, Name = "其他" },
             };
     }
 }

@@ -13,62 +13,62 @@
                 new Product
                 {
                     Id= 1,
-                    Name = "Cool T-Shirt",
-                    Description = "The Cool T-Shirt is made from soft cotton and features a clean print.",
-                    ImageSource = "https://gorilla.bg/userfiles/productlargeimages/product_256.jpg",
-                    Price = 19.99m,
-                    Quantity = 10,
-                    CategoryId = 1
+                    Name = "《大明王朝1566》",
+                    Description = "刘和平著的《大明王朝(1566上下)》对宦官的描写真绝！将“王权主义”写到他们骨头里去了。书中有两个最具命运感的人物，一个是海瑞，一个是嘉靖帝，他们在命运的催化下复活。作品用一出出可歌可泣的好戏，揭示了中国传统政治中儒道互补的运作规律。本书是高品位文化之作，故事新颖，扣人心弦，引人入胜。在许多情节、多种场景的往复切换中，表现出作者的大器局，胸有丘壑。",
+                    ImageSource = "https://img1.baidu.com/it/u=1459856355,3223393159&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=647",
+                    Price = 9.99m,
+                    Quantity = 999,
+                    CategoryId = 2
                 },
                 new Product
                 {
                     Id = 2,
-                    Name = "Super Hero Marvel Sweatshirt",
-                    Description = "The Super Hero Marvel Sweatshirt is made from soft cotton.",
-                    ImageSource = "https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/7404/67088/New-Super-Hero-Marvel-Sweatshirts-Fashion-Cotton-Men-Hoodies-Marvel-Cool-Printed-Sweatshirts-Men-Clothing-Free__23706.1527569968.jpg?c=2&imbypass=on",
-                    Price = 50,
+                    Name = "FFmpeg",
+                    Description = "FFmpeg是一套可以用来记录、转换数字音频、视频，并能将其转化为流的开源计算机程序。采用LGPL或GPL许可证。它提供了录制、转换以及流化音视频的完整解决方案。",
+                    ImageSource = "https://img2.baidu.com/it/u=3478002248,2854966811&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500",
+                    Price = 5.9m,
                     Quantity = 30,
                     CategoryId = 1
                 },
                 new Product
                 {
                     Id = 3,
-                    Name = "Beats by Dr. Dre Solo3 Wireless On-Ear Headphones",
-                    Description = "Beats Solo 3 is easy to set up, simply power on and hold near your iPhone, Apple Watch, iPad and Mac. Bluetooth technology makes it easy to instantly enjoy music from your Apple devices.",
-                    ImageSource = "https://i.ebayimg.com/images/g/OkQAAOSwFdRe18Yq/s-l1600.jpg",
+                    Name = "方可云仓库进销存",
+                    Description = "网页版B/S在线进销存、仓库软件免安装，手机、平板、PC数据同步，只需要一个上网浏览器即可使用。集采购进货、销售、库存、财务于一体，无需培训，人人会用",
+                    ImageSource = "http://www.fkerp.com/templates/cn2014/images/1.png",
                     Price = 109.60m,
                     Quantity = 10,
-                    CategoryId = 2
+                    CategoryId = 1
                 },
                 new Product
                 {
                     Id = 4,
-                    Name = "Apple Watch Series 5",
-                    Description = "Keep your workouts fresh and enjoyable by streaming your favorite audio with the Apple Watch Series 5. The Series 5 has access to the Apple Music library, letting you stream your favorite albums, podcasts, and audiobooks.",
-                    ImageSource = "https://static.plasico.bg/thumbs/12/mwvf2bsa.jpg",
+                    Name = "苹果数据恢复精灵",
+                    Description = "淘晶苹果数据恢复精灵，操作简单，无需越狱，支持所有苹果IOS设备，可恢复浏览短信、联系人、通话记录、QQ、微信、相册等数据（经测试碎片查找能力行业领先），并可轻松导出为明文备份。 本软件适配苹果官方手机助手itunes工具备份的镜像，免去进入手机内部扫描的风险。强大的镜像碎片提取引擎让您不在为删除的数据而烦恼，是一款苹果设备必备工具。",
+                    ImageSource = "http://wx.iskycn.com/image/hfios_2.jpg",
                     Price = 366.98m,
                     Quantity = 10,
-                    CategoryId = 2
+                    CategoryId = 1
                 },
                 new Product
                 {
                     Id = 5,
-                    Name = "Code Complete - Second Edition",
-                    Description = "CODE COMPLETE has been helping developers write better software for more than a decade.",
-                    ImageSource = "https://i.ebayimg.com/images/g/55gAAOSwIqtfW63B/s-l500.png",
+                    Name = "安卓手机数据恢复精灵",
+                    Description = "支持安卓手机中的短信、联系人、通话记录、微信、QQ等常见应用的数据的导出查看及一键恢复，且只要相关碎片存在即可完全恢复出删除的数据，建议给手机ROOT权限，方便一键导出功能的使用，也可以支持部份手机免ROOT导出数据查看与恢复。",
+                    ImageSource = "http://www.taokeman.com/images/an/anp1.png",
                     Price = 35.99m,
                     Quantity = 10,
-                    CategoryId = 3
+                    CategoryId = 1
                 },
                 new Product
                 {
                     Id = 6,
-                    Name = "Rick and Morty: Season 3 - Blu-Ray",
-                    Description = "An animated series that follows the exploits of a super scientist and his not-so-bright grandson.",
-                    ImageSource = "https://www.augoods.com.au/assets/full/DVD-LN-9322225226746.jpg?20200703062244",
+                    Name = "家庭电脑屏幕录制记录器",
+                    Description = "一款针对电脑屏幕的录制，可用于协助您看管家中上网的孩子，了解他是否遭受到网络上不良信息的干扰，及时与孩子勾通，给他一个安全纯净的生长空间。",
+                    ImageSource = "http://wx.iskycn.com/image/small/JT01.jpg",
                     Price = 28.95m,
                     Quantity = 10,
-                    CategoryId = 3
+                    CategoryId = 1
                 }
             };
     }
