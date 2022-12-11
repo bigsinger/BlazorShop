@@ -14,10 +14,18 @@
 
         public WishlistsService(HttpClient http) => this.http = http;
 
-        public async Task<Result> AddProduct(long id)
-            => await this.http
-                .PostAsJsonAsync($"{WishlistsPath}/{nameof(this.AddProduct)}/{id}", id)
-                .ToResult();
+        public async Task<Result> AddProduct(long id) {
+            try {
+                return await this.http
+                            .PostAsJsonAsync($"{WishlistsPath}/{nameof(this.AddProduct)}/{id}", id)
+                            .ToResult();
+            } catch (Exception e) {
+                if (e.Message.Contains("token")) {
+                    return "未登录\n" + e.Message;
+                }
+                return e.Message;
+            }
+        }
 
         public async Task<Result> RemoveProduct(long id)
             => await this.http

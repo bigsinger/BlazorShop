@@ -62,23 +62,24 @@
         }
 
         private async Task AddToWishlist(long id) {
-            await this.WishlistsService.AddProduct(id);
-            this.NavigationManager.NavigateTo("/wishlist");
+            var result = await this.WishlistsService.AddProduct(id);
+            if (result != null && result.Succeeded) {
+                this.NavigationManager.NavigateTo("/wishlist");
+            } else {
+                this.ToastService.ShowError(result?.Errors.First());
+            }
         }
 
         private async Task AddToCart(long id) {
-            var cartRequest = new ShoppingCartRequestModel
-            {
+            var cartRequest = new ShoppingCartRequestModel {
                 ProductId = id,
-                Quantity = 1
             };
 
             var result = await this.ShoppingCartsService.AddProduct(cartRequest);
-
-            if (!result.Succeeded) {
-                this.ToastService.ShowError(result.Errors.First());
-            } else {
+            if(result != null && result.Succeeded) {
                 this.NavigationManager.NavigateTo("/cart", forceLoad: true);
+            } else {
+                this.ToastService.ShowError(result?.Errors.First());
             }
         }
 

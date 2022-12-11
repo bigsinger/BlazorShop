@@ -14,10 +14,18 @@
 
         public ShoppingCartsService(HttpClient http) => this.http = http;
 
-        public async Task<Result> AddProduct(ShoppingCartRequestModel model)
-            => await this.http
+        public async Task<Result> AddProduct(ShoppingCartRequestModel model) {
+            try {
+                return await this.http
                 .PostAsJsonAsync($"{ShoppingCartsPath}/{nameof(this.AddProduct)}", model)
                 .ToResult();
+            } catch (Exception e) {
+                if (e.Message.Contains("token")) {
+                    return "未登录\n" + e.Message;
+                }
+                return e.Message;
+            }
+        }
 
         public async Task<Result> UpdateProduct(ShoppingCartRequestModel model)
             => await this.http
