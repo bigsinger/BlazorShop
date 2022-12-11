@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.11" />
+	<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.11" />
 	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
 	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.11" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.11">
@@ -18,8 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BlazorShop.Services\BlazorShop.Services.csproj" />
-    <ProjectReference Include="..\Client\BlazorShop.Web.Client.csproj" />
+    <ProjectReference Include="..\BlazorShop.Web.Client\BlazorShop.Web.Client.csproj" />
   </ItemGroup>
 
 

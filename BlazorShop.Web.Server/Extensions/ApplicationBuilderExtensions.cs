@@ -1,4 +1,6 @@
 ﻿namespace BlazorShop.Web.Server.Extensions {
+    using AutoMapper;
+    using BlazorShop.Common.Mapping;
     using Data.Contracts;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
