@@ -2,6 +2,7 @@
     using Contracts;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Diagnostics;
     using Models;
     using System;
     using System.Linq;
@@ -44,12 +45,32 @@
             return base.SaveChangesAsync(cancellationToken);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.ConfigureWarnings(wb => wb
+                .Ignore(CoreEventId.RowLimitingOperationWithoutOrderByWarning)
+                .Ignore(CoreEventId.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning)
+            );
+        }
+
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
 
-            builder.Entity<Address>().Property(f => f.Id).ValueGeneratedOnAdd();
-            builder.Entity<Category>().Property(f => f.Id).ValueGeneratedOnAdd();
-            builder.Entity<Product>().Property(f => f.Id).ValueGeneratedOnAdd();
+            builder.Entity<Address>()
+                .HasQueryFilter(f => !f.IsDeleted)
+                .Property(f => f.Id).ValueGeneratedOnAdd();
+
+            builder.Entity<Category>()
+                .HasQueryFilter(f => !f.IsDeleted)
+                .Property(f => f.Id).ValueGeneratedOnAdd();
+
+            builder.Entity<Product>()
+                .HasQueryFilter(f => !f.IsDeleted)
+                .Property(f => f.Id).ValueGeneratedOnAdd();
+
+            builder.Entity<BlazorShopUser>()
+                .HasQueryFilter(f => !f.IsDeleted);
+
             builder.Entity<ShoppingCart>().Property(f => f.Id).ValueGeneratedOnAdd();
             builder.Entity<ShoppingCartProduct>().Property(f => f.ShoppingCartId).ValueGeneratedOnAdd();
             builder.Entity<Wishlist>().Property(f => f.Id).ValueGeneratedOnAdd();
