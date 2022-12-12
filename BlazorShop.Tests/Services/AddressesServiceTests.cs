@@ -30,8 +30,7 @@
             string phoneNumber) {
             const string userId = TestUser.Identifier;
 
-            var request = new AddressesRequestModel
-            {
+            var request = new AddressesRequestModel {
                 Country = country,
                 State = state,
                 City = city,

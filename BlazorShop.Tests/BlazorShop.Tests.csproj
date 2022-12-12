@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorShop.Web\Server\BlazorShop.Web.Server.csproj" />
+    <ProjectReference Include="..\BlazorShop.Web.Server\BlazorShop.Web.Server.csproj" />
   </ItemGroup>
 
 </Project>

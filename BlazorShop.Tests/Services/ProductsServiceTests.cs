@@ -25,8 +25,7 @@
             int quantity,
             decimal price,
             long categoryId) {
-            var request = new ProductsRequestModel
-            {
+            var request = new ProductsRequestModel {
                 Name = name,
                 Description = description,
                 ImageSource = imageSource,
@@ -64,8 +63,7 @@
 
             await this.AddFakeProducts(count);
 
-            var request = new ProductsRequestModel
-            {
+            var request = new ProductsRequestModel {
                 Name = name,
                 Description = description,
                 ImageSource = imageSource,
