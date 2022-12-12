@@ -9,7 +9,7 @@ else
 {
     <section class="section-pagetop bg">
         <div class="container">
-            <h2 class="title-page text-center">Order #@Id</h2>
+            <h2 class="title-page text-center">订单号 #@Id</h2>
         </div>
     </section>
 
@@ -19,7 +19,7 @@ else
             <div class="card mb-3">
                 <article class="card-body">
                     <header class="mb-4">
-                        <h4 class="card-title">Order details</h4>
+                        <h4 class="card-title">订单详情</h4>
                     </header>
                     <div class="row">
 
@@ -32,7 +32,7 @@ else
                                     </div>
                                     <figcaption class="info">
                                         <p> @product.Name </p>
-                                        <span> @product.Quantity x $@product.Price = Total: $@(product.Price * product.Quantity) </span>
+                                        <span> @product.Quantity x ￥@product.Price = 总计: ￥@(product.Price * product.Quantity) </span>
                                     </figcaption>
                                 </figure>
                             </div>
@@ -43,19 +43,19 @@ else
                 <article class="card-body border-top">
 
                     <dl class="row">
-                        <dt class="col-sm-10">Created on: </dt>
+                        <dt class="col-sm-10">创建时间: </dt>
                         <dd class="col-sm-2 text-right"><strong>@order.CreatedOn</strong></dd>
 
-                        <dt class="col-sm-10">Subtotal: <span class="float-right text-muted">@order.Products.Count() items</span></dt>
+                        <dt class="col-sm-10">小计: <span class="float-right text-muted">@order.Products.Count() items</span></dt>
                         <dd class="col-sm-2 text-right"><strong>$@totalPrice</strong></dd>
 
-                        <dt class="col-sm-10">Discount: <span class="float-right text-muted">0%</span></dt>
+                        <dt class="col-sm-10">折扣: <span class="float-right text-muted">0%</span></dt>
                         <dd class="col-sm-2 text-danger text-right"><strong>$0</strong></dd>
 
-                        <dt class="col-sm-10">Delivery charge: <span class="float-right text-muted">Standard Delivery</span></dt>
-                        <dd class="col-sm-2 text-right"><strong>Free</strong></dd>
+                        <dt class="col-sm-10">运费: <span class="float-right text-muted">Standard Delivery</span></dt>
+                        <dd class="col-sm-2 text-right"><strong>免费</strong></dd>
 
-                        <dt class="col-sm-10">Total:</dt>
+                        <dt class="col-sm-10">总计:</dt>
                         <dd class="col-sm-2 text-right"><strong class="h5 text-dark">$@totalPrice</strong></dd>
                     </dl>
 

@@ -21,10 +21,10 @@ else
 
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Search</h5>
+                                <h5 class="card-title">搜索</h5>
 
                                 <div class="input-group">
-                                    <input @bind-value="SearchQuery" @bind-value:event="oninput" type="text" placeholder="Keyword" class="form-control" />
+                                    <input @bind-value="SearchQuery" @bind-value:event="oninput" type="text" placeholder="输入关键词搜索" class="form-control" />
                                     <span class="input-group-append">
                                         <button class="btn btn-primary">
                                             <i class="fa fa-search"></i>
@@ -40,7 +40,7 @@ else
                                 <header class="card-header">
                                     <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
                                         <i class="icon-control fa fa-chevron-down"></i>
-                                        <h6 class="title">Categories</h6>
+                                        <h6 class="title">类目</h6>
                                     </a>
                                 </header>
                                 <div class="filter-content collapse show" id="collapse_1">
@@ -85,7 +85,7 @@ else
                                 <header class="card-header">
                                     <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
                                         <i class="icon-control fa fa-chevron-down"></i>
-                                        <h6 class="title"> Price range </h6>
+                                        <h6 class="title"> 价格区间 </h6>
                                     </a>
                                 </header>
                                 <div class="filter-content collapse show" id="collapse_3" style="">
@@ -93,11 +93,11 @@ else
                                         <input type="range" @bind-value="model.MinPrice" @bind-value:event="oninput" class="custom-range" min="0" max="@model.MaxPrice" />
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label>Min</label>
+                                                <label>最低价格</label>
                                                 <input @bind-value="model.MinPrice" @bind-value:event="oninput" class="form-control" placeholder="$0" type="number" />
                                             </div>
                                             <div class="form-group text-right col-md-6">
-                                                <label>Max</label>
+                                                <label>最高价格</label>
                                                 <input @bind-value="model.MaxPrice" @bind-value:event="oninput" class="form-control" placeholder="$1,0000" type="number" />
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@ else
                            @onclick:preventDefault
                            href="#"
                            class="btn btn-light btn-sm mt-2">
-                            Reset
+                            重置
                         </a>
 
                     </EditForm>
@@ -121,7 +121,7 @@ else
 
                     <header class="border-bottom mb-4 pb-3">
                         <div class="form-inline">
-                            <span class="mr-md-auto">@products.Count() Items found </span>
+                            <span class="mr-md-auto">共找到 @products.Count() 条 </span>
 
                             <div class="btn-group">
 
@@ -188,7 +188,7 @@ else
                                             </span>
                                             <a class="btn-overlay" href="/products/@product.Id/@product.Name">
                                                 <i class="fa fa-search-plus"></i>
-                                                Quick view
+                                                查看详情
                                             </a>
                                         </div>
                                         <figcaption class="info-wrap">
@@ -205,7 +205,7 @@ else
                                                @onclick:preventDefault
                                                href="#"
                                                class="btn btn-block btn-primary">
-                                                Add to cart
+                                                添加到购物车
                                             </a>
                                         </figcaption>
                                     </figure>
@@ -237,24 +237,24 @@ else
                                     <aside class="col-sm-3">
                                         <div class="info-aside">
                                             <div class="price-wrap">
-                                                <span class="price h5"> $@product.Price </span>
+                                                <span class="price h5"> @product.Price </span>
                                                 @*<del class="price-old"> $198</del>*@
                                             </div>
-                                            <p class="text-success">Free shipping</p>
+                                            <p class="text-success">包邮</p>
 
                                             <br />
 
                                             <p>
                                                 <a href="/products/@product.Id/@product.Name"
                                                    class="btn btn-primary btn-block">
-                                                    Details
+                                                    详情
                                                 </a>
                                                 <a @onclick="() => AddToWishlist(product.Id)"
                                                    @onclick:preventDefault
                                                    href="#"
                                                    class="btn btn-light btn-block">
                                                     <i class="fa fa-heart"></i>
-                                                    <span class="text">Add to wishlist</span>
+                                                    <span class="text">收藏</span>
                                                 </a>
                                             </p>
                                         </div>

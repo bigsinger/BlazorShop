@@ -16,8 +16,8 @@ else
                     </ul>
 
                     <ul class="nav">
-                        <li><a href="#" class="nav-link"> <i class="fa fa-comment"></i> Contact </a></li>
-                        <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
+                        <li><a href="#" class="nav-link"> <i class="fa fa-comment"></i> 留言 </a></li>
+                        <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> 联系我们 </a></li>
                     </ul>
                 </nav>
             </div>
@@ -56,8 +56,8 @@ else
                                         <div class="text">
                                             <span class="text-muted">Welcome!</span>
                                             <div>
-                                                <a href="/account/login">Login</a> |
-                                                <a href="/account/register"> Register</a>
+                                                <a href="/account/login">登录</a> |
+                                                <a href="/account/register"> 注册</a>
                                             </div>
                                         </div>
                                     </div>
@@ -83,8 +83,8 @@ else
                                             <span class="sr-only">Profile actions</span>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="/account/settings">Profile setting</a>
-                                            <a class="dropdown-item" href="/orders/mine">My orders</a>
+                                            <a class="dropdown-item" href="/account/settings">个人设置</a>
+                                            <a class="dropdown-item" href="/orders/mine">我的订单</a>
                                             <hr class="dropdown-divider">
                                             <Logout />
                                         </div>
@@ -110,13 +110,16 @@ else
                 <div class="collapse navbar-collapse" id="dropdown6">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link pl-0" href="/"> <strong>Home</strong></a>
+                            <a class="nav-link pl-0" href="/"> <strong>首页</strong></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/wishlist">Wishlist</a>
+                            <a class="nav-link" href="/wishlist">收藏夹</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/products/page/1">Products</a>
+                            <a class="nav-link" href="/cart">购物车</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/products/page/1">产品列表</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a @onclick:preventDefault
@@ -125,7 +128,7 @@ else
                                data-toggle="dropdown"
                                aria-haspopup="true"
                                aria-expanded="false">
-                                Categories
+                                类目
                             </a>
                             <div class="dropdown-menu">
                                 @foreach (var category in categories)
