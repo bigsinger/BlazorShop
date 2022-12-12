@@ -183,7 +183,7 @@ else
                                                    @onclick:preventDefault
                                                    href="#"
                                                    class="float-right">
-                                                    <i class="fa fa-heart"></i>
+                                                    <i class="fa fa-star" style="color:gray"></i>
                                                 </a>
                                             </span>
                                             <a class="btn-overlay" href="/products/@product.Id/@product.Name">
@@ -197,7 +197,7 @@ else
                                                     @product.Name
                                                 </a>
                                                 <div class="price-wrap mt-2">
-                                                    <span class="price">$@product.Price</span>
+                                                    <span class="price">￥@product.Price</span>
                                                     @*<del class="price-old">$1980</del>*@
                                                 </div>
                                             </div>
@@ -205,6 +205,7 @@ else
                                                @onclick:preventDefault
                                                href="#"
                                                class="btn btn-block btn-primary">
+                                                <i class="fa fa-cart-plus"></i>
                                                 添加到购物车
                                             </a>
                                         </figcaption>
@@ -247,14 +248,15 @@ else
                                             <p>
                                                 <a href="/products/@product.Id/@product.Name"
                                                    class="btn btn-primary btn-block">
+                                                    <i class="fa fa-search-plus"></i>
                                                     详情
                                                 </a>
                                                 <a @onclick="() => AddToWishlist(product.Id)"
                                                    @onclick:preventDefault
                                                    href="#"
                                                    class="btn btn-light btn-block">
-                                                    <i class="fa fa-heart"></i>
-                                                    <span class="text">收藏</span>
+                                                    <i class="fa fa-star" style="color:gray"></i>
+                                                    收藏
                                                 </a>
                                             </p>
                                         </div>

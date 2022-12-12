@@ -8,7 +8,7 @@
     <div class="form-row">
 
         <div class="form-group col-md flex-grow-0">
-            <label>Quantity</label>
+            <label>数量</label>
             <div class="input-group mb-3 input-spinner">
                 <div class="input-group-prepend">
                     <button @onclick="DecrementQuantity" class="btn btn-light" type="button" id="button-minus"> &minus; </button>
@@ -24,7 +24,7 @@
     <div class="form-row">
         <div class="form-group col-md">
             <button type="submit" class="btn btn-primary">
-                <span class="text">Add to cart</span>
+                <span class="text">添加到购物车</span>
                 <i class="fas fa-shopping-cart"></i>
             </button>
 
@@ -32,20 +32,26 @@
                @onclick:preventDefault
                href="#"
                class="btn btn-light">
-                <i class="fas fa-heart"></i>
+               <i class="fas fa-star"></i>
             </a>
+
+@*            <button class="btn btn-primary" @onclick="() => AddToWishlist()">
+                <span class="text">收藏</span>
+                <i class="fas fa-star"></i>
+            </button>*@
+
             <CascadingAuthenticationState>
             <AuthorizeView Roles="@Constants.AdministratorRole" Context="Auth">
                 <a href="/products/update/@ProductId"
                    class="btn btn-outline-warning">
-                    <i class="fa fa-pen">更新商品</i>
+                    <i class="fa fa-pen"> 更新商品</i>
                 </a>
 
                 <a @onclick:preventDefault
                    @onclick="() => OnDeleteAsync()"
                    href=""
                    class="btn btn-outline-danger">
-                    <i class="fa fa-trash">删除商品</i>
+                    <i class="fa fa-trash"> 删除商品</i>
                 </a>
             </AuthorizeView>
             </CascadingAuthenticationState>
