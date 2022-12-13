@@ -53,12 +53,12 @@
             return true;
         }
 
+        // 如果要格式化好的多级分类 可以参考：https://blog.csdn.net/KingCruel/article/details/122104023
         public async Task<IEnumerable<CategoriesListingResponseModel>> AllAsync()
-            => await this.Mapper.ProjectTo<CategoriesListingResponseModel>(this.AllAsNoTracking())
+            => await this.Mapper.ProjectTo<CategoriesListingResponseModel>(this.AllAsNoTracking().Where(c => c.ParentId == 0))
                 .ToListAsync();
 
-        private async Task<Category> FindByIdAsync(
-            long id)
+        private async Task<Category> FindByIdAsync(long id)
             => await this
                 .All()
                 .Where(c => c.Id == id)

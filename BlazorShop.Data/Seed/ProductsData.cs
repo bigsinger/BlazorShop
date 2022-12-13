@@ -18,7 +18,7 @@
                     ImageSource = "https://img1.baidu.com/it/u=1459856355,3223393159&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=647",
                     Price = 9.99m,
                     Quantity = 999,
-                    CategoryId = 2
+                    CategoryId = 102
                 },
                 new Product
                 {
@@ -28,7 +28,7 @@
                     ImageSource = "https://img2.baidu.com/it/u=3478002248,2854966811&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500",
                     Price = 5.9m,
                     Quantity = 30,
-                    CategoryId = 1
+                    CategoryId = 101
                 },
                 new Product
                 {
@@ -38,7 +38,7 @@
                     ImageSource = "https://img1.baidu.com/it/u=3772627597,2855505711&fm=253&fmt=auto&app=138&f=PNG?w=500&h=250",
                     Price = 109.60m,
                     Quantity = 10,
-                    CategoryId = 1
+                    CategoryId = 101
                 },
                 new Product
                 {
@@ -48,7 +48,7 @@
                     ImageSource = "https://img0.baidu.com/it/u=1912789850,404984198&fm=253&fmt=auto&app=138&f=PNG?w=500&h=500",
                     Price = 366.98m,
                     Quantity = 10,
-                    CategoryId = 1
+                    CategoryId = 101
                 },
                 new Product
                 {
@@ -58,7 +58,7 @@
                     ImageSource = "https://img0.baidu.com/it/u=475388606,3830604471&fm=253&fmt=auto&app=138&f=JPEG?w=499&h=333",
                     Price = 35.99m,
                     Quantity = 10,
-                    CategoryId = 1
+                    CategoryId = 101
                 },
                 new Product
                 {
@@ -68,7 +68,7 @@
                     ImageSource = "https://img2.baidu.com/it/u=2392206097,2280036916&fm=253&fmt=auto&app=138&f=GIF?w=500&h=281",
                     Price = 28.95m,
                     Quantity = 10,
-                    CategoryId = 1
+                    CategoryId = 101
                 }
             };
     }
