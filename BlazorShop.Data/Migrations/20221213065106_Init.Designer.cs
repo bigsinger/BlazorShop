@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorShop.Data.Migrations
 {
     [DbContext(typeof(BlazorShopDbContext))]
-    [Migration("20221212054440_Init")]
+    [Migration("20221213065106_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,6 +231,9 @@ namespace BlazorShop.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<long>("ParentId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
@@ -329,6 +332,10 @@ namespace BlazorShop.Data.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("Summary")
+                        .HasMaxLength(800)
+                        .HasColumnType("varchar(800)");
 
                     b.HasKey("Id");
 

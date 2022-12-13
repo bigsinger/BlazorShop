@@ -229,6 +229,9 @@ namespace BlazorShop.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<long>("ParentId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
@@ -327,6 +330,10 @@ namespace BlazorShop.Data.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("Summary")
+                        .HasMaxLength(800)
+                        .HasColumnType("varchar(800)");
 
                     b.HasKey("Id");
 

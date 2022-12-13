@@ -11,6 +11,8 @@
 
         public string ImageSource { get; set; }
 
+        public string Summary { get; set; }
+
         public string Description { get; set; }
 
         public decimal Price { get; set; }
@@ -18,16 +20,11 @@
         public void Mapping(Profile mapper)
             => mapper
                 .CreateMap<WishlistProduct, WishlistsProductsResponseModel>()
-                .ForMember(m => m.Id, m => m
-                    .MapFrom(c => c.Product.Id))
-                .ForMember(m => m.Name, m => m
-                    .MapFrom(c => c.Product.Name))
-                .ForMember(m => m.Description, m => m
-                    .MapFrom(c => c.Product.Description))
-                .ForMember(m => m.ImageSource, m => m
-                    .MapFrom(c => c.Product.ImageSource))
-                .ForMember(m => m.Price, m => m
-                    .MapFrom(c => c.Product.Price));
-
+                .ForMember(m => m.Id, m => m.MapFrom(c => c.Product.Id))
+                .ForMember(m => m.Name, m => m.MapFrom(c => c.Product.Name))
+                .ForMember(m => m.Summary, m => m.MapFrom(c => c.Product.Summary))
+                .ForMember(m => m.Description, m => m.MapFrom(c => c.Product.Description))
+                .ForMember(m => m.ImageSource, m => m.MapFrom(c => c.Product.ImageSource))
+                .ForMember(m => m.Price, m => m.MapFrom(c => c.Product.Price));
     }
 }

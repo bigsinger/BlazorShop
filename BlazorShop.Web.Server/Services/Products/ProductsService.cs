@@ -19,6 +19,7 @@
         public async Task<long> CreateAsync(ProductsRequestModel model) {
             var product = new Product {
                 Name = model.Name,
+                Summary = model.Summary,
                 Description = model.Description,
                 ImageSource = model.ImageSource,
                 Quantity = model.Quantity,
@@ -40,6 +41,7 @@
             }
 
             product.Name = model.Name;
+            product.Summary = model.Summary;
             product.Description = model.Description;
             product.ImageSource = model.ImageSource;
             product.Quantity = model.Quantity;

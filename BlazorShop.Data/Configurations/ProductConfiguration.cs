@@ -1,5 +1,4 @@
-﻿namespace BlazorShop.Data.Configurations
-{
+﻿namespace BlazorShop.Data.Configurations {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,10 +7,8 @@
     using static ModelConstants.Common;
     using static ModelConstants.Product;
 
-    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
-    {
-        public void Configure(EntityTypeBuilder<Product> product)
-        {
+    internal class ProductConfiguration : IEntityTypeConfiguration<Product> {
+        public void Configure(EntityTypeBuilder<Product> product) {
             product
                 .Property(p => p.Name)
                 .HasMaxLength(MaxNameLength)
@@ -20,6 +17,10 @@
             product
                 .Property(p => p.Description)
                 .HasMaxLength(MaxDescriptionLength);
+
+            product
+                .Property(p => p.Summary)
+                .HasMaxLength(MaxSummaryLength);
 
             product
                 .Property(p => p.ImageSource)

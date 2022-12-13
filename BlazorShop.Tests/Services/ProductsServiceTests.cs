@@ -40,6 +40,7 @@
 
             product.Id.ShouldBe(id);
             product.Name.ShouldBe(request.Name);
+            product.Summary.ShouldBe(request.Summary);
             product.Description.ShouldBe(request.Description);
             product.ImageSource.ShouldBe(request.ImageSource);
             product.Quantity.ShouldBe(request.Quantity);
@@ -80,6 +81,7 @@
 
             product.Id.ShouldBe(id);
             product.Name.ShouldBe(request.Name);
+            product.Summary.ShouldBe(request.Summary);
             product.Description.ShouldBe(request.Description);
             product.ImageSource.ShouldBe(request.ImageSource);
             product.Quantity.ShouldBe(request.Quantity);

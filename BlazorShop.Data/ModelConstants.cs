@@ -26,6 +26,7 @@
             public const int MinQuantity = 1;
             public const int MaxQuantity = int.MaxValue;
             public const int MaxUrlLength = 2048;
+            public const int MaxSummaryLength = 800;
             public const int MaxDescriptionLength = 1000;
             public const string MinPrice = "1";
             public const string MaxPrice = "100000";

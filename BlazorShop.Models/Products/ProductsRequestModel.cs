@@ -12,6 +12,9 @@
             MinimumLength = MinNameLength)]
         public string Name { get; set; }
 
+        [MaxLength(MaxSummaryLength)]
+        public string Summary { get; set; }
+
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 

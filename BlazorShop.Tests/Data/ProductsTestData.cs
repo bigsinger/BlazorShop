@@ -7,9 +7,9 @@
         public static List<Product> GetProducts(int count)
             => Enumerable
                 .Range(1, count)
-                .Select(i => new Product
-                {
+                .Select(i => new Product {
                     Name = $"Product {i}",
+                    Summary = $"Summary {i}",
                     Description = $"Description {i}",
                     ImageSource = $"Image {i}",
                     Quantity = i,
