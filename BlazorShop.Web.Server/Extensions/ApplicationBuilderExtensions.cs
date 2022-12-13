@@ -1,6 +1,4 @@
 ﻿namespace BlazorShop.Web.Server.Extensions {
-    using AutoMapper;
-    using BlazorShop.Common.Mapping;
     using Data.Contracts;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -12,6 +10,8 @@
             if(env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             } else {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.

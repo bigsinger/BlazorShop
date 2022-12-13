@@ -11,7 +11,8 @@ builder.Services.AddDatabase(builder.Configuration)
                 //.AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddAutoMapper(typeof(MappingProfile).Assembly)
                 .AddApplicationServices()
-                .AddApiControllers();
+                .AddApiControllers()
+                .AddSwaggerGen();
 
 var app = builder.Build();
 
