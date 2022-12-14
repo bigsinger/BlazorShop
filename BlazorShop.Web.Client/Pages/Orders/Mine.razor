@@ -22,8 +22,7 @@ else
 
                             <div class="row">
 
-                                @foreach (var order in orders)
-                                {
+                                @foreach (var order in orders) {
                                     <div class="col-md-6">
                                         <figure class="itemside  mb-3">
 
@@ -54,4 +53,11 @@ else
 
         </div>
     </section>
+}
+
+@code{
+    private IEnumerable<OrdersListingResponseModel> orders;
+
+    protected override async Task OnInitializedAsync()
+        => this.orders = await this.OrdersService.Mine();
 }

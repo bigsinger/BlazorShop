@@ -44,3 +44,23 @@
     <br /><br />
 
 </section>
+
+@code{
+    private readonly RegisterRequestModel model = new ();
+
+    public bool ShowErrors { get; set; }
+
+    public IEnumerable<string> Errors { get; set; }
+
+    private async Task SubmitAsync() {
+        var result = await this.AuthService.Register(this.model);
+        if(result.Succeeded) {
+            this.ShowErrors = false;
+            this.ToastService.ShowSuccess( "注册成功，请登录！", "恭喜!");
+            this.NavigationManager.NavigateTo("/account/login");
+        } else {
+            this.Errors = result.Errors;
+            this.ShowErrors = true;
+        }
+    }
+}

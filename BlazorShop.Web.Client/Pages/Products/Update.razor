@@ -28,14 +28,10 @@ else {
                             <div class="form-group">
                                 <label>类目</label>
                                 <InputSelectNumber @bind-Value="model.CategoryId" class="form-control">
-                                    @foreach (var category in categories)
-                                    {
-                                        if (model.CategoryId == category.Id)
-                                        {
+                                    @foreach (var category in categories) {
+                                        if (model.CategoryId == category.Id) {
                                             <option value="@category.Id" selected="">@category.Name</option>
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             <option value="@category.Id">@category.Name</option>
                                         }
                                     }
@@ -75,4 +71,25 @@ else {
             </div>
         </div>
     </section>
+}
+
+@code{
+    private ProductsRequestModel model;
+    private IEnumerable<CategoriesListingResponseModel> categories;
+
+    [Parameter]
+    public long Id { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        this.model = await this.ProductsService.DetailsAsync<ProductsRequestModel>(this.Id);
+        this.categories = await this.CategoriesService.All();
+    }
+
+    private async Task SubmitAsync() {
+        var result = await this.ProductsService.UpdateAsync(this.Id, this.model);
+
+        if(result.Succeeded) {
+            this.NavigationManager.NavigateTo($"/products/{this.Id}/{this.model.Name}");
+        }
+    }
 }

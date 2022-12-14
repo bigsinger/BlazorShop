@@ -69,3 +69,18 @@ else {
         </div>
     </section>
 }
+
+@code{
+    private readonly ProductsRequestModel model = new ();
+
+    private IEnumerable<CategoriesListingResponseModel> categories;
+
+    protected override async Task OnInitializedAsync()
+        => this.categories = await this.CategoriesService.All();
+
+    private async Task SubmitAsync() {
+        var id = await this.ProductsService.CreateAsync(this.model);
+
+        this.NavigationManager.NavigateTo($"/products/{id}/{this.model.Name}");
+    }                         
+}

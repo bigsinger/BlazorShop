@@ -1,12 +1,10 @@
 ﻿@page "/account/settings"
 @attribute [Authorize]
 
-@if (model == null)
-{
+@if (model == null) {
     <LoadingScreen />
 }
-else
-{
+else {
     <section class="section-content padding-y bg">
         <div class="container">
 
@@ -56,4 +54,39 @@ else
 
         </div>
     </section>
+}
+
+@code{
+    private readonly ChangeSettingsRequestModel model = new ();
+
+    private string email;
+
+    public bool ShowErrors { get; set; }
+
+    public IEnumerable<string> Errors { get; set; }
+
+    protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
+
+    private async Task LoadDataAsync() {
+        var state = await this.AuthState.GetAuthenticationStateAsync();
+        var user = state.User;
+
+        this.email = user.GetEmail();
+        this.model.FirstName = user.GetFirstName();
+        this.model.LastName = user.GetLastName();
+    }
+
+    private async Task SubmitAsync() {
+        var response = await this.Http.PutAsJsonAsync("api/identity/changesettings", this.model);
+
+        if(response.IsSuccessStatusCode) {
+            this.ShowErrors = false;
+            await this.AuthService.Logout();
+            this.ToastService.ShowSuccess("个人账户设置修改成功，请重新登录!");
+            this.NavigationManager.NavigateTo("/account/login");
+        } else {
+            this.Errors = await response.Content.ReadFromJsonAsync<string[]>();
+            this.ShowErrors = true;
+        }
+    }
 }
