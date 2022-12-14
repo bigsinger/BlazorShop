@@ -1328,7 +1328,6 @@ a[class*='card'] {
 }
 
 .price {
-    font-weight: 600;
     color: #212529;
 }
 
@@ -1671,7 +1670,6 @@ a[class*='card'] {
 }
 
 .table-shopping-cart .price {
-    font-weight: bold;
     margin-right: 5px;
     display: block;
 }

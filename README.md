@@ -15,7 +15,7 @@ Fork from https://github.com/kalintsenkov/BlazorShop
 
   ```bash
   cd .\BlazorShop.Data
-  dotnet ef --startup-project ..\BlazorShop.Web\Server database update
+  dotnet ef --startup-project ..\BlazorShop.Web.Server database update
   ```
 
 - 运行。运行效果图如下。

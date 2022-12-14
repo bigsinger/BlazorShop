@@ -7,7 +7,7 @@
 @if(products == null || categories == null) {
 	<LoadingScreen />
 } else {
-	<section class="section-content padding-y bg">
+	<section class="section-content padding-y-sm bg">
 		<div class="container">
 
 			<div class="row">
@@ -18,8 +18,6 @@
 
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">搜索</h5>
-
 								<div class="input-group">
 									<input @bind-value="SearchQuery" @bind-value:event="oninput" type="text" placeholder="输入关键词搜索" class="form-control" />
 									<span class="input-group-append">
@@ -153,7 +151,7 @@
 									<aside class="col-sm-3">
 										<div class="info-aside">
 											<div class="price-wrap">
-												<span class="price h5"> @product.Price </span>
+												<span class="price h5">￥@product.Price</span>
 												@*<del class="price-old"> $198</del>*@
 											</div>
 											<p class="text-success">包邮</p>
@@ -161,16 +159,18 @@
 											<br />
 
 											<p>
-												<a href="/products/@product.Id/@product.Name"
-									   class="btn btn-primary btn-block">
-													<i class="fa fa-search-plus"></i>
-													详情
+												<a @onclick="() => AddToCart(product.Id)"
+									   @onclick:preventDefault
+									   href="#"
+									   class="btn btn-block btn-primary">
+													<i class="fa fa-cart-plus"></i>
+													购买
 												</a>
 												<a @onclick="() => AddToWishlist(product.Id)"
 									   @onclick:preventDefault
 									   href="#"
 									   class="btn btn-light btn-block">
-													<i class="fa fa-star" style="color:gray"></i>
+													<i class="fa fa-star" style="color:lightgray"></i>
 													收藏
 												</a>
 											</p>
@@ -186,19 +186,17 @@
 								<div class="col-md-4">
 									<figure class="card card-product-grid">
 										<div class="img-wrap">
-											<img src="@product.ImageSource" />
+											<a href="/products/@product.Id/@product.Name">
+												<img src="@product.ImageSource" />
+											</a>
 											<span class="topbar">
 												<a @onclick="() => AddToWishlist(product.Id)"
 									   @onclick:preventDefault
 									   href="#"
 									   class="float-right">
-													<i class="fa fa-star" style="color:gray"></i>
+													<i class="fa fa-star" style="color:lightgray"></i>
 												</a>
 											</span>
-											<a class="btn-overlay" href="/products/@product.Id/@product.Name">
-												<i class="fa fa-search-plus"></i>
-												查看详情
-											</a>
 										</div>
 										<figcaption class="info-wrap">
 											<div class="fix-height">
