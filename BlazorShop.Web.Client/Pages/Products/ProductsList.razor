@@ -16,7 +16,7 @@
 
 					<EditForm Model="model" @oninput="() => LoadData(withCategories: false)">
 
-						<div class="card mb-3">
+						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title">搜索</h5>
 
@@ -42,32 +42,21 @@
 								</header>
 								<div class="filter-content collapse show" id="collapse_1">
 									<div class="card-body">
-
-										@foreach(var category in categories) {
-											var categoryName = category.Name;
+										@{
 											var currentCategory = string.Empty;
-
 											if(NavigationManager.Uri.Contains("/category")) {
 												currentCategory = WebUtility.UrlDecode(NavigationManager.Uri.Split('/')[5]);
 											}
+											foreach(var category in categories) {
+												var isChecked = category.Name == currentCategory;
 
-											var isChecked = currentCategory == categoryName;
-
-											<a href="/products/category/@category.Name/@category.Id" class="text-dark">
-												<label class="custom-control custom-radio">
-
-													@if(isChecked) {
-														<input type="radio" name="myfilter_radio" class="custom-control-input" checked />
-													} else {
-														<input type="radio" name="myfilter_radio" class="custom-control-input">
-													}
-
-													<span class="custom-control-label">
-														@category.Name
-													</span>
-
-												</label>
-											</a>
+												<a href="/products/category/@category.Name/@category.Id" class="text-dark">
+													<label class="custom-control custom-radio">
+														<input type="radio" name="myfilter_radio" class="custom-control-input" checked="@isChecked" />
+														<span class="custom-control-label">@category.Name</span>
+													</label>
+												</a>
+											}
 										}
 
 									</div>
@@ -86,11 +75,11 @@
 										<div class="form-row">
 											<div class="form-group col-md-6">
 												<label>最低价格</label>
-												<input @bind-value="model.MinPrice" @bind-value:event="oninput" class="form-control" placeholder="$0" type="number" />
+												<input @bind-value="model.MinPrice" @bind-value:event="oninput" class="form-control" placeholder="￥0" type="number" />
 											</div>
 											<div class="form-group text-right col-md-6">
 												<label>最高价格</label>
-												<input @bind-value="model.MaxPrice" @bind-value:event="oninput" class="form-control" placeholder="$1,0000" type="number" />
+												<input @bind-value="model.MaxPrice" @bind-value:event="oninput" class="form-control" placeholder="￥1,0000" type="number" />
 											</div>
 										</div>
 									</div>
@@ -115,93 +104,35 @@
 						<div class="form-inline">
 							<span class="mr-md-auto">共找到 @products.Count() 条 </span>
 
+							<span class="mr-md-auto">
+								<Pagination Page="@searchResponse.Page"
+										TotalPages="@searchResponse.TotalPages"
+										Radius="2"
+										SelectedPage="SelectedPage" />
+							</span>
+
 							<div class="btn-group">
-
-								@if(ListView) {
-									<a @onclick="ChangeView"
+								<a @onclick="ChangeView"
 							   @onclick:preventDefault
 							   href="#"
-							   class="btn btn-outline-secondary active"
+							   class="btn btn-outline-secondary @getListViewActiveStr(ListView)"
 							   data-toggle="tooltip"
-							   title="List view">
-										<i class="fa fa-bars"></i>
-									</a>
-									<a @onclick="ChangeView"
+							   title="列表视图">
+									<i class="fa fa-bars"></i>
+								</a>
+								<a @onclick="ChangeView"
 							   @onclick:preventDefault
 							   href="#"
-							   class="btn btn-outline-secondary"
+							   class="btn btn-outline-secondary @getListViewActiveStr(!ListView)"
 							   data-toggle="tooltip"
-							   title="Grid view">
-										<i class="fa fa-th"></i>
-									</a>
-								} else {
-									<a @onclick="ChangeView"
-							   @onclick:preventDefault
-							   href="#"
-							   class="btn btn-outline-secondary"
-							   data-toggle="tooltip"
-							   title="List view">
-										<i class="fa fa-bars"></i>
-									</a>
-									<a @onclick="ChangeView"
-							   @onclick:preventDefault
-							   href="#"
-							   class="btn btn-outline-secondary active"
-							   data-toggle="tooltip"
-							   title="Grid view">
-										<i class="fa fa-th"></i>
-									</a>
-								}
-
+							   title="网格视图">
+									<i class="fa fa-th"></i>
+								</a>
 							</div>
 						</div>
 					</header>
 
-					@if(GridView) {
-						<div class="row">
-
-							@foreach(var product in this.products) {
-								<div class="col-md-4">
-									<figure class="card card-product-grid">
-										<div class="img-wrap">
-											<img src="@product.ImageSource" />
-											<span class="topbar">
-												<a @onclick="() => AddToWishlist(product.Id)"
-									   @onclick:preventDefault
-									   href="#"
-									   class="float-right">
-													<i class="fa fa-star" style="color:gray"></i>
-												</a>
-											</span>
-											<a class="btn-overlay" href="/products/@product.Id/@product.Name">
-												<i class="fa fa-search-plus"></i>
-												查看详情
-											</a>
-										</div>
-										<figcaption class="info-wrap">
-											<div class="fix-height">
-												<a href="/products/@product.Id/@product.Name" class="title">
-													@product.Name
-												</a>
-												<div class="price-wrap mt-2">
-													<span class="price">￥@product.Price</span>
-													@*<del class="price-old">$1980</del>*@
-												</div>
-											</div>
-											<a @onclick="() => AddToCart(product.Id)"
-								   @onclick:preventDefault
-								   href="#"
-								   class="btn btn-block btn-primary">
-												<i class="fa fa-cart-plus"></i>
-												添加到购物车
-											</a>
-										</figcaption>
-									</figure>
-								</div>
-							}
-
-						</div>
-					} else {
+					@if(ListView) {
 						foreach(var product in this.products) {
 							<article class="card card-product-list">
 								<div class="row no-gutters">
@@ -248,12 +179,51 @@
 								</div>
 							</article>
 						}
-					}
+					} else {
+						<div class="row">
 
-					<Pagination Page="@searchResponse.Page"
-							TotalPages="@searchResponse.TotalPages"
-							Radius="2"
-							SelectedPage="SelectedPage" />
+							@foreach(var product in this.products) {
+								<div class="col-md-4">
+									<figure class="card card-product-grid">
+										<div class="img-wrap">
+											<img src="@product.ImageSource" />
+											<span class="topbar">
+												<a @onclick="() => AddToWishlist(product.Id)"
+									   @onclick:preventDefault
+									   href="#"
+									   class="float-right">
+													<i class="fa fa-star" style="color:gray"></i>
+												</a>
+											</span>
+											<a class="btn-overlay" href="/products/@product.Id/@product.Name">
+												<i class="fa fa-search-plus"></i>
+												查看详情
+											</a>
+										</div>
+										<figcaption class="info-wrap">
+											<div class="fix-height">
+												<a href="/products/@product.Id/@product.Name" class="title">
+													@product.Name
+												</a>
+												<div class="price-wrap mt-2">
+													<span class="price">￥@product.Price</span>
+													@*<del class="price-old">$1980</del>*@
+												</div>
+											</div>
+											<a @onclick="() => AddToCart(product.Id)"
+								   @onclick:preventDefault
+								   href="#"
+								   class="btn btn-block btn-primary">
+												<i class="fa fa-cart-plus"></i>
+												添加到购物车
+											</a>
+										</figcaption>
+									</figure>
+								</div>
+							}
+
+						</div>
+					}
 
 				</main>
 

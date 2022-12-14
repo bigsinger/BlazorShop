@@ -29,8 +29,9 @@
         [Parameter]
         public bool ListView { get; set; } = false;
 
-        [Parameter]
-        public bool GridView { get; set; } = true;
+        private string getListViewActiveStr(bool active) {
+            return active ? "active" : "";
+        }
 
         protected override async Task OnInitializedAsync() => await this.LoadData();
 
@@ -43,7 +44,7 @@
         }
 
         private async Task LoadData(bool withCategories = true) {
-            if (this.Page == 0) {
+            if(this.Page == 0) {
                 this.Page = 1;
             }
 
@@ -54,7 +55,7 @@
             this.searchResponse = await this.ProductsService.SearchAsync(this.model);
             this.products = this.searchResponse.Products;
 
-            if (withCategories) {
+            if(withCategories) {
                 this.categories = await this.CategoriesService.All();
             }
 
@@ -63,7 +64,7 @@
 
         private async Task AddToWishlist(long id) {
             var result = await this.WishlistsService.AddProduct(id);
-            if (result != null && result.Succeeded) {
+            if(result != null && result.Succeeded) {
                 this.NavigationManager.NavigateTo("/wishlist");
             } else {
                 this.ToastService.ShowError(result?.Errors.First());
@@ -85,7 +86,6 @@
 
         private void ChangeView() {
             this.ListView = !this.ListView;
-            this.GridView = !this.GridView;
         }
 
         private void Reset() {
@@ -95,13 +95,13 @@
         }
 
         private void Filter() {
-            if (!string.IsNullOrWhiteSpace(this.model.Query) && string.IsNullOrWhiteSpace(this.CategoryName) && !this.model.Category.HasValue) {
+            if(!string.IsNullOrWhiteSpace(this.model.Query) && string.IsNullOrWhiteSpace(this.CategoryName) && !this.model.Category.HasValue) {
                 this.NavigationManager.NavigateTo($"/products/search/{this.model.Query}/page/{this.model.Page}");
-            } else if (!string.IsNullOrWhiteSpace(this.model.Query) && !string.IsNullOrWhiteSpace(this.CategoryName) && this.model.Category.HasValue) {
+            } else if(!string.IsNullOrWhiteSpace(this.model.Query) && !string.IsNullOrWhiteSpace(this.CategoryName) && this.model.Category.HasValue) {
                 this.NavigationManager.NavigateTo($"/products/category/{this.CategoryName}/{this.model.Category}/search/{this.model.Query}/page/{this.model.Page}");
-            } else if (!string.IsNullOrWhiteSpace(this.CategoryName) && this.model.Category.HasValue) {
+            } else if(!string.IsNullOrWhiteSpace(this.CategoryName) && this.model.Category.HasValue) {
                 this.NavigationManager.NavigateTo($"/products/category/{this.CategoryName}/{this.model.Category}/page/{this.model.Page}");
-            } else if (string.IsNullOrWhiteSpace(this.model.Query) && string.IsNullOrWhiteSpace(this.CategoryName) && !this.model.Category.HasValue) {
+            } else if(string.IsNullOrWhiteSpace(this.model.Query) && string.IsNullOrWhiteSpace(this.CategoryName) && !this.model.Category.HasValue) {
                 this.NavigationManager.NavigateTo($"/products/page/{this.model.Page}");
             }
         }
