@@ -3,8 +3,8 @@
 <a class="dropdown-item" href="/" @onclick="Submit">退出登录</a>
 
 @code {
-    private async Task Submit() {
-        this.ToastService.ShowSuccess("已退出登录");
-        await this.AuthService.Logout();
-    }
+	private async Task Submit() {
+		this.ToastService.ShowSuccess("已退出登录");
+		await this.AuthService.Logout();
+	}
 }

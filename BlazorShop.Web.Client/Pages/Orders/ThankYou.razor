@@ -3,25 +3,25 @@
 
 
 <section class="section-pagetop bg">
-    <div class="container text-center">
-        <h1 class="title-page text-success">
-            <i class="fas fa-check-circle"></i>
-        </h1>
-        <h1 class="title-page">
-            恭喜!
-        </h1>
-        <h5 class="text-muted">
-            订单完成
-        </h5>
+	<div class="container text-center">
+		<h1 class="title-page text-success">
+			<i class="fas fa-check-circle"></i>
+		</h1>
+		<h1 class="title-page">
+			恭喜!
+		</h1>
+		<h5 class="text-muted">
+			订单完成
+		</h5>
 
-        <br />
+		<br />
 
-        <a class="btn btn-primary" href="/order/details/@Id"> 订单详情 </a>
-        <a class="btn btn-outline-primary-light" href="/products/page/1"> 返回到商品列表 </a>
-    </div>
+		<a class="btn btn-primary" href="/order/details/@Id"> 订单详情 </a>
+		<a class="btn btn-outline-primary-light" href="/products/page/1"> 返回到商品列表 </a>
+	</div>
 </section>
 
 @code {
-    [Parameter]
-    public string Id { get; set; }
+	[Parameter]
+	public string Id { get; set; }
 }

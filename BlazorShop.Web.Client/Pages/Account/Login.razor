@@ -2,67 +2,67 @@
 
 <section class="section-conten padding-y bg">
 
-    <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
-        <div class="card-body">
-            <h4 class="card-title mb-4">Login</h4>
-            <EditForm Model="model" OnValidSubmit="SubmitAsync">
+	<div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+		<div class="card-body">
+			<h4 class="card-title mb-4">Login</h4>
+			<EditForm Model="model" OnValidSubmit="SubmitAsync">
 
-                <ErrorsList ShowErrors="ShowErrors" Errors="Errors" />
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+				<ErrorsList ShowErrors="ShowErrors" Errors="Errors" />
+				<DataAnnotationsValidator />
+				<ValidationSummary />
 
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-envelope"></i>
-                            </span>
-                        </div>
-                        <InputText @bind-Value="model.Email" class="form-control" placeholder="Email" type="email" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                        </div>
-                        <InputText @bind-Value="model.Password" class="form-control" placeholder="Password" type="password" />
-                    </div>
-                </div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="fa fa-envelope"></i>
+							</span>
+						</div>
+						<InputText @bind-Value="model.Email" class="form-control" placeholder="Email" type="email" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+						</div>
+						<InputText @bind-Value="model.Password" class="form-control" placeholder="Password" type="password" />
+					</div>
+				</div>
 
-                <div class="form-group">
-                    <a href="#" class="float-left">忘记密码?</a>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> 登录  </button>
-                </div>
-            </EditForm>
-        </div>
-    </div>
+				<div class="form-group">
+					<a href="#" class="float-left">忘记密码?</a>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-block"> 登录  </button>
+				</div>
+			</EditForm>
+		</div>
+	</div>
 
-    <p class="text-center mt-4">还没有账号? <a href="/account/register">立即创建</a></p>
+	<p class="text-center mt-4">还没有账号? <a href="/account/register">立即创建</a></p>
 
-    <br /><br />
+	<br /><br />
 
 </section>
 
 @code {
-    private readonly LoginRequestModel model = new ();
+	private readonly LoginRequestModel model = new();
 
-    public bool ShowErrors { get; set; }
+	public bool ShowErrors { get; set; }
 
-    public IEnumerable<string> Errors { get; set; }
+	public IEnumerable<string> Errors { get; set; }
 
-    private async Task SubmitAsync() {
-        var result = await this.AuthService.Login(this.model);
+	private async Task SubmitAsync() {
+		var result = await this.AuthService.Login(this.model);
 
-        if(result.Succeeded) {
-            this.ShowErrors = false;
-            this.ToastService.ShowSuccess("登录成功");
-            this.NavigationManager.NavigateTo("/");
-        } else {
-            this.Errors = result.Errors;
-            this.ShowErrors = true;
-        }
-    }
+		if(result.Succeeded) {
+			this.ShowErrors = false;
+			this.ToastService.ShowSuccess("登录成功");
+			this.NavigationManager.NavigateTo("/");
+		} else {
+			this.Errors = result.Errors;
+			this.ShowErrors = true;
+		}
+	}
 }

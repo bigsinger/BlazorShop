@@ -2,65 +2,65 @@
 
 <section class="section-content padding-y bg">
 
-    <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
-        <article class="card-body">
-            <header class="mb-4"><h4 class="card-title">注册</h4></header>
-            <EditForm Model="model" OnValidSubmit="SubmitAsync">
+	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+		<article class="card-body">
+			<header class="mb-4"><h4 class="card-title">注册</h4></header>
+			<EditForm Model="model" OnValidSubmit="SubmitAsync">
 
-                <ErrorsList ShowErrors="ShowErrors" Errors="Errors" />
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+				<ErrorsList ShowErrors="ShowErrors" Errors="Errors" />
+				<DataAnnotationsValidator />
+				<ValidationSummary />
 
-                <div class="form-row">
-                    <div class="col form-group">
-                        <label>名</label>
-                        <InputText @bind-Value="model.FirstName" type="text" class="form-control" />
-                    </div>
-                    <div class="col form-group">
-                        <label>姓</label>
-                        <InputText @bind-Value="model.LastName" type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>邮箱</label>
-                    <InputText @bind-Value="model.Email" type="email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>密码</label>
-                    <InputText @bind-Value="model.Password" type="password" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>确认密码</label>
-                    <InputText @bind-Value="model.ConfirmPassword" type="password" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> 注册 </button>
-                </div>
-            </EditForm>
-        </article>
-    </div>
+				<div class="form-row">
+					<div class="col form-group">
+						<label>名</label>
+						<InputText @bind-Value="model.FirstName" type="text" class="form-control" />
+					</div>
+					<div class="col form-group">
+						<label>姓</label>
+						<InputText @bind-Value="model.LastName" type="text" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label>邮箱</label>
+					<InputText @bind-Value="model.Email" type="email" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label>密码</label>
+					<InputText @bind-Value="model.Password" type="password" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label>确认密码</label>
+					<InputText @bind-Value="model.ConfirmPassword" type="password" class="form-control" />
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-block"> 注册 </button>
+				</div>
+			</EditForm>
+		</article>
+	</div>
 
-    <p class="text-center mt-4">已经有账号了? <a href="/account/login">登录</a></p>
-    <br /><br />
+	<p class="text-center mt-4">已经有账号了? <a href="/account/login">登录</a></p>
+	<br /><br />
 
 </section>
 
-@code{
-    private readonly RegisterRequestModel model = new ();
+@code {
+	private readonly RegisterRequestModel model = new();
 
-    public bool ShowErrors { get; set; }
+	public bool ShowErrors { get; set; }
 
-    public IEnumerable<string> Errors { get; set; }
+	public IEnumerable<string> Errors { get; set; }
 
-    private async Task SubmitAsync() {
-        var result = await this.AuthService.Register(this.model);
-        if(result.Succeeded) {
-            this.ShowErrors = false;
-            this.ToastService.ShowSuccess( "注册成功，请登录！", "恭喜!");
-            this.NavigationManager.NavigateTo("/account/login");
-        } else {
-            this.Errors = result.Errors;
-            this.ShowErrors = true;
-        }
-    }
+	private async Task SubmitAsync() {
+		var result = await this.AuthService.Register(this.model);
+		if(result.Succeeded) {
+			this.ShowErrors = false;
+			this.ToastService.ShowSuccess("注册成功，请登录！", "恭喜!");
+			this.NavigationManager.NavigateTo("/account/login");
+		} else {
+			this.Errors = result.Errors;
+			this.ShowErrors = true;
+		}
+	}
 }

@@ -2,85 +2,82 @@
 @using BlazorShop.Data;
 @attribute [Authorize(Roles = Constants.AdministratorRole)]
 
-@if (categories == null)
-{
-    <LoadingScreen />
-}
-else {
-    <h4 class="title-page text-center">添加商品</h4>
-    <section class="section-content padding-y bg">
-        <div class="container">
-            <div class="row">
-                <div class="card mx-auto">
-                    <article class="card-body">
+@if(categories == null) {
+	<LoadingScreen />
+} else {
+	<h4 class="title-page text-center">添加商品</h4>
+	<section class="section-content padding-y bg">
+		<div class="container">
+			<div class="row">
+				<div class="card mx-auto">
+					<article class="card-body">
 
-                        <EditForm Model="model" OnValidSubmit="SubmitAsync">
+						<EditForm Model="model" OnValidSubmit="SubmitAsync">
 
-                            <DataAnnotationsValidator />
-                            <ValidationSummary />
+							<DataAnnotationsValidator />
+							<ValidationSummary />
 
 
-                            <div class="form-group">
-                                <label>名称/标题</label>
-                                <InputText @bind-Value="model.Name" type="text" class="form-control" />
-                            </div>
+							<div class="form-group">
+								<label>名称/标题</label>
+								<InputText @bind-Value="model.Name" type="text" class="form-control" />
+							</div>
 
-                            <div class="form-group">
-                                <label>分类</label>
-                                <InputSelectNumber @bind-Value="model.CategoryId" class="form-control">
-                                    @foreach (var category in categories)
-                                    {
-                                        <option value="@category.Id">@category.Name</option>
-                                    }
-                                </InputSelectNumber>
-                            </div>
+							<div class="form-group">
+								<label>分类</label>
+								<InputSelectNumber @bind-Value="model.CategoryId" class="form-control">
+									@foreach(var category in categories) {
+										<option value="@category.Id">@category.Name</option>
+									}
+								</InputSelectNumber>
+							</div>
 
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label>价格</label>
-                                    <InputNumber @bind-Value="model.Price" type="number" class="form-control" />
-                                </div>
-                                <div class="col form-group">
-                                    <label>库存数量</label>
-                                    <InputNumber @bind-Value="model.Quantity" type="number" class="form-control" />
-                                </div>
-                            </div>
+							<div class="form-row">
+								<div class="col form-group">
+									<label>价格</label>
+									<InputNumber @bind-Value="model.Price" type="number" class="form-control" />
+								</div>
+								<div class="col form-group">
+									<label>库存数量</label>
+									<InputNumber @bind-Value="model.Quantity" type="number" class="form-control" />
+								</div>
+							</div>
 
-                            <div class="form-group">
-                                <label>预览图</label>
-                                <InputText @bind-Value="model.ImageSource" type="url" class="form-control" />
-                                <img src="@model.ImageSource" style="width:100px" />
-                            </div>
+							<div class="form-group">
+								<label>预览图</label>
+								<InputText @bind-Value="model.ImageSource" type="url" class="form-control" />
+								<img src="@model.ImageSource" style="width:100px" />
+							</div>
 
-                            <div class="form-group">
-                                <label>详情</label>
-                                <InputTextArea @bind-Value="model.Description" rows="10" class="form-control"></InputTextArea>
-                            </div>
+							<div class="form-group">
+								<label>详情</label>
+								<InputTextArea @bind-Value="model.Description" rows="10" class="form-control"></InputTextArea>
+							</div>
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-block btn-primary">添加</button>
-                            </div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-block btn-primary">添加</button>
+							</div>
 
-                        </EditForm>
+						</EditForm>
 
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
 }
 
-@code{
-    private readonly ProductsRequestModel model = new ();
+@code {
+	private readonly ProductsRequestModel model = new();
 
-    private IEnumerable<CategoriesListingResponseModel> categories;
+	private IEnumerable<CategoriesListingResponseModel> categories;
 
-    protected override async Task OnInitializedAsync()
-        => this.categories = await this.CategoriesService.All();
+	protected override async Task OnInitializedAsync()
+		=> this.categories = await this.CategoriesService.All();
 
-    private async Task SubmitAsync() {
-        var id = await this.ProductsService.CreateAsync(this.model);
+	private async Task SubmitAsync() {
+		var id = await this.ProductsService.CreateAsync(this.model);
 
-        this.NavigationManager.NavigateTo($"/products/{id}/{this.model.Name}");
-    }                         
+		this.NavigationManager.NavigateTo($"/products/{id}/{this.model.Name}");
+	}
 }

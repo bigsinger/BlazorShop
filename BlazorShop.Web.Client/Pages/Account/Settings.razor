@@ -1,92 +1,91 @@
 ﻿@page "/account/settings"
 @attribute [Authorize]
 
-@if (model == null) {
-    <LoadingScreen />
+@if(model == null) {
+	<LoadingScreen />
+} else {
+	<section class="section-content padding-y bg">
+		<div class="container">
+
+			<div class="row">
+
+				<AccountSidebar />
+
+				<main class="col-md-9">
+
+					<article class="card mb-3">
+						<div class="card-body">
+
+							<h4 class="card-title mb-4">账号设置</h4>
+							<EditForm Model="model" OnValidSubmit="SubmitAsync">
+
+								<ErrorsList ShowErrors="ShowErrors" Errors="Errors" />
+								<DataAnnotationsValidator />
+								<ValidationSummary />
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">邮箱</label>
+									<div class="col-sm-6">
+										<InputText @bind-Value="email" type="email" class="form-control-plaintext" readonly />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">名</label>
+									<div class="col-sm-6">
+										<InputText @bind-Value="model.FirstName" type="text" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">姓</label>
+									<div class="col-sm-6">
+										<InputText @bind-Value="model.LastName" type="text" class="form-control" />
+									</div>
+								</div>
+
+								<button class="btn btn-primary"> 保存 </button>
+							</EditForm>
+
+						</div>
+					</article>
+
+				</main>
+			</div>
+
+		</div>
+	</section>
 }
-else {
-    <section class="section-content padding-y bg">
-        <div class="container">
 
-            <div class="row">
+@code {
+	private readonly ChangeSettingsRequestModel model = new();
 
-                <AccountSidebar />
+	private string email;
 
-                <main class="col-md-9">
+	public bool ShowErrors { get; set; }
 
-                    <article class="card mb-3">
-                        <div class="card-body">
+	public IEnumerable<string> Errors { get; set; }
 
-                            <h4 class="card-title mb-4">账号设置</h4>
-                            <EditForm Model="model" OnValidSubmit="SubmitAsync">
+	protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
 
-                                <ErrorsList ShowErrors="ShowErrors" Errors="Errors" />
-                                <DataAnnotationsValidator />
-                                <ValidationSummary />
+	private async Task LoadDataAsync() {
+		var state = await this.AuthState.GetAuthenticationStateAsync();
+		var user = state.User;
 
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">邮箱</label>
-                                    <div class="col-sm-6">
-                                        <InputText @bind-Value="email" type="email" class="form-control-plaintext" readonly />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">名</label>
-                                    <div class="col-sm-6">
-                                        <InputText @bind-Value="model.FirstName" type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">姓</label>
-                                    <div class="col-sm-6">
-                                        <InputText @bind-Value="model.LastName" type="text" class="form-control" />
-                                    </div>
-                                </div>
+		this.email = user.GetEmail();
+		this.model.FirstName = user.GetFirstName();
+		this.model.LastName = user.GetLastName();
+	}
 
-                                <button class="btn btn-primary"> 保存 </button>
-                            </EditForm>
+	private async Task SubmitAsync() {
+		var response = await this.Http.PutAsJsonAsync("api/identity/changesettings", this.model);
 
-                        </div>
-                    </article>
-
-                </main>
-            </div>
-
-        </div>
-    </section>
-}
-
-@code{
-    private readonly ChangeSettingsRequestModel model = new ();
-
-    private string email;
-
-    public bool ShowErrors { get; set; }
-
-    public IEnumerable<string> Errors { get; set; }
-
-    protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
-
-    private async Task LoadDataAsync() {
-        var state = await this.AuthState.GetAuthenticationStateAsync();
-        var user = state.User;
-
-        this.email = user.GetEmail();
-        this.model.FirstName = user.GetFirstName();
-        this.model.LastName = user.GetLastName();
-    }
-
-    private async Task SubmitAsync() {
-        var response = await this.Http.PutAsJsonAsync("api/identity/changesettings", this.model);
-
-        if(response.IsSuccessStatusCode) {
-            this.ShowErrors = false;
-            await this.AuthService.Logout();
-            this.ToastService.ShowSuccess("个人账户设置修改成功，请重新登录!");
-            this.NavigationManager.NavigateTo("/account/login");
-        } else {
-            this.Errors = await response.Content.ReadFromJsonAsync<string[]>();
-            this.ShowErrors = true;
-        }
-    }
+		if(response.IsSuccessStatusCode) {
+			this.ShowErrors = false;
+			await this.AuthService.Logout();
+			this.ToastService.ShowSuccess("个人账户设置修改成功，请重新登录!");
+			this.NavigationManager.NavigateTo("/account/login");
+		} else {
+			this.Errors = await response.Content.ReadFromJsonAsync<string[]>();
+			this.ShowErrors = true;
+		}
+	}
 }

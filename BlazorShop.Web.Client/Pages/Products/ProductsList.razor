@@ -4,277 +4,261 @@
 @page "/products/category/{CategoryName}/{CategoryId:long}/page/{Page:int}"
 @page "/products/category/{CategoryName}/{CategoryId:long}/search/{SearchQuery}/page/{Page:int}"
 
-@if (products == null || categories == null)
-{
-    <LoadingScreen />
-}
-else
-{
-    <section class="section-content padding-y bg">
-        <div class="container">
+@if(products == null || categories == null) {
+	<LoadingScreen />
+} else {
+	<section class="section-content padding-y bg">
+		<div class="container">
 
-            <div class="row">
+			<div class="row">
 
-                <aside class="col-md-3">
+				<aside class="col-md-3">
 
-                    <EditForm Model="model" @oninput="() => LoadData(withCategories: false)">
+					<EditForm Model="model" @oninput="() => LoadData(withCategories: false)">
 
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">搜索</h5>
+						<div class="card mb-3">
+							<div class="card-body">
+								<h5 class="card-title">搜索</h5>
 
-                                <div class="input-group">
-                                    <input @bind-value="SearchQuery" @bind-value:event="oninput" type="text" placeholder="输入关键词搜索" class="form-control" />
-                                    <span class="input-group-append">
-                                        <button class="btn btn-primary">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+								<div class="input-group">
+									<input @bind-value="SearchQuery" @bind-value:event="oninput" type="text" placeholder="输入关键词搜索" class="form-control" />
+									<span class="input-group-append">
+										<button class="btn btn-primary">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
 
-                        <div class="card">
+						<div class="card">
 
-                            <article class="filter-group">
-                                <header class="card-header">
-                                    <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-                                        <i class="icon-control fa fa-chevron-down"></i>
-                                        <h6 class="title">类目</h6>
-                                    </a>
-                                </header>
-                                <div class="filter-content collapse show" id="collapse_1">
-                                    <div class="card-body">
+							<article class="filter-group">
+								<header class="card-header">
+									<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+										<i class="icon-control fa fa-chevron-down"></i>
+										<h6 class="title">类目</h6>
+									</a>
+								</header>
+								<div class="filter-content collapse show" id="collapse_1">
+									<div class="card-body">
 
-                                        @foreach (var category in categories)
-                                        {
-                                            var categoryName = category.Name;
-                                            var currentCategory = string.Empty;
+										@foreach(var category in categories) {
+											var categoryName = category.Name;
+											var currentCategory = string.Empty;
 
-                                            if (NavigationManager.Uri.Contains("/category"))
-                                            {
-                                                currentCategory = WebUtility.UrlDecode(NavigationManager.Uri.Split('/')[5]);
-                                            }
+											if(NavigationManager.Uri.Contains("/category")) {
+												currentCategory = WebUtility.UrlDecode(NavigationManager.Uri.Split('/')[5]);
+											}
 
-                                            var isChecked = currentCategory == categoryName;
+											var isChecked = currentCategory == categoryName;
 
-                                            <a href="/products/category/@category.Name/@category.Id" class="text-dark">
-                                                <label class="custom-control custom-radio">
+											<a href="/products/category/@category.Name/@category.Id" class="text-dark">
+												<label class="custom-control custom-radio">
 
-                                                    @if (isChecked)
-                                                    {
-                                                        <input type="radio" name="myfilter_radio" class="custom-control-input" checked />
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="radio" name="myfilter_radio" class="custom-control-input">
-                                                    }
+													@if(isChecked) {
+														<input type="radio" name="myfilter_radio" class="custom-control-input" checked />
+													} else {
+														<input type="radio" name="myfilter_radio" class="custom-control-input">
+													}
 
-                                                    <span class="custom-control-label">
-                                                        @category.Name
-                                                    </span>
+													<span class="custom-control-label">
+														@category.Name
+													</span>
 
-                                                </label>
-                                            </a>
-                                        }
+												</label>
+											</a>
+										}
 
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="filter-group">
-                                <header class="card-header">
-                                    <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
-                                        <i class="icon-control fa fa-chevron-down"></i>
-                                        <h6 class="title"> 价格区间 </h6>
-                                    </a>
-                                </header>
-                                <div class="filter-content collapse show" id="collapse_3" style="">
-                                    <div class="card-body">
-                                        <input type="range" @bind-value="model.MinPrice" @bind-value:event="oninput" class="custom-range" min="0" max="@model.MaxPrice" />
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label>最低价格</label>
-                                                <input @bind-value="model.MinPrice" @bind-value:event="oninput" class="form-control" placeholder="$0" type="number" />
-                                            </div>
-                                            <div class="form-group text-right col-md-6">
-                                                <label>最高价格</label>
-                                                <input @bind-value="model.MaxPrice" @bind-value:event="oninput" class="form-control" placeholder="$1,0000" type="number" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
+									</div>
+								</div>
+							</article>
+							<article class="filter-group">
+								<header class="card-header">
+									<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+										<i class="icon-control fa fa-chevron-down"></i>
+										<h6 class="title"> 价格区间 </h6>
+									</a>
+								</header>
+								<div class="filter-content collapse show" id="collapse_3" style="">
+									<div class="card-body">
+										<input type="range" @bind-value="model.MinPrice" @bind-value:event="oninput" class="custom-range" min="0" max="@model.MaxPrice" />
+										<div class="form-row">
+											<div class="form-group col-md-6">
+												<label>最低价格</label>
+												<input @bind-value="model.MinPrice" @bind-value:event="oninput" class="form-control" placeholder="$0" type="number" />
+											</div>
+											<div class="form-group text-right col-md-6">
+												<label>最高价格</label>
+												<input @bind-value="model.MaxPrice" @bind-value:event="oninput" class="form-control" placeholder="$1,0000" type="number" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</article>
 
-                        </div>
+						</div>
 
-                        <a @onclick="Reset"
-                           @onclick:preventDefault
-                           href="#"
-                           class="btn btn-light btn-sm mt-2">
-                            重置
-                        </a>
+						<a @onclick="Reset"
+					   @onclick:preventDefault
+					   href="#"
+					   class="btn btn-light btn-sm mt-2">
+							重置
+						</a>
 
-                    </EditForm>
-                </aside>
+					</EditForm>
+				</aside>
 
-                <main class="col-md-9">
+				<main class="col-md-9">
 
-                    <header class="border-bottom mb-4 pb-3">
-                        <div class="form-inline">
-                            <span class="mr-md-auto">共找到 @products.Count() 条 </span>
+					<header class="border-bottom mb-4 pb-3">
+						<div class="form-inline">
+							<span class="mr-md-auto">共找到 @products.Count() 条 </span>
 
-                            <div class="btn-group">
+							<div class="btn-group">
 
-                                @if (ListView)
-                                {
-                                    <a @onclick="ChangeView"
-                                       @onclick:preventDefault
-                                       href="#"
-                                       class="btn btn-outline-secondary active"
-                                       data-toggle="tooltip"
-                                       title="List view">
-                                        <i class="fa fa-bars"></i>
-                                    </a>
-                                    <a @onclick="ChangeView"
-                                       @onclick:preventDefault
-                                       href="#"
-                                       class="btn btn-outline-secondary"
-                                       data-toggle="tooltip"
-                                       title="Grid view">
-                                        <i class="fa fa-th"></i>
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a @onclick="ChangeView"
-                                       @onclick:preventDefault
-                                       href="#"
-                                       class="btn btn-outline-secondary"
-                                       data-toggle="tooltip"
-                                       title="List view">
-                                        <i class="fa fa-bars"></i>
-                                    </a>
-                                    <a @onclick="ChangeView"
-                                       @onclick:preventDefault
-                                       href="#"
-                                       class="btn btn-outline-secondary active"
-                                       data-toggle="tooltip"
-                                       title="Grid view">
-                                        <i class="fa fa-th"></i>
-                                    </a>
-                                }
+								@if(ListView) {
+									<a @onclick="ChangeView"
+							   @onclick:preventDefault
+							   href="#"
+							   class="btn btn-outline-secondary active"
+							   data-toggle="tooltip"
+							   title="List view">
+										<i class="fa fa-bars"></i>
+									</a>
+									<a @onclick="ChangeView"
+							   @onclick:preventDefault
+							   href="#"
+							   class="btn btn-outline-secondary"
+							   data-toggle="tooltip"
+							   title="Grid view">
+										<i class="fa fa-th"></i>
+									</a>
+								} else {
+									<a @onclick="ChangeView"
+							   @onclick:preventDefault
+							   href="#"
+							   class="btn btn-outline-secondary"
+							   data-toggle="tooltip"
+							   title="List view">
+										<i class="fa fa-bars"></i>
+									</a>
+									<a @onclick="ChangeView"
+							   @onclick:preventDefault
+							   href="#"
+							   class="btn btn-outline-secondary active"
+							   data-toggle="tooltip"
+							   title="Grid view">
+										<i class="fa fa-th"></i>
+									</a>
+								}
 
-                            </div>
-                        </div>
-                    </header>
+							</div>
+						</div>
+					</header>
 
-                    @if (GridView)
-                    {
-                        <div class="row">
+					@if(GridView) {
+						<div class="row">
 
-                            @foreach (var product in this.products)
-                            {
-                                <div class="col-md-4">
-                                    <figure class="card card-product-grid">
-                                        <div class="img-wrap">
-                                            <img src="@product.ImageSource" />
-                                            <span class="topbar">
-                                                <a @onclick="() => AddToWishlist(product.Id)"
-                                                   @onclick:preventDefault
-                                                   href="#"
-                                                   class="float-right">
-                                                    <i class="fa fa-star" style="color:gray"></i>
-                                                </a>
-                                            </span>
-                                            <a class="btn-overlay" href="/products/@product.Id/@product.Name">
-                                                <i class="fa fa-search-plus"></i>
-                                                查看详情
-                                            </a>
-                                        </div>
-                                        <figcaption class="info-wrap">
-                                            <div class="fix-height">
-                                                <a href="/products/@product.Id/@product.Name" class="title">
-                                                    @product.Name
-                                                </a>
-                                                <div class="price-wrap mt-2">
-                                                    <span class="price">￥@product.Price</span>
-                                                    @*<del class="price-old">$1980</del>*@
-                                                </div>
-                                            </div>
-                                            <a @onclick="() => AddToCart(product.Id)"
-                                               @onclick:preventDefault
-                                               href="#"
-                                               class="btn btn-block btn-primary">
-                                                <i class="fa fa-cart-plus"></i>
-                                                添加到购物车
-                                            </a>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                            }
+							@foreach(var product in this.products) {
+								<div class="col-md-4">
+									<figure class="card card-product-grid">
+										<div class="img-wrap">
+											<img src="@product.ImageSource" />
+											<span class="topbar">
+												<a @onclick="() => AddToWishlist(product.Id)"
+									   @onclick:preventDefault
+									   href="#"
+									   class="float-right">
+													<i class="fa fa-star" style="color:gray"></i>
+												</a>
+											</span>
+											<a class="btn-overlay" href="/products/@product.Id/@product.Name">
+												<i class="fa fa-search-plus"></i>
+												查看详情
+											</a>
+										</div>
+										<figcaption class="info-wrap">
+											<div class="fix-height">
+												<a href="/products/@product.Id/@product.Name" class="title">
+													@product.Name
+												</a>
+												<div class="price-wrap mt-2">
+													<span class="price">￥@product.Price</span>
+													@*<del class="price-old">$1980</del>*@
+												</div>
+											</div>
+											<a @onclick="() => AddToCart(product.Id)"
+								   @onclick:preventDefault
+								   href="#"
+								   class="btn btn-block btn-primary">
+												<i class="fa fa-cart-plus"></i>
+												添加到购物车
+											</a>
+										</figcaption>
+									</figure>
+								</div>
+							}
 
-                        </div>
-                    }
-                    else
-                    {
-                        foreach (var product in this.products)
-                        {
-                            <article class="card card-product-list">
-                                <div class="row no-gutters">
-                                    <aside class="col-md-3">
-                                        <a href="/products/@product.Id/@product.Name" class="img-wrap">
-                                            <img src="@product.ImageSource" />
-                                        </a>
-                                    </aside>
-                                    <div class="col-md-6">
-                                        <div class="info-main">
-                                            <a href="/products/@product.Id/@product.Name" class="h5 title">
-                                                @product.Name
-                                            </a>
+						</div>
+					} else {
+						foreach(var product in this.products) {
+							<article class="card card-product-list">
+								<div class="row no-gutters">
+									<aside class="col-md-3">
+										<a href="/products/@product.Id/@product.Name" class="img-wrap">
+											<img src="@product.ImageSource" />
+										</a>
+									</aside>
+									<div class="col-md-6">
+										<div class="info-main">
+											<a href="/products/@product.Id/@product.Name" class="h5 title">
+												@product.Name
+											</a>
 
-                                            <p> @product.Summary </p>
-                                        </div>
-                                    </div>
-                                    <aside class="col-sm-3">
-                                        <div class="info-aside">
-                                            <div class="price-wrap">
-                                                <span class="price h5"> @product.Price </span>
-                                                @*<del class="price-old"> $198</del>*@
-                                            </div>
-                                            <p class="text-success">包邮</p>
+											<p> @product.Summary </p>
+										</div>
+									</div>
+									<aside class="col-sm-3">
+										<div class="info-aside">
+											<div class="price-wrap">
+												<span class="price h5"> @product.Price </span>
+												@*<del class="price-old"> $198</del>*@
+											</div>
+											<p class="text-success">包邮</p>
 
-                                            <br />
+											<br />
 
-                                            <p>
-                                                <a href="/products/@product.Id/@product.Name"
-                                                   class="btn btn-primary btn-block">
-                                                    <i class="fa fa-search-plus"></i>
-                                                    详情
-                                                </a>
-                                                <a @onclick="() => AddToWishlist(product.Id)"
-                                                   @onclick:preventDefault
-                                                   href="#"
-                                                   class="btn btn-light btn-block">
-                                                    <i class="fa fa-star" style="color:gray"></i>
-                                                    收藏
-                                                </a>
-                                            </p>
-                                        </div>
-                                    </aside>
-                                </div>
-                            </article>
-                        }
-                    }
+											<p>
+												<a href="/products/@product.Id/@product.Name"
+									   class="btn btn-primary btn-block">
+													<i class="fa fa-search-plus"></i>
+													详情
+												</a>
+												<a @onclick="() => AddToWishlist(product.Id)"
+									   @onclick:preventDefault
+									   href="#"
+									   class="btn btn-light btn-block">
+													<i class="fa fa-star" style="color:gray"></i>
+													收藏
+												</a>
+											</p>
+										</div>
+									</aside>
+								</div>
+							</article>
+						}
+					}
 
-                    <Pagination Page="@searchResponse.Page"
-                                TotalPages="@searchResponse.TotalPages"
-                                Radius="2"
-                                SelectedPage="SelectedPage" />
+					<Pagination Page="@searchResponse.Page"
+							TotalPages="@searchResponse.TotalPages"
+							Radius="2"
+							SelectedPage="SelectedPage" />
 
-                </main>
+				</main>
 
-            </div>
+			</div>
 
-        </div>
-    </section>
+		</div>
+	</section>
 }

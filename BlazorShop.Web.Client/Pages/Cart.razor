@@ -1,182 +1,178 @@
 ﻿@page "/cart"
 @attribute [Authorize]
 
-@if (cartProducts == null)
-{
-    <LoadingScreen />
-}
-else
-{
-    <section class="section-pagetop bg">
-        <div class="container">
-            <h2 class="title-page">购物车</h2>
-        </div>
-    </section>
+@if(cartProducts == null) {
+	<LoadingScreen />
+} else {
+	<section class="section-pagetop bg">
+		<div class="container">
+			<h2 class="title-page">购物车</h2>
+		</div>
+	</section>
 
-    <section class="section-content padding-y">
-        <div class="container">
+	<section class="section-content padding-y">
+		<div class="container">
 
-            <div class="row">
-                <main class="col-md-9">
-                    <div class="card">
+			<div class="row">
+				<main class="col-md-9">
+					<div class="card">
 
-                        <table class="table table-borderless table-shopping-cart">
-                            <thead class="text-muted">
-                                <tr class="small text-uppercase">
-                                    <th scope="col">商品</th>
-                                    <th scope="col" width="120">数量</th>
-                                    <th scope="col" width="120">价格</th>
-                                    <th scope="col" class="text-right" width="200"> </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var product in cartProducts)
-                                {
-                                    <tr>
-                                        <td>
-                                            <figure class="itemside">
-                                                <div class="aside"><img src="@product.ImageSource" class="img-sm"></div>
-                                                <figcaption class="info">
-                                                    <a href="/products/@product.Id/@product.Name" class="title text-dark">
-                                                        @product.Name
-                                                    </a>
-                                                </figcaption>
-                                            </figure>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-spinner">
-                                                <div class="input-group-prepend">
-                                                    <button @onclick="() => DecrementQuantity(product.Id, product.Quantity)"
-                                                            class="btn btn-light"
-                                                            type="button"
-                                                            id="button-minus">
-                                                        &minus;
-                                                    </button>
-                                                </div>
-                                                <input @bind-value="@product.Quantity" type="text" class="form-control" readonly />
-                                                <div class="input-group-append">
-                                                    <button @onclick="() => IncrementQuantity(product.Id, product.Quantity, product.StockQuantity)"
-                                                            class="btn btn-light"
-                                                            type="button"
-                                                            id="button-plus">
-                                                        +
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="price-wrap">
-                                                <var class="price">$@(product.Price * product.Quantity)</var>
-                                                <small class="text-muted"> $@product.Price each </small>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <a @onclick="() => OnRemoveAsync(product.Id)"
-                                               @onclick:preventDefault
-                                               href="#"
-                                               class="btn btn-light">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+						<table class="table table-borderless table-shopping-cart">
+							<thead class="text-muted">
+								<tr class="small text-uppercase">
+									<th scope="col">商品</th>
+									<th scope="col" width="120">数量</th>
+									<th scope="col" width="120">价格</th>
+									<th scope="col" class="text-right" width="200"> </th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach(var product in cartProducts) {
+									<tr>
+										<td>
+											<figure class="itemside">
+												<div class="aside"><img src="@product.ImageSource" class="img-sm"></div>
+												<figcaption class="info">
+													<a href="/products/@product.Id/@product.Name" class="title text-dark">
+														@product.Name
+													</a>
+												</figcaption>
+											</figure>
+										</td>
+										<td>
+											<div class="input-group input-spinner">
+												<div class="input-group-prepend">
+													<button @onclick="() => DecrementQuantity(product.Id, product.Quantity)"
+													class="btn btn-light"
+													type="button"
+													id="button-minus">
+														&minus;
+													</button>
+												</div>
+												<input @bind-value="@product.Quantity" type="text" class="form-control" readonly />
+												<div class="input-group-append">
+													<button @onclick="() => IncrementQuantity(product.Id, product.Quantity, product.StockQuantity)"
+													class="btn btn-light"
+													type="button"
+													id="button-plus">
+														+
+													</button>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="price-wrap">
+												<var class="price">$@(product.Price * product.Quantity)</var>
+												<small class="text-muted"> $@product.Price each </small>
+											</div>
+										</td>
+										<td class="text-right">
+											<a @onclick="() => OnRemoveAsync(product.Id)"
+									   @onclick:preventDefault
+									   href="#"
+									   class="btn btn-light">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
 
-                        <div class="card-body border-top">
-                            <a href="/checkout" class="btn btn-primary float-md-right"> 确定下单 <i class="fa fa-chevron-right"></i> </a>
-                            <a href="/products/page/1" class="btn btn-light"> <i class="fa fa-chevron-left"></i> 再逛逛 </a>
-                        </div>
-                    </div>
+						<div class="card-body border-top">
+							<a href="/checkout" class="btn btn-primary float-md-right"> 确定下单 <i class="fa fa-chevron-right"></i> </a>
+							<a href="/products/page/1" class="btn btn-light"> <i class="fa fa-chevron-left"></i> 再逛逛 </a>
+						</div>
+					</div>
 
-                    <div class="alert alert-success mt-3">
-                        <p class="icontext"><i class="icon text-success fa fa-truck"></i> 包邮</p>
-                    </div>
+					<div class="alert alert-success mt-3">
+						<p class="icontext"><i class="icon text-success fa fa-truck"></i> 包邮</p>
+					</div>
 
-                </main>
-                <aside class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <dl class="dlist-align">
-                                <dt>总价:</dt>
-                                <dd class="text-right">$@totalPrice</dd>
-                            </dl>
-                            <dl class="dlist-align">
-                                <dt>折扣:</dt>
-                                <dd class="text-right">$0</dd>
-                            </dl>
-                            <dl class="dlist-align">
-                                <dt>总价:</dt>
-                                <dd class="text-right  h5"><strong>$@totalPrice</strong></dd>
-                            </dl>
-                            <hr>
-                            <p class="text-center mb-3">
-                                <img src="images/misc/payments.png" height="26" />
-                            </p>
+				</main>
+				<aside class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<dl class="dlist-align">
+								<dt>总价:</dt>
+								<dd class="text-right">$@totalPrice</dd>
+							</dl>
+							<dl class="dlist-align">
+								<dt>折扣:</dt>
+								<dd class="text-right">$0</dd>
+							</dl>
+							<dl class="dlist-align">
+								<dt>总价:</dt>
+								<dd class="text-right  h5"><strong>$@totalPrice</strong></dd>
+							</dl>
+							<hr>
+							<p class="text-center mb-3">
+								<img src="images/misc/payments.png" height="26" />
+							</p>
 
-                        </div>
-                    </div>
-                </aside>
-            </div>
+						</div>
+					</div>
+				</aside>
+			</div>
 
-        </div>
-    </section>
+		</div>
+	</section>
 
-    <section class="section-name bg padding-y">
-        <div class="container">
-            <h6>付款和退款政策</h6>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </div>
-    </section>
+	<section class="section-name bg padding-y">
+		<div class="container">
+			<h6>付款和退款政策</h6>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</p>
+		</div>
+	</section>
 }
 
-@code{
-    private readonly ShoppingCartRequestModel model = new ();
+@code {
+	private readonly ShoppingCartRequestModel model = new();
 
-    private decimal totalPrice;
-    private IEnumerable<ShoppingCartProductsResponseModel> cartProducts;
+	private decimal totalPrice;
+	private IEnumerable<ShoppingCartProductsResponseModel> cartProducts;
 
-    protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
+	protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
 
-    private async Task LoadDataAsync() {
-        this.cartProducts = await this.ShoppingCartsService.Mine();
-        this.totalPrice = this.cartProducts.Sum(p => p.Price * p.Quantity);
-    }
+	private async Task LoadDataAsync() {
+		this.cartProducts = await this.ShoppingCartsService.Mine();
+		this.totalPrice = this.cartProducts.Sum(p => p.Price * p.Quantity);
+	}
 
-    private async Task OnRemoveAsync(long productId) {
-        await this.ShoppingCartsService.RemoveProduct(productId);
+	private async Task OnRemoveAsync(long productId) {
+		await this.ShoppingCartsService.RemoveProduct(productId);
 
-        this.NavigationManager.NavigateTo("/cart", forceLoad: true);
-    }
+		this.NavigationManager.NavigateTo("/cart", forceLoad: true);
+	}
 
-    private async Task IncrementQuantity(long productId, int quantity, int stockQuantity) {
-        this.model.ProductId = productId;
-        this.model.Quantity = quantity;
+	private async Task IncrementQuantity(long productId, int quantity, int stockQuantity) {
+		this.model.ProductId = productId;
+		this.model.Quantity = quantity;
 
-        if (this.model.Quantity + 1 <= stockQuantity) {
-            this.model.Quantity++;
+		if(this.model.Quantity + 1 <= stockQuantity) {
+			this.model.Quantity++;
 
-            await this.ShoppingCartsService.UpdateProduct(this.model);
-            await this.LoadDataAsync();
-        }
-    }
+			await this.ShoppingCartsService.UpdateProduct(this.model);
+			await this.LoadDataAsync();
+		}
+	}
 
-    private async Task DecrementQuantity(long productId, int quantity) {
-        this.model.ProductId = productId;
-        this.model.Quantity = quantity;
+	private async Task DecrementQuantity(long productId, int quantity) {
+		this.model.ProductId = productId;
+		this.model.Quantity = quantity;
 
-        if (this.model.Quantity - 1 > 0) {
-            this.model.Quantity--;
+		if(this.model.Quantity - 1 > 0) {
+			this.model.Quantity--;
 
-            await this.ShoppingCartsService.UpdateProduct(this.model);
-            await this.LoadDataAsync();
-        }
-    }
+			await this.ShoppingCartsService.UpdateProduct(this.model);
+			await this.LoadDataAsync();
+		}
+	}
 }

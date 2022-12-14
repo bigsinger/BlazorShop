@@ -1,118 +1,114 @@
 ﻿@page "/account/overview"
 @attribute [Authorize]
 
-@if (orders == null)
-{
-    <LoadingScreen />
-}
-else
-{
-    <section class="section-content padding-y bg">
-        <div class="container">
+@if(orders == null) {
+	<LoadingScreen />
+} else {
+	<section class="section-content padding-y bg">
+		<div class="container">
 
-            <div class="row">
+			<div class="row">
 
-                <AccountSidebar />
+				<AccountSidebar />
 
-                <main class="col-md-9">
+				<main class="col-md-9">
 
-                    <article class="card mb-3">
-                        <div class="card-body">
+					<article class="card mb-3">
+						<div class="card-body">
 
-                            <figure class="icontext">
-                                <div class="text">
-                                    <strong> @firstName @lastName </strong>
-                                    <br />
-                                    @email
-                                    <br />
-                                    <a href="/account/settings">修改</a>
-                                </div>
-                            </figure>
-                            <hr>
-                            <p>
-                                <i class="fa fa-map-marker text-muted"></i> &nbsp; 收货地址:
-                                <br />
-                                杭州市滨江区xx街道xx小区10-20号 &nbsp;
-                                <a href="/addresses" class="btn-link"> 修改 </a>
-                            </p>
+							<figure class="icontext">
+								<div class="text">
+									<strong> @firstName @lastName </strong>
+									<br />
+									@email
+									<br />
+									<a href="/account/settings">修改</a>
+								</div>
+							</figure>
+							<hr>
+							<p>
+								<i class="fa fa-map-marker text-muted"></i> &nbsp; 收货地址:
+								<br />
+								杭州市滨江区xx街道xx小区10-20号 &nbsp;
+								<a href="/addresses" class="btn-link"> 修改 </a>
+							</p>
 
-                            <article class="card-group">
-                                <figure class="card bg">
-                                    <div class="p-3">
-                                        <h5 class="card-title">@orders.Count()</h5>
-                                        <span>订单</span>
-                                    </div>
-                                </figure>
-                                <figure class="card bg">
-                                    <div class="p-3">
-                                        <h5 class="card-title">5</h5>
-                                        <span>收藏</span>
-                                    </div>
-                                </figure>
-                            </article>
+							<article class="card-group">
+								<figure class="card bg">
+									<div class="p-3">
+										<h5 class="card-title">@orders.Count()</h5>
+										<span>订单</span>
+									</div>
+								</figure>
+								<figure class="card bg">
+									<div class="p-3">
+										<h5 class="card-title">5</h5>
+										<span>收藏</span>
+									</div>
+								</figure>
+							</article>
 
-                        </div>
-                    </article>
+						</div>
+					</article>
 
-                    <article class="card  mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title mb-4">最近的订单 </h5>
+					<article class="card  mb-3">
+						<div class="card-body">
+							<h5 class="card-title mb-4">最近的订单 </h5>
 
-                            <div class="row">
+							<div class="row">
 
-                                @foreach (var order in orders)
-                                {
-                                    <div class="col-md-6">
-                                        <figure class="itemside  mb-3">
+								@foreach(var order in orders) {
+									<div class="col-md-6">
+										<figure class="itemside  mb-3">
 
-                                            <div class="aside">
-                                                <a href="/order/details/@order.Id">
-                                                    <img src="@order.ProductImageSource" class="border img-sm">
-                                                </a>
-                                            </div>
-                                            <figcaption class="info">
-                                                <a href="/order/details/@order.Id">
-                                                    <time class="text-muted"><i class="fa fa-calendar-alt"></i> @order.CreatedOn </time>
-                                                    <p class="black"> @order.ProductName </p>
-                                                    <span class="text-success">Sent</span>
-                                                </a>
-                                            </figcaption>
+											<div class="aside">
+												<a href="/order/details/@order.Id">
+													<img src="@order.ProductImageSource" class="border img-sm">
+												</a>
+											</div>
+											<figcaption class="info">
+												<a href="/order/details/@order.Id">
+													<time class="text-muted"><i class="fa fa-calendar-alt"></i> @order.CreatedOn </time>
+													<p class="black"> @order.ProductName </p>
+													<span class="text-success">Sent</span>
+												</a>
+											</figcaption>
 
-                                        </figure>
-                                    </div>
-                                }
+										</figure>
+									</div>
+								}
 
-                            </div>
+							</div>
 
-                            <a href="/orders/mine" class="btn btn-outline-primary"> 查看所有订单  </a>
-                        </div>
-                    </article>
+							<a href="/orders/mine" class="btn btn-outline-primary"> 查看所有订单  </a>
+						</div>
+					</article>
 
-                </main>
-            </div>
+				</main>
+			</div>
 
-        </div>
-    </section>
+		</div>
+	</section>
 }
 
-@code{
-    private IEnumerable<OrdersListingResponseModel> orders;
+@code {
+	private IEnumerable<OrdersListingResponseModel> orders;
 
-    private string email;
-    private string firstName;
-    private string lastName;
+	private string email;
+	private string firstName;
+	private string lastName;
 
-    protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
+	protected override async Task OnInitializedAsync() => await this.LoadDataAsync();
 
-    private async Task LoadDataAsync() {
-        var state = await this.AuthState.GetAuthenticationStateAsync();
-        var user = state.User;
+	private async Task LoadDataAsync() {
+		var state = await this.AuthState.GetAuthenticationStateAsync();
+		var user = state.User;
 
-        this.email = user.GetEmail();
-        this.firstName = user.GetFirstName();
-        this.lastName = user.GetLastName();
+		this.email = user.GetEmail();
+		this.firstName = user.GetFirstName();
+		this.lastName = user.GetLastName();
 
-        this.orders = await this.OrdersService.Mine();
-        this.orders = this.orders.Take(4);
-    }
+		this.orders = await this.OrdersService.Mine();
+		this.orders = this.orders.Take(4);
+	}
 }
