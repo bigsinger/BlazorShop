@@ -78,7 +78,7 @@
 
             var result = await this.ShoppingCartsService.AddProduct(cartRequest);
             if(result != null && result.Succeeded) {
-                this.NavigationManager.NavigateTo("/cart", forceLoad: true);
+                this.NavigationManager.NavigateTo("/cart", forceLoad: false);
             } else {
                 this.ToastService.ShowError(result?.Errors.First());
             }
