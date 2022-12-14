@@ -90,6 +90,7 @@ else
                                     <div class="col form-group">
                                         <label>电话</label>
                                         <InputText @bind-Value="address.PhoneNumber" type="tel" class="form-control" />
+                                        <ValidationMessage For="@(() => address.PhoneNumber)" />
                                     </div>
                                 </div>
 

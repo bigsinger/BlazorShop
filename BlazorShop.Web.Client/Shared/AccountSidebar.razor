@@ -1,52 +1,24 @@
 ﻿<aside class="col-md-3">
     <ul class="list-group">
-
-        @if (NavigationManager.Uri.Contains("overview"))
-        {
-            <a class="list-group-item active" href="/account/overview"> 账号概览  </a>
-            <a class="list-group-item" href="/orders/mine"> 我的订单 </a>
-            <a class="list-group-item" href="/addresses"> 收货地址 </a>
-            <a class="list-group-item" href="/account/settings"> 设置 </a>
-            <a class="list-group-item" href="/account/password"> 修改密码 </a>
-        }
-        else if (NavigationManager.Uri.Contains("orders"))
-        {
-            <a class="list-group-item" href="/account/overview"> 账号概览  </a>
-            <a class="list-group-item active" href="/orders/mine"> 我的订单 </a>
-            <a class="list-group-item" href="/addresses"> 收货地址 </a>
-            <a class="list-group-item" href="/account/settings"> 设置 </a>
-            <a class="list-group-item" href="/account/passsword"> 修改密码 </a>
-        }
-        else if (NavigationManager.Uri.Contains("addresses"))
-        {
-            <a class="list-group-item" href="/account/overview"> 账号概览  </a>
-            <a class="list-group-item" href="/orders/mine"> 我的订单 </a>
-            <a class="list-group-item active" href="/addresses"> 收货地址 </a>
-            <a class="list-group-item" href="/account/settings"> 设置 </a>
-            <a class="list-group-item" href="/account/password"> 修改密码 </a>
-        }
-        else if (NavigationManager.Uri.Contains("settings"))
-        {
-            <a class="list-group-item" href="/account/overview"> 账号概览  </a>
-            <a class="list-group-item" href="/orders/mine"> 我的订单 </a>
-            <a class="list-group-item" href="/addresses"> 收货地址 </a>
-            <a class="list-group-item active" href="/account/settings"> 设置 </a>
-            <a class="list-group-item" href="/account/password"> 修改密码 </a>
-        }
-        else if (NavigationManager.Uri.Contains("password"))
-        {
-            <a class="list-group-item" href="/account/overview"> 账号概览  </a>
-            <a class="list-group-item" href="/orders/mine"> 我的订单 </a>
-            <a class="list-group-item" href="/addresses"> 收货地址 </a>
-            <a class="list-group-item" href="/account/settings"> 设置 </a>
-            <a class="list-group-item active" href="/account/password"> 修改密码 </a>
-        }
-
+        <a class="list-group-item @ActiveStyle("overview")" href="/account/overview"> 账号概览  </a>
+        <a class="list-group-item @ActiveStyle("orders")" href="/orders/mine"> 我的订单 </a>
+        <a class="list-group-item @ActiveStyle("addresses")" href="/addresses"> 收货地址 </a>
+        <a class="list-group-item @ActiveStyle("settings")" href="/account/settings"> 设置 </a>
+        <a class="list-group-item @ActiveStyle("password")" href="/account/password"> 修改密码 </a>
     </ul>
 
     <br />
 
     <a class="btn btn-light btn-block" href="/" @onclick="Submit">
-        <i class="fas fa-sign-out-alt"></i> <span class="text">Log out</span>
+        <i class="fas fa-sign-out-alt"></i> <span class="text">退出登录</span>
     </a>
 </aside>
+
+@code{
+    private string ActiveStyle(string url) {
+        if(NavigationManager.Uri.Contains(url)) {
+            return "active";
+        }
+        return "";
+    }
+}

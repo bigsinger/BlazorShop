@@ -28,9 +28,7 @@
         }
 
         public async Task<Result> Register(RegisterRequestModel model)
-            => await this.httpClient
-                .PostAsJsonAsync(RegisterPath, model)
-                .ToResult();
+            => await this.httpClient.PostAsJsonAsync(RegisterPath, model).ToResult();
 
         public async Task<Result> Login(LoginRequestModel model) {
             var response = await this.httpClient.PostAsJsonAsync(LoginPath, model);
