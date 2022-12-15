@@ -109,11 +109,14 @@
 }
 
 @code {
+	private readonly ProductsSearchRequestModel model = new(){
+			OrderBy = "ModifiedOn desc"
+	};
+
 	private IEnumerable<ProductsListingResponseModel> products;
 
 	protected override async Task OnInitializedAsync() {
-		var response = await this.Http.GetFromJsonAsync<ProductsSearchResponseModel>("api/products");
-
+		var response = await this.ProductsService.SearchAsync(this.model);
 		this.products = response.Products.OrderByDescending(p => p.CreatedOn);
 	}
 }

@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
 
     public partial class ProductsList {
-        private readonly ProductsSearchRequestModel model = new ProductsSearchRequestModel();
+        private readonly ProductsSearchRequestModel model = new();
 
         private ProductsSearchResponseModel searchResponse;
         private IEnumerable<ProductsListingResponseModel> products;

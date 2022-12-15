@@ -3,6 +3,7 @@
     using BlazorShop.Common;
     using Data;
     using Data.Models;
+    using Entities.Services;
     using Microsoft.EntityFrameworkCore;
     using Models.Products;
     using Specifications;
@@ -81,6 +82,7 @@
                 .ProjectTo<ProductsListingResponseModel>(this
                     .AllAsNoTracking()
                     .Where(specification)
+                    .Sort(model.OrderBy)
                     .Skip((model.Page - 1) * ProductsPerPage)
                     .Take(ProductsPerPage))
                 .ToListAsync();

@@ -11,7 +11,7 @@
 
         private const string ProductsPath = "api/products";
         private const string ProductsPathWithSlash = ProductsPath + "/";
-        private const string ProductsSearchPath = ProductsPath + "?category={0}&minPrice={1}&maxPrice={2}&query={3}&page={4}";
+        private const string ProductsSearchPath = ProductsPath + "?category={0}&minPrice={1}&maxPrice={2}&query={3}&page={4}&orderby={5}";
 
         public ProductsService(HttpClient http) => this.http = http;
 
@@ -38,12 +38,12 @@
 
         public async Task<ProductsSearchResponseModel> SearchAsync(ProductsSearchRequestModel model)
             => await this.http.GetFromJsonAsync<ProductsSearchResponseModel>(
-                string.Format(
-                    ProductsSearchPath,
+                string.Format(ProductsSearchPath,
                     model.Category,
                     model.MinPrice,
                     model.MaxPrice,
                     model.Query,
-                    model.Page));
+                    model.Page,
+                    model.OrderBy));
     }
 }
