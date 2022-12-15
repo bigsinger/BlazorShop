@@ -20,15 +20,15 @@
 
         [Parameter]
         [SupplyParameterFromQuery(Name = "categoryName")]
-        public string CategoryName { get; set; }
+        public string? CategoryName { get; set; }
 
         [Parameter]
         [SupplyParameterFromQuery(Name = "key")]
-        public string SearchQuery { get; set; } = string.Empty;
+        public string? SearchQuery { get; set; }
 
         [Parameter]
         [SupplyParameterFromQuery(Name = "orderby")]
-        public string OrderBy { get; set; } = string.Empty;
+        public string? OrderBy { get; set; }
 
         [Parameter]
         [SupplyParameterFromQuery(Name = "page")]
@@ -36,7 +36,7 @@
 
         [Parameter]
         [SupplyParameterFromQuery(Name = "view")]
-        public string viewMode { get; set; } = "list";
+        public string? viewMode { get; set; }
 
         private bool ListView = false;
 

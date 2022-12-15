@@ -19,7 +19,13 @@
 
         public decimal Price { get; set; }
 
-        public long CategoryId { get; set; }
+        // 浏览次数
+        public long ViewCount { get; set; }
+		
+        // 下载次数
+		public long DownCount { get; set; }
+
+		public long CategoryId { get; set; }
 
         public Category Category { get; set; }
 
