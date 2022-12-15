@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorShop.Data.Migrations
 {
     [DbContext(typeof(BlazorShopDbContext))]
-    [Migration("20221213065106_Init")]
+    [Migration("20221215090905_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,7 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DeletedOn")
@@ -51,7 +52,8 @@ namespace BlazorShop.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("PhoneNumber")
@@ -100,7 +102,7 @@ namespace BlazorShop.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
@@ -164,7 +166,7 @@ namespace BlazorShop.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NormalizedEmail")
@@ -215,6 +217,7 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DeletedOn")
@@ -223,7 +226,8 @@ namespace BlazorShop.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
@@ -247,12 +251,14 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<long>("DeliveryAddressId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserId")
@@ -277,9 +283,11 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("Quantity")
@@ -302,6 +310,7 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DeletedOn")
@@ -319,7 +328,8 @@ namespace BlazorShop.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
@@ -353,9 +363,11 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserId")
@@ -379,9 +391,11 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("Quantity")
@@ -401,9 +415,11 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserId")
@@ -427,9 +443,11 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("ModifiedOn")
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("WishlistId", "ProductId");

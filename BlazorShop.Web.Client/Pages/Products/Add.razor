@@ -20,7 +20,7 @@
 
 							<div class="form-group">
 								<label>名称/标题</label>
-								<InputText @bind-Value="model.Name" type="text" class="form-control" />
+								<input type="text" class="form-control" @bind="model.Name" @bind:event="oninput" @onkeyup="OnKeyup" />
 							</div>
 
 							<div class="form-group">
@@ -35,11 +35,11 @@
 							<div class="form-row">
 								<div class="col form-group">
 									<label>价格</label>
-									<InputNumber @bind-Value="model.Price" type="number" class="form-control" />
+									<InputNumber @bind-Value="model.Price" type="number" class="form-control" min="1" />
 								</div>
 								<div class="col form-group">
 									<label>库存数量</label>
-									<InputNumber @bind-Value="model.Quantity" type="number" class="form-control" />
+									<InputNumber @bind-Value="model.Quantity" type="number" class="form-control" min="1"/>
 								</div>
 							</div>
 
@@ -50,8 +50,8 @@
 							</div>
 
 							<div class="form-group">
-								<label>详情</label>
-								<InputTextArea @bind-Value="model.Description" rows="10" class="form-control"></InputTextArea>
+								<label>摘要</label>
+								<InputTextArea @bind-Value="model.Summary" rows="10" class="form-control"></InputTextArea>
 							</div>
 
 							<div class="form-group">
@@ -68,16 +68,30 @@
 }
 
 @code {
-	private readonly ProductsRequestModel model = new();
+	[Parameter]
+	public ProductsRequestModel model { get; set; } = new() {
+		Price = 1m,
+		Quantity = 9999,
+	};
 
 	private IEnumerable<CategoriesListingResponseModel> categories;
 
-	protected override async Task OnInitializedAsync()
-		=> this.categories = await this.CategoriesService.All();
+	private long ?bookCategoryId = 0;
+
+	protected override async Task OnInitializedAsync() {
+		this.categories = await this.CategoriesService.All();
+		bookCategoryId = this.categories.Where(c => c.Name.Contains("书")).FirstOrDefault()?.Id;
+	}
 
 	private async Task SubmitAsync() {
 		var id = await this.ProductsService.CreateAsync(this.model);
-
 		this.NavigationManager.NavigateTo($"/products/{id}/{this.model.Name}");
+	}
+
+	private async Task OnKeyup() {
+		if(model.Name!=null && model.Name.StartsWith("《") && model.Name.EndsWith("》")) {
+			model.CategoryId = bookCategoryId ?? 0;
+		}
+		await Task.CompletedTask;
 	}
 }

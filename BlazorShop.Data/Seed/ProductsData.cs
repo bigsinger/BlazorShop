@@ -69,7 +69,17 @@
                     Price = 28.95m,
                     Quantity = 10,
                     CategoryId = 101
-                }
+                },
+                new Product
+                {
+                    Id= 7,
+                    Name = "《林肯：解放黑奴的美国总统（名人传）》",
+                    Summary = "《解放黑人奴隶宣言》（The Emancipation Proclamation）是一份由美国总统亚伯拉罕·林肯公布的宣言，其主张所有美利坚联邦叛乱下的领土之黑奴应享有自由，然而豁免 的对象未包含未脱离联邦的边境州，以及联邦掌控下的诸州。此宣言虽仅立即解放少部分奴隶，但实质上强化联邦军掌控联邦的领土后这些黑奴自由的权威性，并为最终废除全美奴隶制度预先铺路。",
+                    ImageSource = "http://t15.baidu.com/it/u=1766340840,3508599749&fm=224&app=112&f=JPEG?w=500&h=500",
+                    Price = 5.99m,
+                    Quantity = 99,
+                    CategoryId = 102
+                },
             };
     }
 }

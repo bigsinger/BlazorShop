@@ -92,6 +92,7 @@
 
                     if(entry.State == EntityState.Added) {
                         entity.CreatedOn = DateTime.UtcNow;
+                        entity.ModifiedOn = entity.CreatedOn;
                     } else {
                         entity.ModifiedOn = DateTime.UtcNow;
                     }

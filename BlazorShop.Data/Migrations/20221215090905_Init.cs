@@ -20,7 +20,7 @@ namespace BlazorShop.Data.Migrations
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -47,7 +47,7 @@ namespace BlazorShop.Data.Migrations
                     LastName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -88,8 +88,10 @@ namespace BlazorShop.Data.Migrations
                     ParentId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -144,8 +146,10 @@ namespace BlazorShop.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -271,8 +275,10 @@ namespace BlazorShop.Data.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -294,8 +300,10 @@ namespace BlazorShop.Data.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -326,8 +334,10 @@ namespace BlazorShop.Data.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -352,8 +362,10 @@ namespace BlazorShop.Data.Migrations
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DeliveryAddressId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -380,8 +392,10 @@ namespace BlazorShop.Data.Migrations
                     ShoppingCartId = table.Column<long>(type: "bigint", nullable: false),
                     ProductId = table.Column<long>(type: "bigint", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -407,8 +421,10 @@ namespace BlazorShop.Data.Migrations
                 {
                     WishlistId = table.Column<long>(type: "bigint", nullable: false),
                     ProductId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -436,8 +452,10 @@ namespace BlazorShop.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProductId = table.Column<long>(type: "bigint", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {

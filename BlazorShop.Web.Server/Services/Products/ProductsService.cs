@@ -74,8 +74,7 @@
                     .Where(p => p.Id == id))
                 .FirstOrDefaultAsync();
 
-        public async Task<ProductsSearchResponseModel> SearchAsync(
-            ProductsSearchRequestModel model) {
+        public async Task<ProductsSearchResponseModel> SearchAsync(ProductsSearchRequestModel model) {
             var specification = this.GetProductSpecification(model);
 
             var products = await this.Mapper
@@ -112,8 +111,7 @@
                 .Where(p => p.Id == id)
                 .FirstOrDefaultAsync();
 
-        private Specification<Product> GetProductSpecification(
-            ProductsSearchRequestModel model)
+        private Specification<Product> GetProductSpecification(ProductsSearchRequestModel model)
             => new ProductByNameSpecification(model.Query)
                 .And(new ProductByPriceSpecification(model.MinPrice, model.MaxPrice))
                 .And(new ProductByCategorySpecification(model.Category));
