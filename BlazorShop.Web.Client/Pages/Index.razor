@@ -80,7 +80,7 @@
 		<div class="container">
 
 			<header class="section-heading">
-				<a href="/products/page/1" class="btn btn-outline-primary float-right">查看所有</a>
+				<a href="/products" class="btn btn-outline-primary float-right">查看所有</a>
 				<h3 class="section-title">新品展示</h3>
 			</header>
 
@@ -89,11 +89,11 @@
 				@foreach(var product in products) {
 					<div class="col-md-3">
 						<div class="card card-product-grid">
-							<a href="/products/@product.Id/@product.Name" class="img-wrap">
+							<a href="/product/@product.Id/@product.Name" class="img-wrap">
 								<img src="@product.ImageSource">
 							</a>
 							<figcaption class="info-wrap">
-								<a href="/products/@product.Id/@product.Name" class="title">
+								<a href="/product/@product.Id/@product.Name" class="title">
 									@product.Name
 								</a>
 

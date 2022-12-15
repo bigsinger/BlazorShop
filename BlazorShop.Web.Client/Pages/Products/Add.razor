@@ -1,4 +1,4 @@
-﻿@page "/products/add"
+﻿@page "/product/add"
 @using BlazorShop.Data;
 @attribute [Authorize(Roles = Constants.AdministratorRole)]
 
@@ -85,7 +85,7 @@
 
 	private async Task SubmitAsync() {
 		var id = await this.ProductsService.CreateAsync(this.model);
-		this.NavigationManager.NavigateTo($"/products/{id}/{this.model.Name}");
+		this.NavigationManager.NavigateTo($"/product/{id}/{this.model.Name}");
 	}
 
 	private async Task OnKeyup() {

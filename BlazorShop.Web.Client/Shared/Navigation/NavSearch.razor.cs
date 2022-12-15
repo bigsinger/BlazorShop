@@ -1,11 +1,9 @@
-﻿namespace BlazorShop.Web.Client.Shared.Navigation
-{
+﻿namespace BlazorShop.Web.Client.Shared.Navigation {
     using Models.Products;
 
-    public partial class NavSearch
-    {
+    public partial class NavSearch {
         private readonly ProductsSearchRequestModel searchModel = new ProductsSearchRequestModel();
 
-        private void Search() => this.NavigationManager.NavigateTo($"/products/search/{this.searchModel.Query}/page/1");
+        private void Search() => this.NavigationManager.NavigateTo($"/products?key={this.searchModel.Query}");
     }
 }

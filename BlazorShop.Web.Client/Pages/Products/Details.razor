@@ -1,4 +1,4 @@
-﻿@page "/products/{Id:long}/{ProductName}"
+﻿@page "/product/{Id:long}/{ProductName}"
 @attribute [Authorize]
 
 @if(product == null) {
@@ -11,7 +11,7 @@
 					<aside class="col-md-6">
 						<article class="gallery-wrap">
 							<div class="img-big-wrap">
-								<a href="#"><img src="@product.ImageSource" /></a>
+								<a href="@product.ImageSource" target="_blank"><img src="@product.ImageSource" /></a>
 							</div>
 						</article>
 					</aside>
@@ -20,20 +20,19 @@
 
 							<h3 class="title">@product.Name</h3>
 
-							<div class="mb-3">
-								<var class="price h4">￥@product.Price</var>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="price-wrap">
+										<span class="price h4">￥@product.Price</span>
+									</div>
+								</div>
+								<div align="right" class="col-md-4">
+									<span class="col-sm-2">类目: </span>
+									<span class="col-sm-2">@product.CategoryName</span>
+								</div>
 							</div>
 
 							<p>@product.Summary</p>
-
-							<dl class="row">
-
-								<dt class="col-sm-3">类目</dt>
-								<dd class="col-sm-9">@product.CategoryName</dd>
-
-								<dt class="col-sm-3">库存</dt>
-								<dd class="col-sm-9">@product.Quantity</dd>
-							</dl>
 
 							<hr />
 

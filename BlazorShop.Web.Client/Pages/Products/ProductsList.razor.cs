@@ -15,27 +15,43 @@
         private IEnumerable<CategoriesListingResponseModel> categories;
 
         [Parameter]
+        [SupplyParameterFromQuery(Name = "categoryId")]
         public long? CategoryId { get; set; }
 
         [Parameter]
+        [SupplyParameterFromQuery(Name = "categoryName")]
         public string CategoryName { get; set; }
 
         [Parameter]
+        [SupplyParameterFromQuery(Name = "key")]
         public string SearchQuery { get; set; } = string.Empty;
 
         [Parameter]
+        [SupplyParameterFromQuery(Name = "orderby")]
+        public string OrderBy { get; set; } = string.Empty;
+
+        [Parameter]
+        [SupplyParameterFromQuery(Name = "page")]
         public int Page { get; set; } = 1;
 
         [Parameter]
-        public bool ListView { get; set; } = false;
+        [SupplyParameterFromQuery(Name = "view")]
+        public string viewMode { get; set; } = "list";
+
+        private bool ListView = false;
 
         private string getListViewActiveStr(bool active) {
             return active ? "active" : "";
         }
 
-        protected override async Task OnInitializedAsync() => await this.LoadData();
+        protected override async Task OnInitializedAsync() {
+            await this.LoadData();
+        }
 
-        protected override async Task OnParametersSetAsync() => await this.LoadData(withCategories: false);
+        protected override async Task OnParametersSetAsync() {
+            ListView = viewMode != null && viewMode.Contains("list");
+            await this.LoadData(withCategories: false);
+        }
 
         private async Task SelectedPage(int page) {
             this.Page = page;
@@ -44,12 +60,11 @@
         }
 
         private async Task LoadData(bool withCategories = true) {
-            if(this.Page == 0) {
-                this.Page = 1;
-            }
+            if(this.Page <= 0) { this.Page = 1; }
 
             this.model.Category = this.CategoryId;
             this.model.Query = this.SearchQuery;
+            this.model.OrderBy = this.OrderBy;
             this.model.Page = this.Page;
 
             this.searchResponse = await this.ProductsService.SearchAsync(this.model);
@@ -58,8 +73,6 @@
             if(withCategories) {
                 this.categories = await this.CategoriesService.All();
             }
-
-            this.Filter();
         }
 
         private async Task AddToWishlist(long id) {
@@ -86,24 +99,13 @@
 
         private void ChangeView() {
             this.ListView = !this.ListView;
+            viewMode = this.ListView ? "list" : "grid";
         }
 
         private void Reset() {
             this.model.MinPrice = null;
             this.model.MaxPrice = null;
-            this.NavigationManager.NavigateTo("/products/page/1");
-        }
-
-        private void Filter() {
-            if(!string.IsNullOrWhiteSpace(this.model.Query) && string.IsNullOrWhiteSpace(this.CategoryName) && !this.model.Category.HasValue) {
-                this.NavigationManager.NavigateTo($"/products/search/{this.model.Query}/page/{this.model.Page}");
-            } else if(!string.IsNullOrWhiteSpace(this.model.Query) && !string.IsNullOrWhiteSpace(this.CategoryName) && this.model.Category.HasValue) {
-                this.NavigationManager.NavigateTo($"/products/category/{this.CategoryName}/{this.model.Category}/search/{this.model.Query}/page/{this.model.Page}");
-            } else if(!string.IsNullOrWhiteSpace(this.CategoryName) && this.model.Category.HasValue) {
-                this.NavigationManager.NavigateTo($"/products/category/{this.CategoryName}/{this.model.Category}/page/{this.model.Page}");
-            } else if(string.IsNullOrWhiteSpace(this.model.Query) && string.IsNullOrWhiteSpace(this.CategoryName) && !this.model.Category.HasValue) {
-                this.NavigationManager.NavigateTo($"/products/page/{this.model.Page}");
-            }
+            this.NavigationManager.NavigateTo("/products");
         }
     }
 }

@@ -119,7 +119,7 @@ else
                             <a class="nav-link" href="/cart">购物车</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/products/page/1">产品列表</a>
+                            <a class="nav-link" href="/products">产品列表</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a @onclick:preventDefault
@@ -134,7 +134,7 @@ else
                                 @foreach (var category in categories)
                                 {
                                     <a class="dropdown-item"
-                                       href="/products/category/@category.Name/@category.Id">
+                               href="/products?categoryName=@category.Name&categoryId@category.Id">
                                         @category.Name
                                     </a>
                                 }
@@ -145,7 +145,7 @@ else
                     <AuthorizeView Roles="@Constants.AdministratorRole">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a href="/products/add" class="btn btn-primary ml-md-4">
+                                <a href="/product/add" class="btn btn-primary ml-md-4">
                                     <i class="fa fa-plus"></i> 添加商品
                                 </a>
                             </li>

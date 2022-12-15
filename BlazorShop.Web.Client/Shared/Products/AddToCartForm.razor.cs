@@ -29,7 +29,7 @@
 
             var result = await this.ShoppingCartsService.AddProduct(this.model);
 
-            if (!result.Succeeded) {
+            if(!result.Succeeded) {
                 this.Errors = result.Errors;
                 this.ShowErrors = true;
             } else {
@@ -43,12 +43,12 @@
                 "confirm",
                 "Are you sure you want to delete this item?");
 
-            if (confirmed) {
+            if(confirmed) {
                 var result = await this.ProductsService.DeleteAsync(this.ProductId);
 
-                if (result.Succeeded) {
+                if(result.Succeeded) {
                     this.ToastService.ShowSuccess($"{this.ProductName} has been deleted successfully.");
-                    this.NavigationManager.NavigateTo("/products/page/1");
+                    this.NavigationManager.NavigateTo("/products");
                 } else {
                     this.Errors = result.Errors;
                     this.ShowErrors = true;
@@ -59,7 +59,7 @@
         private async Task AddToWishlist() {
             var result = await this.WishlistsService.AddProduct(this.ProductId);
 
-            if (result.Succeeded) {
+            if(result.Succeeded) {
                 this.ToastService.ShowSuccess($"{this.ProductName} has been added to your wishlist.");
             } else {
                 this.Errors = result.Errors;
@@ -68,14 +68,14 @@
         }
 
         private void IncrementQuantity() {
-            if (this.model.Quantity < this.ProductQuantity) {
+            if(this.model.Quantity < this.ProductQuantity) {
                 this.model.Quantity++;
                 this.ShowErrors = false;
             }
         }
 
         private void DecrementQuantity() {
-            if (this.model.Quantity > 1) {
+            if(this.model.Quantity > 1) {
                 this.model.Quantity--;
                 this.ShowErrors = false;
             }

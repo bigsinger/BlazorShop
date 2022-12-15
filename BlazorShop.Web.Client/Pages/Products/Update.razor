@@ -1,4 +1,4 @@
-﻿@page "/products/update/{Id:long}"
+﻿@page "/product/update/{Id:long}"
 @using BlazorShop.Data;
 @attribute [Authorize(Roles = Constants.AdministratorRole)]
 
@@ -87,7 +87,7 @@
 		var result = await this.ProductsService.UpdateAsync(this.Id, this.model);
 
 		if(result.Succeeded) {
-			this.NavigationManager.NavigateTo($"/products/{this.Id}/{this.model.Name}");
+			this.NavigationManager.NavigateTo($"/product/{this.Id}/{this.model.Name}");
 		}
 	}
 }
