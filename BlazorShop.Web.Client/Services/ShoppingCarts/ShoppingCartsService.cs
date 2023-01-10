@@ -19,8 +19,8 @@
                 return await this.http
                 .PostAsJsonAsync($"{ShoppingCartsPath}/{nameof(this.AddProduct)}", model)
                 .ToResult();
-            } catch (Exception e) {
-                if (e.Message.Contains("token")) {
+            } catch(Exception e) {
+                if(e.Message.Contains("token")) {
                     return "未登录\n" + e.Message;
                 }
                 return e.Message;
@@ -35,8 +35,16 @@
         public async Task<Result> RemoveProduct(long id)
             => await this.http.DeleteAsync($"{ShoppingCartsPath}/{nameof(this.RemoveProduct)}/{id}").ToResult();
 
-        public async Task<int> TotalProducts()
-            => await this.http.GetFromJsonAsync<int>($"{ShoppingCartsPath}/{nameof(this.TotalProducts)}");
+        public async Task<int> TotalProducts() {
+            int total = 0;
+            try {
+                total = await this.http.GetFromJsonAsync<int>($"{ShoppingCartsPath}/{nameof(this.TotalProducts)}");
+            } catch(Exception e) {
+                string s = e.Message;
+            }
+            return total;
+        }
+
 
         public async Task<IEnumerable<ShoppingCartProductsResponseModel>> Mine()
             => await this.http.GetFromJsonAsync<IEnumerable<ShoppingCartProductsResponseModel>>(ShoppingCartsPath);
